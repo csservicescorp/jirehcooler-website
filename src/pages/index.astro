@@ -51,7 +51,9 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
         <ResponsiveImage
           src={home.hero.image}
           alt={home.hero.imageAlt}
-          ratio="4 / 5"
+          ratio="5 / 4"
+          mobileRatio="4 / 3"
+          focal="center 42%"
           variant="hero"
           priority
           sizes="(min-width: 720px) 45vw, 100vw"
@@ -89,13 +91,24 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
 
   <!-- TRUST -->
   <section class="section-royal trust-section">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Why South Florida Trusts Us</p>
-        <h2>{home.trust.heading}</h2>
-        <p>{home.trust.subheading}</p>
+    <div class="container trust-grid-layout">
+      <div class="trust-media" data-reveal>
+        <ResponsiveImage
+          src={home.trust.image}
+          alt={home.trust.imageAlt}
+          ratio="5 / 4"
+          mobileRatio="4 / 3"
+          variant="editorial"
+        />
       </div>
-      <TrustPoints points={home.trust.points} columns={4} />
+      <div class="trust-copy">
+        <div class="section-head">
+          <p class="eyebrow">Why South Florida Trusts Us</p>
+          <h2>{home.trust.heading}</h2>
+          <p>{home.trust.subheading}</p>
+        </div>
+        <TrustPoints points={home.trust.points} columns={2} />
+      </div>
     </div>
   </section>
 
@@ -368,6 +381,16 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     margin-top: var(--space-xl);
   }
 
+  .trust-grid-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .trust-copy .section-head {
+    margin-bottom: var(--space-lg);
+  }
+
   .emergency-section {
     position: relative;
     padding-block: var(--space-3xl);
@@ -469,6 +492,9 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     }
     .services-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .trust-grid-layout {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     }
     .membership-grid,
     .financing-grid,

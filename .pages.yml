@@ -46,6 +46,12 @@ content:
           - { name: office, label: "Office Hours", type: string }
           - { name: emergency, label: "Emergency Hours Statement", type: string }
       - { name: emergencyAvailability, label: "Emergency Availability Badge", type: string, description: "e.g. 24/7/365" }
+      - name: logo
+        label: "Company Logo"
+        type: object
+        fields:
+          - { name: image, label: "Logo File", type: image, description: "Used in the header and footer. Upload a transparent PNG for best results — recommended at least 900×380px (roughly 2.4:1, wide format). The logo is never cropped, only scaled." }
+          - { name: alt, label: "Logo Alt Text", type: string, description: "Read by screen readers, e.g. \"Jireh Cooler Air Conditioning logo\"." }
       - name: social
         label: "Social Links"
         type: object
@@ -143,6 +149,8 @@ content:
         fields:
           - { name: heading, label: "Heading", type: string }
           - { name: subheading, label: "Subheading", type: text }
+          - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×950px, landscape. A real company/fleet photo works best here to back up the credibility message." }
+          - { name: imageAlt, label: "Photo Alt Text", type: string }
           - name: points
             label: "Trust Points"
             type: array
@@ -248,8 +256,12 @@ content:
         fields:
           - { name: label, label: "Label", type: string }
           - { name: description, label: "Description", type: text }
-      - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×900px (4:3). A team or work-in-progress photo fits well here." }
-      - { name: imageAlt, label: "Photo Alt Text", type: string }
+      - { name: image, label: "Primary Photo", type: image, description: "Recommended: at least 1100×1400px, portrait orientation. A team or owner portrait fits well here — shown at the top of the page." }
+      - { name: imageAlt, label: "Primary Photo Alt Text", type: string }
+      - { name: secondaryHeading, label: "Secondary Section Heading", type: string }
+      - { name: secondaryText, label: "Secondary Section Text", type: text }
+      - { name: secondaryImage, label: "Secondary Photo", type: image, description: "Recommended: at least 1200×1200px, square or landscape. A storytelling photo (planning, teamwork, a job in progress) — shown further down the page." }
+      - { name: secondaryImageAlt, label: "Secondary Photo Alt Text", type: string }
 
   # ---------------------------------------------------------------------
   # MAINTENANCE

@@ -144,6 +144,15 @@ files, which Astro's `astro:assets` pipeline does not process automatically.
     never a broken image.
 - `BaseLayout.astro` accepts a `preloadImage` prop (used on the homepage)
   that preloads the hero photo's WebP source as the page's LCP resource.
+- `scripts/optimize-jireh-photos.mjs` — same pipeline as
+  `optimize-images.mjs`, scoped to the client's official photos in
+  `public/images/jireh-originals/` (the untouched source files). Re-run it
+  if any of those six originals are replaced with a new version.
+- `src/components/Logo.astro` — a separate, simpler component for the
+  company logo specifically. Unlike `ResponsiveImage`, it never crops
+  (`object-fit: contain`, natural aspect ratio) since a logo must stay
+  undistorted. It reads its path/alt from `site.json` → `logo`, so it's
+  CMS-editable the same way, with the same manifest-or-fallback behavior.
 
 This design lets a non-technical client replace any photo through Pages CMS
 without breaking layout, aspect ratio, or performance — see

@@ -2,6 +2,7 @@
 import site from '@data/site.json';
 import nav from '@data/navigation.json';
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 
 const { pathname } = Astro.url;
 const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
@@ -23,11 +24,7 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
 
   <div class="container header-inner">
     <a href="/" class="brand" aria-label={`${site.businessName} home`}>
-      <span class="brand-mark">JC</span>
-      <span class="brand-text">
-        <span class="brand-name">Jireh Cooler</span>
-        <span class="brand-tagline">Air Conditioning Experts</span>
-      </span>
+      <Logo height={42} />
     </a>
 
     <nav class="primary-nav" aria-label="Primary">
@@ -182,40 +179,7 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
   .brand {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
     flex-shrink: 0;
-  }
-  .brand-mark {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-sm);
-    background: var(--gradient-blue);
-    color: var(--color-white);
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-  }
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-  }
-  .brand-name {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--color-royal);
-  }
-  .brand-tagline {
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-muted);
-    font-weight: 600;
   }
 
   .primary-nav {

@@ -5,7 +5,8 @@ import manifest from '@data/image-manifest.json';
 interface Props {
   src?: string; // public path, e.g. /images/services/ac-repair-manifold-gauge.jpg
   alt?: string;
-  ratio?: string; // CSS aspect-ratio, e.g. "4 / 3", "16 / 9", "3 / 4"
+  ratio?: string; // CSS aspect-ratio at desktop widths, e.g. "4 / 3", "16 / 9", "3 / 4"
+  mobileRatio?: string; // optional different aspect-ratio below 640px (professional crop per breakpoint)
   variant?: 'hero' | 'card' | 'editorial' | 'background' | 'gallery';
   priority?: boolean; // eager-load + high fetch priority (hero image only)
   focal?: string; // CSS object-position, e.g. "center", "top", "20% 40%"
@@ -19,6 +20,7 @@ const {
   src,
   alt = '',
   ratio = '4 / 3',
+  mobileRatio,
   variant = 'card',
   priority = false,
   focal = 'center',
@@ -35,11 +37,12 @@ const base = src?.replace(/\.jpg$/i, '');
 const loading = priority ? 'eager' : 'lazy';
 const decoding = priority ? 'sync' : 'async';
 const fetchpriority = priority ? 'high' : 'auto';
+const ratioVars = `--ratio:${ratio};--ratio-mobile:${mobileRatio ?? ratio};`;
 ---
 
 {
   src && entry && base ? (
-    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`}>
+    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={ratioVars}>
       <picture>
         <source
           type="image/avif"
@@ -69,12 +72,12 @@ const fetchpriority = priority ? 'high' : 'auto';
     // CMS-uploaded image without a pre-generated manifest entry: render it directly.
     // Still prevents layout shift via the aspect-ratio wrapper; loses AVIF/WebP/srcset
     // until the next `node scripts/optimize-images.mjs` run.
-    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`}>
+    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={ratioVars}>
       <img src={src} alt={alt} loading={loading} decoding={decoding} style={`object-position:${focal}`} />
     </div>
   ) : (
     // No image selected yet — elegant placeholder, never a broken image.
-    <div class:list={['rimg', 'placeholder', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`} role="img" aria-label={fallbackLabel ?? 'Photo coming soon'}>
+    <div class:list={['rimg', 'placeholder', `variant-${variant}`, { rounded }]} style={ratioVars} role="img" aria-label={fallbackLabel ?? 'Photo coming soon'}>
       <svg class="grid-pattern" aria-hidden="true">
         <defs>
           <pattern id={`grid-${fallbackIcon}`} width="28" height="28" patternUnits="userSpaceOnUse">
@@ -95,6 +98,12 @@ const fetchpriority = priority ? 'high' : 'auto';
     width: 100%;
     overflow: hidden;
     background: var(--color-ice);
+    aspect-ratio: var(--ratio);
+  }
+  @media (max-width: 640px) {
+    .rimg {
+      aspect-ratio: var(--ratio-mobile);
+    }
   }
   .rimg.rounded {
     border-radius: var(--radius-lg);

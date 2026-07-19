@@ -18,7 +18,39 @@ into this repository.
 | `public/favicon.svg` | Hand-authored inline SVG ("JC" mark on brand navy) | Original artwork created for this project |
 | All UI icons (`src/components/Icon.astro`) | Hand-authored inline SVG line icons built from basic primitives | Original artwork created for this project; not sourced from any third-party icon library |
 
-## Photography (stock, temporary — see note below)
+## Official Jireh Cooler assets (client-provided — real, not stock)
+
+Six official photos/logo were provided by the client in
+`public/images/jireh-originals/` (originals preserved there, untouched).
+Production copies were generated from them and placed in the folders below.
+These take priority over stock photography wherever they cover a slot.
+
+| Original file | Production copy | Used on |
+|---|---|---|
+| `jireh-cooler-logo.png` | `public/images/brand/jireh-cooler-logo.{png,webp,avif}` | Header, mobile header, footer (via `src/components/Logo.astro`) |
+| `jireh-cooler-vans-residential.png` | `public/images/homepage/jireh-vans-residential.*` | Homepage hero |
+| `jireh-cooler-owners-about.png` | `public/images/about/jireh-owners-portrait.*` | About page — primary image |
+| `jireh-cooler-planning-blueprint.png` | `public/images/about/jireh-planning-blueprint.*` | About page — secondary "Every Job Starts With a Plan" section |
+| `jireh-cooler-technician-ac-unit.png` | `public/images/services/jireh-technician-ac-unit.*` | Preventive Maintenance page |
+| `jireh-cooler-company-fleet.png` | `public/images/homepage/jireh-company-fleet.*` | Homepage trust/credibility section + Gallery ("Our Fleet") |
+
+**Logo processing note:** the source `jireh-cooler-logo.png` had its
+transparency flattened into a baked-in gray/white checkerboard pattern
+(a common export mistake) rather than a real alpha channel. It was restored
+to true transparency with a border-seeded flood-fill (treating the two
+checker colors as background, stopped by the logo's black outline) plus a
+second pass to reopen the enclosed counters of the two "O"s in "COOLER",
+then trimmed and re-exported as PNG/WebP/AVIF, all with verified alpha
+channels. The original, unmodified file is untouched in `jireh-originals/`.
+
+Photo crops: none of the five photographs were pre-cropped to a fixed
+ratio — `ResponsiveImage` crops them responsively via CSS `aspect-ratio` +
+`object-fit: cover` (with separate desktop/mobile ratios via `mobileRatio`
+where useful), so the full original framing is always available and the
+crop adapts per breakpoint. The logo is never cropped (`Logo.astro` uses
+`object-fit: contain`, natural aspect ratio only).
+
+## Photography (stock, used only where no official photo exists)
 
 Every photo below was sourced from **Pexels** (pexels.com), a free stock
 photo platform. All Pexels content is released under the [Pexels
@@ -35,7 +67,6 @@ Pexels source.
 
 | File (`public/images/...`) | Pexels photo ID | Photographer | Pexels URL |
 |---|---|---|---|
-| `homepage/hero-ac-technician-repair.jpg` | 6471913 | José Andrés Pacheco Cortes | pexels.com/photo/6471913 |
 | `homepage/residential-modern-home-exterior.jpg` | 3665354 | Blue Rhino Media | pexels.com/photo/3665354 |
 | `homepage/commercial-rooftop-hvac-skyline.jpg` | 8065903 | Katterinaaa | pexels.com/photo/8065903 |
 | `homepage/emergency-technician-response.jpg` | 6471911 | José Andrés Pacheco Cortes | pexels.com/photo/6471911 |
@@ -51,7 +82,6 @@ Pexels source.
 | `services/water-heater-installation.jpg` | 34938439 | (Pexels contributor 2157750954) | pexels.com/photo/34938439 |
 | `services/dryer-vent-laundry-closet.jpg` | 9515294 | introspectivedsgn | pexels.com/photo/9515294 |
 | `services/smart-thermostat-wall-adjust.jpg` | 36730582 | silverkblack | pexels.com/photo/36730582 |
-| `about/technician-rooftop-work.jpg` | 5463587 | José Andrés Pacheco Cortes | pexels.com/photo/5463587 |
 | `gallery/commercial-technicians-rooftop.jpg` | 5463577 | José Andrés Pacheco Cortes | pexels.com/photo/5463577 |
 | `gallery/technician-inspecting-outdoor-unit.jpg` | 32497161 | Kathleen Austin Kuhn | pexels.com/photo/32497161 |
 | `gallery/technician-outdoor-maintenance.jpg` | 6471914 | José Andrés Pacheco Cortes | pexels.com/photo/6471914 |
@@ -60,6 +90,12 @@ Several of the files above are reused by path across multiple pages (e.g.
 `homepage/commercial-rooftop-hvac-skyline.jpg` is also used on the
 Commercial HVAC service page and in the Gallery) rather than duplicated —
 see `CLIENT_VERIFICATION.md` and `ASSETS_NEEDED.md` for where each is used.
+
+Two stock photos that were originally used for the homepage hero and the
+About page's primary image (a generic technician photo and a generic
+rooftop-work photo) have since been **removed** from the repository — they
+were superseded by the client's real photos (see "Official Jireh Cooler
+assets" above) and are no longer referenced anywhere.
 
 ### Images considered and rejected during sourcing
 

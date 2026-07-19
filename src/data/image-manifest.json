@@ -1,10 +1,4 @@
 {
-  "/images/homepage/hero-ac-technician-repair.jpg": {
-    "width": 1920,
-    "height": 2880,
-    "smWidth": 800,
-    "smHeight": 1200
-  },
   "/images/homepage/residential-modern-home-exterior.jpg": {
     "width": 1400,
     "height": 766,
@@ -95,12 +89,6 @@
     "smWidth": 700,
     "smHeight": 394
   },
-  "/images/about/technician-rooftop-work.jpg": {
-    "width": 1400,
-    "height": 1157,
-    "smWidth": 700,
-    "smHeight": 579
-  },
   "/images/gallery/commercial-technicians-rooftop.jpg": {
     "width": 1000,
     "height": 773,
@@ -118,5 +106,41 @@
     "height": 1520,
     "smWidth": 600,
     "smHeight": 912
+  },
+  "/images/homepage/jireh-vans-residential.jpg": {
+    "width": 1672,
+    "height": 941,
+    "smWidth": 800,
+    "smHeight": 450
+  },
+  "/images/about/jireh-owners-portrait.jpg": {
+    "width": 1122,
+    "height": 1402,
+    "smWidth": 600,
+    "smHeight": 750
+  },
+  "/images/about/jireh-planning-blueprint.jpg": {
+    "width": 1200,
+    "height": 1200,
+    "smWidth": 600,
+    "smHeight": 600
+  },
+  "/images/services/jireh-technician-ac-unit.jpg": {
+    "width": 1254,
+    "height": 1254,
+    "smWidth": 700,
+    "smHeight": 700
+  },
+  "/images/homepage/jireh-company-fleet.jpg": {
+    "width": 1600,
+    "height": 909,
+    "smWidth": 800,
+    "smHeight": 454
+  },
+  "/images/brand/jireh-cooler-logo.png": {
+    "width": 900,
+    "height": 382,
+    "smWidth": 450,
+    "smHeight": 191
   }
 }

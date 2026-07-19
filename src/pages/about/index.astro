@@ -21,11 +21,24 @@ import site from '@data/site.json';
   <section>
     <div class="container about-grid">
       <div data-reveal>
-        <ResponsiveImage src={about.image} alt={about.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="users" />
+        <ResponsiveImage src={about.image} alt={about.imageAlt} ratio="4 / 5" mobileRatio="4 / 5" variant="editorial" fallbackIcon="users" />
       </div>
       <div data-reveal>
         <p class="intro">{about.intro}</p>
         {about.story.map((p: string) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="planning-section">
+    <div class="container planning-grid">
+      <div class="planning-copy" data-reveal>
+        <p class="eyebrow">Behind Every Installation</p>
+        <h2>{about.secondaryHeading}</h2>
+        <p>{about.secondaryText}</p>
+      </div>
+      <div data-reveal>
+        <ResponsiveImage src={about.secondaryImage} alt={about.secondaryImageAlt} ratio="1 / 1" mobileRatio="4 / 3" variant="editorial" fallbackIcon="document" />
       </div>
     </div>
   </section>
@@ -58,9 +71,30 @@ import site from '@data/site.json';
     color: var(--color-charcoal);
     font-weight: 500;
   }
+
+  .planning-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .planning-copy p:not(.eyebrow) {
+    font-size: var(--fs-md);
+    max-width: 46ch;
+  }
+
   @media (min-width: 860px) {
     .about-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    }
+    .planning-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    }
+    .planning-grid .planning-copy {
+      order: 2;
+    }
+    .planning-grid > div:last-child {
+      order: 1;
     }
   }
 </style>

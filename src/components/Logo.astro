@@ -1,0 +1,65 @@
+---
+// Official Jireh Cooler logo. Rendered undistorted (natural aspect ratio,
+// object-fit: contain, never cropped) — unlike ResponsiveImage, which crops
+// photos to a fixed aspect ratio. Reads the path/alt from Website Settings
+// (src/data/site.json → logo) so the client can swap the logo file and edit
+// its alt text through Pages CMS without a code change.
+
+import site from '@data/site.json';
+import manifest from '@data/image-manifest.json';
+
+interface Props {
+  height?: number; // display height in px; width follows the logo's natural ratio
+  class?: string;
+}
+
+const { height = 44, class: className = '' } = Astro.props;
+
+type ManifestEntry = { width: number; height: number; smWidth: number; smHeight: number };
+const src = site.logo.image;
+const alt = site.logo.alt;
+const entry: ManifestEntry | undefined = (manifest as Record<string, ManifestEntry>)[src];
+const base = src.replace(/\.(png|jpg)$/i, '');
+const displayWidth = entry ? Math.round((height * entry.width) / entry.height) : undefined;
+---
+
+{
+  entry ? (
+    <picture>
+      <source
+        type="image/avif"
+        srcset={`${base}-sm.avif ${entry.smWidth}w, ${base}.avif ${entry.width}w`}
+        sizes={`${displayWidth}px`}
+      />
+      <source
+        type="image/webp"
+        srcset={`${base}-sm.webp ${entry.smWidth}w, ${base}.webp ${entry.width}w`}
+        sizes={`${displayWidth}px`}
+      />
+      <img
+        class={`logo-img ${className}`}
+        src={`${base}.png`}
+        srcset={`${base}-sm.png ${entry.smWidth}w, ${base}.png ${entry.width}w`}
+        sizes={`${displayWidth}px`}
+        width={entry.width}
+        height={entry.height}
+        alt={alt}
+        loading="eager"
+        decoding="async"
+        style={`height:${height}px;width:${displayWidth}px;`}
+      />
+    </picture>
+  ) : (
+    // Newly-uploaded logo not yet processed by scripts/optimize-images.mjs —
+    // render it directly rather than break the header.
+    <img class={`logo-img ${className}`} src={src} alt={alt} loading="eager" decoding="async" style={`height:${height}px;width:auto;`} />
+  )
+}
+
+<style>
+  .logo-img {
+    display: block;
+    object-fit: contain;
+    max-width: 100%;
+  }
+</style>

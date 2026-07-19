@@ -41,5 +41,9 @@
     "label": "Call Now",
     "href": "tel:+19544266010"
   },
-  "ogImage": "/images/og/default-og.jpg"
+  "ogImage": "/images/og/default-og.jpg",
+  "logo": {
+    "image": "/images/brand/jireh-cooler-logo.png",
+    "alt": "Jireh Cooler Air Conditioning logo"
+  }
 }

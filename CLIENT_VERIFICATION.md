@@ -70,15 +70,20 @@ as-is:
    the Facebook page. Once Google Business Profile or other verified reviews
    are available, add them via the CMS (see `CMS_GUIDE.md`).
 
-7. **Gallery and site-wide photography** — no real Jireh Cooler project
-   photos were available to reuse, so the site uses appropriately-licensed
-   Pexels stock photography throughout (technicians at work, HVAC
-   equipment, South Florida homes) as realistic, professional placeholders.
-   None of it is labeled or implied to be Jireh Cooler's own staff or
-   completed jobs — alt text describes the photos generically. See
-   `ASSET_INVENTORY.md` for full sourcing/licensing records and
-   `ASSETS_NEEDED.md` for where real company photography should eventually
-   replace each stock photo.
+7. **Gallery and site-wide photography** — the client has since provided six
+   official assets (logo, service vans, owner portrait, planning photo,
+   technician-with-equipment photo, and company fleet photo), now used for
+   the header/footer logo, homepage hero, homepage trust section, both About
+   page images, the Preventive Maintenance page, and the lead Gallery photo.
+   Every other image slot still uses appropriately-licensed Pexels stock
+   photography (technicians at work, HVAC equipment, South Florida homes) as
+   a realistic, professional placeholder until more real photos are
+   available. None of the stock photography is labeled or implied to be
+   Jireh Cooler's own staff or completed jobs — alt text describes those
+   photos generically, while the real photos have honest, specific alt text
+   (e.g., naming the owners). See `ASSET_INVENTORY.md` for full sourcing/
+   licensing records and `ASSETS_NEEDED.md` for what's still on stock
+   photography.
 
 8. **WhatsApp number** — the old site mentioned WhatsApp availability but did
    not display a specific number in the crawled content. `whatsapp.enabled`

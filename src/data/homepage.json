@@ -3,8 +3,8 @@
     "eyebrow": "Serving Broward & Palm Beach County Since 1994",
     "headline": "South Florida's Trusted Air Conditioning Experts",
     "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
-    "image": "/images/homepage/hero-ac-technician-repair.jpg",
-    "imageAlt": "HVAC technician using pressure gauges to service an outdoor air conditioning unit",
+    "image": "/images/homepage/jireh-vans-residential.jpg",
+    "imageAlt": "Jireh Cooler service vans parked outside a South Florida home with palm trees",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
     "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
   },
@@ -28,6 +28,8 @@
   "trust": {
     "heading": "Three Decades of South Florida Comfort",
     "subheading": "Jireh Cooler has been a family-operated fixture in Broward and Palm Beach County since 1994.",
+    "image": "/images/homepage/jireh-company-fleet.jpg",
+    "imageAlt": "Jireh Cooler branded service vans and truck parked outside the company facility",
     "points": [
       {
         "label": "Founded in 1994",
