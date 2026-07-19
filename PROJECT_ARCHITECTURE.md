@@ -153,6 +153,11 @@ files, which Astro's `astro:assets` pipeline does not process automatically.
   (`object-fit: contain`, natural aspect ratio) since a logo must stay
   undistorted. It reads its path/alt from `site.json` → `logo`, so it's
   CMS-editable the same way, with the same manifest-or-fallback behavior.
+- `scripts/build-bear-favicon.mjs` — one-off script that isolates the
+  polar bear mark from the official logo (color/geometry segmentation to
+  drop the wordmark) and generates the full favicon set (`favicon.ico`,
+  `favicon.svg`, PNG sizes, `site.webmanifest`) on a royal-blue background.
+  Re-run only if the source logo changes.
 
 This design lets a non-technical client replace any photo through Pages CMS
 without breaking layout, aspect ratio, or performance — see

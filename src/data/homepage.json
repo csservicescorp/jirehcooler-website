@@ -14,15 +14,15 @@
       "label": "Residential HVAC",
       "description": "Reliable comfort for your home, from same-day repairs to full system replacements.",
       "href": "/residential-hvac/",
-      "image": "/images/homepage/residential-modern-home-exterior.jpg",
-      "imageAlt": "Modern South Florida residential home exterior"
+      "image": "/images/homepage/jireh-residential-ac-service.jpg",
+      "imageAlt": "Jireh Cooler technician servicing an outdoor residential air conditioning unit"
     },
     "commercial": {
       "label": "Commercial HVAC",
       "description": "Dependable climate control for offices, restaurants, and retail spaces that can't afford downtime.",
       "href": "/commercial-hvac/",
-      "image": "/images/homepage/commercial-rooftop-hvac-skyline.jpg",
-      "imageAlt": "Commercial rooftop air conditioning units under a clear blue sky"
+      "image": "/images/homepage/jireh-commercial-thermostat-service.jpg",
+      "imageAlt": "Jireh Cooler technician adjusting a commercial building's thermostat"
     }
   },
   "trust": {

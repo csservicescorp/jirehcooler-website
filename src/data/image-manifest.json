@@ -142,5 +142,29 @@
     "height": 382,
     "smWidth": 450,
     "smHeight": 191
+  },
+  "/images/homepage/jireh-residential-ac-service.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "smWidth": 800,
+    "smHeight": 600
+  },
+  "/images/homepage/jireh-commercial-thermostat-service.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "smWidth": 800,
+    "smHeight": 600
+  },
+  "/images/services/jireh-ac-repair-technician.jpg": {
+    "width": 1327,
+    "height": 1186,
+    "smWidth": 700,
+    "smHeight": 626
+  },
+  "/images/services/jireh-attic-hvac-service.jpg": {
+    "width": 941,
+    "height": 1672,
+    "smWidth": 600,
+    "smHeight": 1066
   }
 }

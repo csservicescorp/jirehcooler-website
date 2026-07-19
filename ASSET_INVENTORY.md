@@ -50,6 +50,39 @@ where useful), so the full original framing is always available and the
 crop adapts per breakpoint. The logo is never cropped (`Logo.astro` uses
 `object-fit: contain`, natural aspect ratio only).
 
+A second batch of four official, branded photos was added later in
+`public/images/jireh-originals/new-jireh-images/` (originals preserved
+there, untouched) and processed with `scripts/optimize-jireh-photos-batch2.mjs`:
+
+| Original file | Production copy | Used on |
+|---|---|---|
+| `jireh-cooler-residential-ac-service.png.png` | `public/images/homepage/jireh-residential-ac-service.*` | Homepage residential pathway card, Residential HVAC page |
+| `jireh-cooler-commercial-thermostat-service.png.png` | `public/images/homepage/jireh-commercial-thermostat-service.*` | Homepage commercial pathway card, Commercial HVAC page, Smart & Wi-Fi Thermostats page |
+| `jireh-cooler-ac-repair-technician.png.png` | `public/images/services/jireh-ac-repair-technician.*` | AC Repair page |
+| `jireh-cooler-attic-hvac-service.png.png` | `public/images/services/jireh-attic-hvac-service.*` | Emergency AC Service page, Gallery ("Attic HVAC Service") |
+
+The residential and commercial pathway source photos share identical
+1448×1086 source dimensions and the same `ratio="16 / 10"` card treatment,
+so the two homepage cards render at equal height and proportion.
+
+## Favicon (polar bear mark)
+
+The site's favicon was rebuilt from the official transparent logo
+(`public/images/jireh-originals/jireh-cooler-logo.png`) via
+`scripts/build-bear-favicon.mjs`: the polar bear silhouette is isolated
+from the wordmark by flood-filling the checkerboard background, then
+excluding the "JIREH COOLER Air Conditioning" text band by both color
+(saturated navy/red pixels) and a geometric cutoff, leaving only the
+bear's white fill/black outline. That silhouette is recolored to solid
+white and composited onto a `#043688` royal-blue square at each required
+size. Generated files: `favicon.ico` (16/32/48 multi-size), `favicon.svg`
+(the 512px PNG embedded in an SVG with rounded-corner clip-path, referenced
+first so modern browsers prefer it), `favicon-16x16.png`, `favicon-32x32.png`,
+`apple-touch-icon.png` (180×180, opaque background per iOS requirements),
+`android-chrome-192x192.png`, `android-chrome-512x512.png`, and
+`site.webmanifest`. The previous hand-authored "JC" favicon.svg has been
+fully replaced — no remaining references to it.
+
 ## Photography (stock, used only where no official photo exists)
 
 Every photo below was sourced from **Pexels** (pexels.com), a free stock

@@ -25,42 +25,42 @@ lists its recommended dimensions.
 | About page — primary image | Portrait of owners Moyses and Evelise Oliveira |
 | About page — secondary "Every Job Starts With a Plan" section | Owner reviewing a planning blueprint |
 | Preventive Maintenance page | Owner/technician with a residential AC unit |
+| Homepage residential pathway card, Residential HVAC page | Technician servicing a residential outdoor AC unit |
+| Homepage commercial pathway card, Commercial HVAC page, Smart & Wi-Fi Thermostats page | Technician adjusting a commercial thermostat |
+| AC Repair page | Technician using a diagnostic meter on an outdoor unit |
+| Emergency AC Service page, Gallery | Technician performing HVAC service in an attic |
 
 ## Still using stock photography (lower priority)
 
 | Location | Current stock photo | Suggested real replacement |
 |---|---|---|
-| Residential pathway (homepage) | Modern Miami home exterior | A real South Florida home Jireh Cooler has serviced (with owner permission) |
-| Commercial pathway (homepage) | Rooftop AC units against a city skyline | A real commercial rooftop project |
-| Emergency section (homepage) | Technician using gauges (background photo) | A real after-hours or urgent service call |
+| Emergency section (homepage, background photo) | Technician using gauges | A real after-hours or urgent service call |
 | Financing section (homepage) | South Florida suburban neighborhood at sunset | Keep generic, or use a real serviced neighborhood |
 | Final CTA background (homepage) | Rooftop HVAC units, industrial | A real branded team/van shot works well here too |
 | Maintenance Membership page | Technician performing hands-on unit work | A real maintenance visit in progress |
 
-## Service pages (11 of 12 still on stock)
+## Service pages (5 of 12 still on stock)
 
 Each service in `src/content/services/*.md` has an `image` field with a
-relevant stock photo in place. Real replacements, in priority order of
-visibility:
+relevant stock photo in place. AC Repair, Residential HVAC, Commercial
+HVAC, Smart & Wi-Fi Thermostats, Emergency Service, and Preventive
+Maintenance are now real branded photos. Remaining real-replacement
+priority order:
 
-- AC Repair, AC Installation, Emergency Service — real technician photos
-  are the highest-value replacements (most-visited pages)
-- Residential HVAC, Commercial HVAC — reuse real property photos if
-  available
+- AC Installation — real technician photo is the highest-value remaining
+  replacement (high-visibility page)
 - Indoor Air Quality, Duct Cleaning, UV Light Systems — real ductwork/install
   photos, if safely photographable
-- Pool Heaters, Water Heaters, Dryer Vent Cleaning, Smart Thermostats —
-  lower priority; current stock photos are solid placeholders
-
-(Preventive Maintenance is done — see above.)
+- Pool Heaters, Water Heaters, Dryer Vent Cleaning — lower priority; current
+  stock photos are solid placeholders
 
 ## Gallery page
 
-`src/content/gallery/*.json` has 10 entries — one real fleet photo plus a
-mix of stock photography (some reused from other pages, some unique). Real
-before/after and in-progress project photos should replace the remaining
-stock entries over time — the gallery is exactly the kind of page where
-authentic work photos matter most.
+`src/content/gallery/*.json` has 11 entries — two real photos (company
+fleet, attic HVAC service) plus a mix of stock photography (some reused
+from other pages, some unique). Real before/after and in-progress project
+photos should replace the remaining stock entries over time — the gallery
+is exactly the kind of page where authentic work photos matter most.
 
 ## Fonts
 
