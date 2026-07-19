@@ -150,23 +150,13 @@ content:
         label: "Trust Section"
         type: object
         fields:
+          - { name: eyebrow, label: "Eyebrow Text", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: subheading, label: "Subheading", type: text }
           - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×950px, landscape. A real company/fleet photo works best here to back up the credibility message." }
           - { name: imageAlt, label: "Photo Alt Text", type: string }
           - name: points
             label: "Trust Points"
-            type: array
-            fields:
-              - { name: label, label: "Label", type: string }
-              - { name: description, label: "Description", type: text }
-      - name: whyChooseUs
-        label: "Why Choose Us Section"
-        type: object
-        fields:
-          - { name: heading, label: "Heading", type: string }
-          - name: points
-            label: "Points"
             type: array
             fields:
               - { name: label, label: "Label", type: string }
@@ -283,8 +273,18 @@ content:
           - { name: metaDescription, label: "Meta Description", type: text }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro", type: text }
-          - { name: included, label: "What's Included", type: array, list: { type: string } }
+          - { name: whyItMatters, label: "Why Preventive Maintenance Matters", type: text }
+          - { name: included, label: "What's Included (Highlights)", type: array, list: { type: string } }
+          - { name: checklist, label: "Full 18-Point Checklist (item by item)", type: array, list: { type: string }, description: "Leave empty until the client provides the exact 18-point checklist. Once filled in, it replaces the placeholder note on the page." }
+          - { name: checklistNote, label: "Checklist Placeholder Note", type: text, description: "Shown only while the checklist above is empty." }
+          - { name: whoItsFor, label: "Who the Plan Is For", type: text }
           - { name: note, label: "Note / Disclaimer", type: text }
+          - name: cta
+            label: "Call to Action"
+            type: object
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: href, label: "Link", type: string }
           - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×900px (4:3). A technician performing maintenance work fits this page." }
           - { name: imageAlt, label: "Photo Alt Text", type: string }
       - name: preventive
@@ -323,6 +323,18 @@ content:
         fields:
           - { name: label, label: "Label", type: string }
           - { name: description, label: "Description", type: text }
+      - name: howItWorks
+        label: "How Financing Works"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - name: steps
+            label: "Steps"
+            type: array
+            fields:
+              - { name: step, label: "Step Number", type: string }
+              - { name: label, label: "Step Title", type: string }
+              - { name: description, label: "Step Description", type: text }
       - { name: disclaimer, label: "Disclaimer", type: text }
       - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×900px (4:3). A technician consulting with a homeowner works well here." }
       - { name: imageAlt, label: "Photo Alt Text", type: string }
@@ -397,6 +409,34 @@ content:
     fields:
       - { name: city, label: "City", type: string }
       - { name: county, label: "County", type: select, options: { values: [Broward, "Palm Beach"] } }
+      - { name: published, label: "Published", type: boolean }
+
+  # ---------------------------------------------------------------------
+  # CITY LANDING PAGES
+  # ---------------------------------------------------------------------
+  - name: cityPages
+    label: "City Pages"
+    description: >-
+      Dedicated landing pages for priority cities (/service-areas/<slug>/).
+      Only cities with a real page here appear as links on the main Service
+      Areas page. Write genuinely unique intro copy per city — do not reuse
+      the same paragraph with only the city name swapped, and never invent
+      neighborhoods, response times, or local stats that aren't verified.
+    type: collection
+    path: src/content/cityPages
+    format: json
+    fields:
+      - { name: city, label: "City Name", type: string }
+      - { name: slug, label: "URL Slug", type: string, description: "e.g. boca-raton — determines the page URL /service-areas/boca-raton/" }
+      - { name: county, label: "County", type: select, options: { values: [Broward, "Palm Beach"] } }
+      - { name: metaDescription, label: "Meta Description", type: text }
+      - { name: intro, label: "Intro Paragraphs", type: array, list: { type: text } }
+      - name: faqs
+        label: "City-Specific FAQ"
+        type: array
+        fields:
+          - { name: question, label: "Question", type: string }
+          - { name: answer, label: "Answer", type: text }
       - { name: published, label: "Published", type: boolean }
 
   # ---------------------------------------------------------------------

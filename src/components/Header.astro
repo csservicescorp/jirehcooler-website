@@ -11,11 +11,15 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
 <header class="site-header" data-header>
   <div class="utility-bar">
     <div class="container utility-inner">
-      <p class="utility-message">
+      <p class="utility-message utility-message-desktop">
         <Icon name="clock" class="icon-sm" />
         Emergency service available 24/7/365 &middot; Broward &amp; Palm Beach County
       </p>
-      <a class="utility-phone" href={`tel:${site.phoneRaw}`}>
+      <p class="utility-message utility-message-mobile">
+        <Icon name="clock" class="icon-xs" />
+        24/7 Emergency Service
+      </p>
+      <a class="utility-phone" href={`tel:${site.phoneRaw}`} data-track="phone_click" data-track-params={JSON.stringify({ location: "header_utility" })}>
         <Icon name="phone" class="icon-sm" />
         {site.phone}
       </a>
@@ -24,7 +28,7 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
 
   <div class="container header-inner">
     <a href="/" class="brand" aria-label={`${site.businessName} home`}>
-      <Logo height={42} />
+      <Logo height={47} mobileHeight={50} />
     </a>
 
     <nav class="primary-nav" aria-label="Primary">
@@ -67,11 +71,11 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
     </nav>
 
     <div class="header-actions">
-      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline header-call">
+      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline header-call" data-track="phone_click" data-track-params={JSON.stringify({ location: "header" })}>
         <Icon name="phone" class="icon-sm" />
         <span>Call Now</span>
       </a>
-      <a href={site.headerCta.href} class="btn btn-primary header-estimate">{site.headerCta.label}</a>
+      <a href={site.headerCta.href} class="btn btn-primary header-estimate" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: "header" })}>{site.headerCta.label}</a>
       <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
         <Icon name="menu" class="icon-menu-open" />
         <Icon name="close" class="icon-menu-close" />
@@ -104,10 +108,10 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
       </ul>
     </nav>
     <div class="mobile-menu-actions">
-      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline btn-block">
+      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline btn-block" data-track="phone_click" data-track-params={JSON.stringify({ location: "mobile_menu" })}>
         <Icon name="phone" class="icon-sm" /> Call {site.phone}
       </a>
-      <a href={site.headerCta.href} class="btn btn-primary btn-block">{site.headerCta.label}</a>
+      <a href={site.headerCta.href} class="btn btn-primary btn-block" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: "mobile_menu" })}>{site.headerCta.label}</a>
     </div>
   </div>
 </header>
@@ -159,12 +163,25 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
     flex-shrink: 0;
   }
 
-  @media (max-width: 720px) {
-    .utility-message {
+  .utility-message-mobile {
+    display: none;
+  }
+  @media (max-width: 719px) {
+    .utility-message-desktop {
       display: none;
+    }
+    .utility-message-mobile {
+      display: flex;
     }
     .utility-inner {
       justify-content: center;
+      padding-block: 0.35rem;
+    }
+    /* Compact mobile top bar: show only the emergency-service line, not the
+       phone number, so it isn't repeated above the fold alongside the
+       hero's Call Now button and the persistent bottom conversion bar. */
+    .utility-phone {
+      display: none;
     }
   }
 
@@ -174,6 +191,13 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
     justify-content: space-between;
     gap: var(--space-sm);
     padding-block: 0.85rem;
+  }
+  @media (max-width: 719px) {
+    .header-inner {
+      /* Combined with the 50px mobile logo, keeps the header row itself
+         (excluding the emergency strip above it) to roughly 64-72px tall. */
+      padding-block: 0.55rem;
+    }
   }
 
   .brand {
@@ -360,10 +384,24 @@ const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.s
   const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
   const menu = document.querySelector('[data-mobile-menu]') as HTMLElement | null;
 
+  function closeMobileMenu(returnFocus: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    menu.hidden = true;
+    if (returnFocus) toggle.focus();
+  }
+
   toggle?.addEventListener('click', () => {
     const expanded = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!expanded));
     if (menu) menu.hidden = expanded;
+  });
+
+  // Escape closes the mobile menu and returns focus to the toggle button.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMobileMenu(true);
+    }
   });
 
   // Touch-friendly dropdown toggle (desktop hover already handled in CSS)

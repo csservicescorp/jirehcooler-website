@@ -55,11 +55,11 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
         <p class="hero-sub hero-sub-desktop">{home.hero.subheadline}</p>
         <p class="hero-sub hero-sub-mobile">{home.hero.mobileSubheadline}</p>
         <div class="hero-actions">
-          <a href={home.hero.primaryCta.href} class="btn btn-primary btn-lg">
+          <a href={home.hero.primaryCta.href} class="btn btn-primary btn-lg" data-track="phone_click" data-track-params={JSON.stringify({ location: "hero" })}>
             <Icon name="phone" class="icon-sm" />
             {home.hero.primaryCta.label}
           </a>
-          <a href={home.hero.secondaryCta.href} class="btn btn-outline btn-lg">{home.hero.secondaryCta.label}</a>
+          <a href={home.hero.secondaryCta.href} class="btn btn-outline btn-lg" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: "hero" })}>{home.hero.secondaryCta.label}</a>
         </div>
         <ul class="hero-facts hero-facts-desktop">
           <li><Icon name="shield" class="icon-sm" /> License {site.license.number}</li>
@@ -118,7 +118,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
       </div>
       <div class="trust-copy">
         <div class="section-head">
-          <p class="eyebrow">Why South Florida Trusts Us</p>
+          <p class="eyebrow">{home.trust.eyebrow}</p>
           <h2>{home.trust.heading}</h2>
           <p>{home.trust.subheading}</p>
         </div>
@@ -153,98 +153,6 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     </div>
   </section>
 
-  <!-- EMERGENCY (full-bleed editorial photo, not another flat color block) -->
-  <section class="emergency-section">
-    <div class="emergency-bg">
-      <ResponsiveImage src={home.emergency.image} alt={home.emergency.imageAlt} ratio="16 / 9" variant="background" rounded={false} sizes="100vw" />
-      <div class="emergency-scrim" aria-hidden="true"></div>
-    </div>
-    <div class="container emergency-inner" data-reveal>
-      <p class="eyebrow">Emergency Service</p>
-      <h2>{home.emergency.heading}</h2>
-      <p>{home.emergency.description}</p>
-      <div class="hero-actions">
-        <a href={home.emergency.cta.href} class="btn btn-primary btn-lg">
-          <Icon name="bolt" class="icon-sm" />
-          {home.emergency.cta.label}
-        </a>
-        <a href={home.emergency.href} class="btn btn-outline btn-lg">Learn More</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY CHOOSE US -->
-  <section class="section-soft why-section">
-    <div class="container">
-      <div class="section-head center">
-        <p class="eyebrow">The Jireh Cooler Difference</p>
-        <h2>{home.whyChooseUs.heading}</h2>
-      </div>
-      <TrustPoints points={home.whyChooseUs.points} columns={4} />
-    </div>
-  </section>
-
-  <!-- PROCESS -->
-  <section class="process-section">
-    <div class="container">
-      <div class="section-head center">
-        <p class="eyebrow">How It Works</p>
-        <h2>{home.process.heading}</h2>
-      </div>
-      <ProcessSteps steps={home.process.steps} />
-    </div>
-  </section>
-
-  <!-- MEMBERSHIP -->
-  <section class="section-royal membership-section">
-    <div class="container membership-grid">
-      <div data-reveal>
-        <ResponsiveImage src={home.membership.image} alt={home.membership.imageAlt} ratio="4 / 3" variant="editorial" />
-      </div>
-      <div data-reveal>
-        <p class="eyebrow">Preventive Maintenance</p>
-        <h2>{home.membership.heading}</h2>
-        <p>{home.membership.description}</p>
-        <ul class="check-list">
-          {home.membership.highlights.map((h) => (
-            <li><Icon name="check" class="icon-sm" /> {h}</li>
-          ))}
-        </ul>
-        <a href={home.membership.cta.href} class="btn btn-white btn-lg">{home.membership.cta.label}</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINANCING -->
-  <section class="financing-section">
-    <div class="container financing-grid">
-      <div data-reveal>
-        <p class="eyebrow">Financing</p>
-        <h2>{home.financing.heading}</h2>
-        <p>{home.financing.description}</p>
-        <a href={home.financing.cta.href} class="btn btn-primary btn-lg">{home.financing.cta.label}</a>
-      </div>
-      <div data-reveal>
-        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" focal="center 38%" variant="editorial" />
-      </div>
-    </div>
-  </section>
-
-  <!-- AIR QUALITY -->
-  <section class="section-ice air-quality-section">
-    <div class="container air-grid">
-      <div data-reveal>
-        <ResponsiveImage src={home.airQuality.image} alt={home.airQuality.imageAlt} ratio="4 / 3" variant="editorial" />
-      </div>
-      <div data-reveal>
-        <p class="eyebrow">Indoor Air Quality</p>
-        <h2>{home.airQuality.heading}</h2>
-        <p>{home.airQuality.description}</p>
-        <a href={home.airQuality.cta.href} class="btn btn-primary btn-lg">{home.airQuality.cta.label}</a>
-      </div>
-    </div>
-  </section>
-
   <!-- CUSTOMER STORIES -->
   <section class="reviews-teaser">
     <div class="container">
@@ -272,8 +180,89 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
         </p>
       )}
       <div class="reviews-actions">
-        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Read More Reviews</a>
-        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">Leave Us a Review</a>
+        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-track="google_reviews_click" data-track-params={JSON.stringify({ location: "homepage" })}>Read More Reviews</a>
+        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-track="leave_review_click" data-track-params={JSON.stringify({ location: "homepage" })}>Leave Us a Review</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY (full-bleed editorial photo, not another flat color block) -->
+  <section class="emergency-section">
+    <div class="emergency-bg">
+      <ResponsiveImage src={home.emergency.image} alt={home.emergency.imageAlt} ratio="16 / 9" variant="background" rounded={false} sizes="100vw" />
+      <div class="emergency-scrim" aria-hidden="true"></div>
+    </div>
+    <div class="container emergency-inner" data-reveal>
+      <p class="eyebrow">Emergency Service</p>
+      <h2>{home.emergency.heading}</h2>
+      <p>{home.emergency.description}</p>
+      <div class="hero-actions">
+        <a href={home.emergency.cta.href} class="btn btn-primary btn-lg" data-track="emergency_call_click" data-track-params={JSON.stringify({ location: "homepage_emergency" })}>
+          <Icon name="bolt" class="icon-sm" />
+          {home.emergency.cta.label}
+        </a>
+        <a href={home.emergency.href} class="btn btn-outline btn-lg">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">{home.process.eyebrow}</p>
+        <h2>{home.process.heading}</h2>
+      </div>
+      <ProcessSteps steps={home.process.steps} />
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section class="section-royal membership-section">
+    <div class="container membership-grid">
+      <div data-reveal>
+        <ResponsiveImage src={home.membership.image} alt={home.membership.imageAlt} ratio="4 / 3" variant="editorial" />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Preventive Maintenance</p>
+        <h2>{home.membership.heading}</h2>
+        <p>{home.membership.description}</p>
+        <ul class="check-list">
+          {home.membership.highlights.map((h) => (
+            <li><Icon name="check" class="icon-sm" /> {h}</li>
+          ))}
+        </ul>
+        <a href={home.membership.cta.href} class="btn btn-white btn-lg" data-track="maintenance_click" data-track-params={JSON.stringify({ location: "homepage" })}>{home.membership.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCING -->
+  <section class="financing-section">
+    <div class="container financing-grid">
+      <div data-reveal>
+        <p class="eyebrow">Financing</p>
+        <h2>{home.financing.heading}</h2>
+        <p>{home.financing.description}</p>
+        <a href={home.financing.cta.href} class="btn btn-primary btn-lg" data-track="financing_click" data-track-params={JSON.stringify({ location: "homepage" })}>{home.financing.cta.label}</a>
+      </div>
+      <div data-reveal>
+        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" focal="center 38%" variant="editorial" />
+      </div>
+    </div>
+  </section>
+
+  <!-- AIR QUALITY -->
+  <section class="section-ice air-quality-section">
+    <div class="container air-grid">
+      <div data-reveal>
+        <ResponsiveImage src={home.airQuality.image} alt={home.airQuality.imageAlt} ratio="4 / 3" variant="editorial" />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Indoor Air Quality</p>
+        <h2>{home.airQuality.heading}</h2>
+        <p>{home.airQuality.description}</p>
+        <a href={home.airQuality.cta.href} class="btn btn-primary btn-lg">{home.airQuality.cta.label}</a>
       </div>
     </div>
   </section>

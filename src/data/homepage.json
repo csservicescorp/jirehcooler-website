@@ -8,7 +8,7 @@
     "image": "/images/homepage/jireh-cooler-office-hero.jpg",
     "imageAlt": "Jireh Cooler office reception area with the company logo on the accent wall",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
-    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
+    "secondaryCta": { "label": "Schedule Service", "href": "/request-an-estimate/" }
   },
   "pathways": {
     "heading": "Built for Your Home. Ready for Your Business.",
@@ -28,22 +28,23 @@
     }
   },
   "trust": {
-    "heading": "Three Decades of South Florida Comfort",
+    "eyebrow": "Why South Florida Trusts Us",
+    "heading": "Why South Florida Trusts Jireh Cooler",
     "subheading": "Jireh Cooler has been a family-operated fixture in Broward and Palm Beach County since 1994.",
     "image": "/images/homepage/jireh-company-fleet.jpg",
     "imageAlt": "Jireh Cooler branded service vans and truck parked outside the company facility",
     "points": [
       {
-        "label": "Founded in 1994",
-        "description": "Three decades of hands-on HVAC experience in South Florida's climate."
+        "label": "Family-Operated Since 1994",
+        "description": "Founded and still run by Moyses Oliveira, with three decades of hands-on HVAC experience in South Florida's climate."
       },
       {
         "label": "State-Certified & Insured",
-        "description": "Licensed Air Conditioning Contractor, CAC1815741."
+        "description": "Licensed Air Conditioning Contractor, CAC1815741, for residential and commercial work."
       },
       {
-        "label": "Family-Operated",
-        "description": "Owner-led business built on direct accountability, not a call center."
+        "label": "Straightforward Pricing",
+        "description": "Written estimates before work begins, with no pressure and no surprises."
       },
       {
         "label": "24/7 Emergency Availability",
@@ -71,29 +72,9 @@
     "image": "/images/homepage/emergency-technician-response.jpg",
     "imageAlt": "HVAC technician using pressure gauges during an urgent air conditioning repair"
   },
-  "whyChooseUs": {
-    "heading": "Why South Florida Chooses Jireh Cooler",
-    "points": [
-      {
-        "label": "Direct Owner Involvement",
-        "description": "Founded and still run by Moyses Oliveira, with decades of hands-on technical experience behind every job."
-      },
-      {
-        "label": "Straightforward Pricing",
-        "description": "Written estimates before work begins, with no pressure and no surprises."
-      },
-      {
-        "label": "Certified Technicians",
-        "description": "Trained on the major brands we install and service, including Carrier, Bryant, Rheem, Goodman, and Lennox."
-      },
-      {
-        "label": "Built for the Long Term",
-        "description": "Three decades of repeat customers across Broward and Palm Beach County."
-      }
-    ]
-  },
   "process": {
-    "heading": "What Happens When You Call",
+    "eyebrow": "How It Works",
+    "heading": "How Jireh Cooler Works",
     "steps": [
       {
         "step": "1",
@@ -125,14 +106,14 @@
       "Two scheduled visits per year",
       "Priority scheduling for members"
     ],
-    "cta": { "label": "Learn About Membership", "href": "/maintenance-membership/" },
+    "cta": { "label": "Join the V.I.P. Maintenance Plan", "href": "/maintenance-membership/" },
     "image": "/images/homepage/membership-technician-inspection.jpg",
     "imageAlt": "Technician performing hands-on maintenance work on an outdoor air conditioning unit"
   },
   "financing": {
     "heading": "Flexible Financing Options",
     "description": "Financing is available for qualified homeowners so a system replacement doesn't have to be an all-at-once expense.",
-    "cta": { "label": "Explore Financing", "href": "/financing/" },
+    "cta": { "label": "Ask About Financing", "href": "/financing/" },
     "image": "/images/financing/jireh-financing-consultation.jpg",
     "imageAlt": "Jireh Cooler HVAC professional explaining financing options to a homeowner"
   },

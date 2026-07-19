@@ -9,18 +9,22 @@ import site from '@data/site.json';
 import manifest from '@data/image-manifest.json';
 
 interface Props {
-  height?: number; // display height in px; width follows the logo's natural ratio
+  height?: number; // desktop display height in px; width follows the logo's natural ratio
+  mobileHeight?: number; // optional different height below 720px; defaults to `height`
   class?: string;
 }
 
-const { height = 44, class: className = '' } = Astro.props;
+const { height = 44, mobileHeight, class: className = '' } = Astro.props;
+const mHeight = mobileHeight ?? height;
 
 type ManifestEntry = { width: number; height: number; smWidth: number; smHeight: number };
 const src = site.logo.image;
 const alt = site.logo.alt;
 const entry: ManifestEntry | undefined = (manifest as Record<string, ManifestEntry>)[src];
 const base = src.replace(/\.(png|jpg)$/i, '');
-const displayWidth = entry ? Math.round((height * entry.width) / entry.height) : undefined;
+const maxHeight = Math.max(height, mHeight);
+const displayWidth = entry ? Math.round((maxHeight * entry.width) / entry.height) : undefined;
+const sizeVars = `--logo-h:${height}px;--logo-h-mobile:${mHeight}px;`;
 ---
 
 {
@@ -46,13 +50,13 @@ const displayWidth = entry ? Math.round((height * entry.width) / entry.height) :
         alt={alt}
         loading="eager"
         decoding="async"
-        style={`height:${height}px;width:${displayWidth}px;`}
+        style={sizeVars}
       />
     </picture>
   ) : (
     // Newly-uploaded logo not yet processed by scripts/optimize-images.mjs —
     // render it directly rather than break the header.
-    <img class={`logo-img ${className}`} src={src} alt={alt} loading="eager" decoding="async" style={`height:${height}px;width:auto;`} />
+    <img class={`logo-img ${className}`} src={src} alt={alt} loading="eager" decoding="async" style={sizeVars} />
   )
 }
 
@@ -61,5 +65,12 @@ const displayWidth = entry ? Math.round((height * entry.width) / entry.height) :
     display: block;
     object-fit: contain;
     max-width: 100%;
+    height: var(--logo-h);
+    width: auto;
+  }
+  @media (max-width: 719px) {
+    .logo-img {
+      height: var(--logo-h-mobile);
+    }
   }
 </style>

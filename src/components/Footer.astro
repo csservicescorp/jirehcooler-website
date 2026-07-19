@@ -57,7 +57,7 @@ const year = new Date().getFullYear();
       <h3>Contact</h3>
       <ul>
         <li>
-          <a href={`tel:${site.phoneRaw}`}>
+          <a href={`tel:${site.phoneRaw}`} data-track="phone_click" data-track-params={JSON.stringify({ location: 'footer' })}>
             <Icon name="phone" class="icon-sm" /> {site.phone}
           </a>
         </li>

@@ -227,6 +227,14 @@ section {
 .btn:hover {
   transform: translateY(-1px);
 }
+@media (max-width: 400px) {
+  /* Safety net: a long CTA label (e.g. "Join the V.I.P. Maintenance Plan")
+     must wrap rather than force horizontal overflow on very narrow screens. */
+  .btn {
+    white-space: normal;
+    text-align: center;
+  }
+}
 .btn-primary {
   background: var(--color-royal);
   color: var(--color-white);
