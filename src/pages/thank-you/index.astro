@@ -1,0 +1,72 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Icon from '@components/Icon.astro';
+import site from '@data/site.json';
+---
+
+<BaseLayout
+  title="Thank You | Jireh Cooler"
+  description="Your request was received. A member of the Jireh Cooler team will be in touch shortly."
+  path="/thank-you/"
+  noindex
+>
+  <section class="thank-you-section">
+    <div class="container-narrow thank-you-inner">
+      <span class="check-badge" aria-hidden="true">
+        <Icon name="check-circle" />
+      </span>
+      <h1>Thank You — Your Request Was Received</h1>
+      <p>
+        A member of the Jireh Cooler team will contact you shortly. For urgent service, call{' '}
+        <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>.
+      </p>
+      <div class="thank-you-actions">
+        <a href={`tel:${site.phoneRaw}`} class="btn btn-primary btn-lg" data-track="phone_click" data-track-params={JSON.stringify({ location: 'thank_you' })}>
+          <Icon name="phone" class="icon-sm" />
+          Call Now
+        </a>
+        <a href="/" class="btn btn-outline btn-lg">Return Home</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thank-you-section {
+    padding-block: var(--space-3xl);
+  }
+  .thank-you-inner {
+    text-align: center;
+  }
+  .check-badge {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin-inline: auto;
+    margin-bottom: var(--space-md);
+    border-radius: 50%;
+    background: var(--color-ice);
+    color: var(--color-success);
+  }
+  .check-badge :global(svg) {
+    width: 36px;
+    height: 36px;
+  }
+  .thank-you-inner p {
+    font-size: var(--fs-md);
+    max-width: 48ch;
+    margin-inline: auto;
+  }
+  .thank-you-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: var(--space-lg);
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+  }
+</style>

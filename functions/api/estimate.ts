@@ -24,9 +24,18 @@ interface EstimatePayload {
   consent?: string;
   companyWebsite?: string; // honeypot
   formStartedAt?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  gclid?: string;
 }
 
-const REQUIRED_FIELDS = ['name', 'phone', 'email', 'zip', 'consent'] as const;
+// Base fields required for every submission. The estimate form additionally
+// requires serviceNeeded, urgency, and message; email is optional on both
+// forms (phone is the primary required contact method).
+const REQUIRED_FIELDS = ['name', 'phone', 'zip', 'consent'] as const;
+const ESTIMATE_REQUIRED_FIELDS = ['serviceNeeded', 'urgency', 'message'] as const;
 const MIN_SUBMIT_SECONDS = 3; // rejects submissions faster than a human could plausibly fill the form
 
 function isValidEmail(value: string): boolean {
@@ -67,7 +76,16 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     }
   }
 
-  if (!isValidEmail(payload.email ?? '')) {
+  if (payload.formType !== 'contact') {
+    for (const field of ESTIMATE_REQUIRED_FIELDS) {
+      if (!payload[field]) {
+        return jsonResponse({ error: `Missing required field: ${field}` }, 400);
+      }
+    }
+  }
+
+  // Email is optional on both forms, but must be well-formed if provided.
+  if (payload.email && !isValidEmail(payload.email)) {
     return jsonResponse({ error: 'Invalid email address' }, 400);
   }
 
@@ -84,13 +102,16 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     `Form type: ${payload.formType ?? 'estimate'}`,
     `Name: ${payload.name}`,
     `Phone: ${payload.phone}`,
-    `Email: ${payload.email}`,
+    payload.email ? `Email: ${payload.email}` : null,
     `ZIP: ${payload.zip}`,
     payload.propertyType ? `Property type: ${payload.propertyType}` : null,
     payload.serviceNeeded ? `Service needed: ${payload.serviceNeeded}` : null,
     payload.urgency ? `Urgency: ${payload.urgency}` : null,
     payload.contactMethod ? `Preferred contact method: ${payload.contactMethod}` : null,
     payload.message ? `Message: ${payload.message}` : null,
+    payload.utmSource || payload.utmMedium || payload.utmCampaign || payload.utmContent || payload.gclid
+      ? `Campaign: source=${payload.utmSource || '-'} medium=${payload.utmMedium || '-'} campaign=${payload.utmCampaign || '-'} content=${payload.utmContent || '-'} gclid=${payload.gclid || '-'}`
+      : null,
   ].filter(Boolean);
 
   try {

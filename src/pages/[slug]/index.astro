@@ -6,6 +6,7 @@ import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
 import ServiceCard from '@components/ServiceCard.astro';
+import ReviewCard from '@components/ReviewCard.astro';
 import site from '@data/site.json';
 import { serviceSchema } from '@/lib/schema';
 
@@ -22,6 +23,24 @@ const { Content } = await render(service);
 const allServices = await getCollection('services', ({ data }) => data.published);
 const related = allServices.filter((s) => s.data.urlSlug !== service.data.urlSlug).slice(0, 3);
 const path = `/${service.data.urlSlug}/`;
+// Emergency service's CTA is a direct phone call, not the estimate form.
+const isEmergency = service.data.urlSlug === 'emergency-ac-service';
+const ctaHref = isEmergency ? `tel:${site.phoneRaw}` : `/request-an-estimate/?service=${service.data.urlSlug}`;
+
+// Thematically-matched real review shown on the five highest-priority
+// service pages, pulled from the same authentic testimonials collection
+// used on the Reviews page — never a fabricated quote.
+const RELATED_REVIEWER: Record<string, string> = {
+  'ac-repair': 'Paul Clippinger',
+  'ac-installation-and-replacement': 'marcus nunes',
+  'emergency-ac-service': 'Joao Neto',
+  'residential-hvac': 'Leticia Furlani',
+  'commercial-hvac': 'Marcus Sousa',
+};
+const relatedReviewerName = RELATED_REVIEWER[service.data.urlSlug];
+const relatedReview = relatedReviewerName
+  ? (await getCollection('testimonials', ({ data }) => data.published && data.reviewerName === relatedReviewerName))[0]
+  : undefined;
 ---
 
 <BaseLayout
@@ -33,7 +52,6 @@ const path = `/${service.data.urlSlug}/`;
   <PageHero
     eyebrow="Services"
     title={service.data.title}
-    description={service.data.shortDescription}
     breadcrumbs={[
       { label: 'Home', href: '/' },
       { label: 'Services', href: '/services/' },
@@ -56,7 +74,7 @@ const path = `/${service.data.urlSlug}/`;
       <div class="intro-copy" data-reveal>
         <span class="intro-icon"><Icon name={service.data.icon} /></span>
         <p class="intro-lead">{service.data.shortDescription}</p>
-        <a href="/request-an-estimate/" class="btn btn-primary btn-lg intro-cta">{service.data.ctaLabel}</a>
+        <a href={ctaHref} class="btn btn-primary btn-lg intro-cta">{service.data.ctaLabel}</a>
       </div>
     </div>
   </section>
@@ -74,7 +92,7 @@ const path = `/${service.data.urlSlug}/`;
               <li><Icon name="check" class="icon-sm" /> {b}</li>
             ))}
           </ul>
-          <a href="/request-an-estimate/" class="btn btn-primary btn-block">{service.data.ctaLabel}</a>
+          <a href={ctaHref} class="btn btn-primary btn-block">{service.data.ctaLabel}</a>
           <a href={`tel:${site.phoneRaw}`} class="btn btn-outline btn-block">
             <Icon name="phone" class="icon-sm" /> {site.phone}
           </a>
@@ -82,6 +100,39 @@ const path = `/${service.data.urlSlug}/`;
       </aside>
     </div>
   </section>
+
+  {relatedReview && (
+    <section class="related-review-section">
+      <div class="container container-narrow">
+        <div class="section-head center">
+          <p class="eyebrow">In Their Words</p>
+          <h2>What a Recent Customer Said</h2>
+        </div>
+        <ReviewCard
+          reviewerName={relatedReview.data.reviewerName}
+          rating={relatedReview.data.rating}
+          reviewText={relatedReview.data.reviewText}
+          reviewDate={relatedReview.data.reviewDate}
+          sourceLabel={relatedReview.data.sourceLabel}
+          sourceUrl={relatedReview.data.sourceUrl}
+        />
+      </div>
+    </section>
+  )}
+
+  {isEmergency && (
+    <section class="emergency-cta-banner">
+      <div class="container container-narrow emergency-banner-inner">
+        <div>
+          <h2>Can't Wait? Call Now.</h2>
+          <p>Our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year.</p>
+        </div>
+        <a href={`tel:${site.phoneRaw}`} class="btn btn-primary btn-lg" data-track="emergency_call_click" data-track-params={JSON.stringify({ location: 'service_page' })}>
+          <Icon name="bolt" class="icon-sm" /> Call {site.phone}
+        </a>
+      </div>
+    </section>
+  )}
 
   <section class="section-soft related-section">
     <div class="container">
@@ -100,6 +151,7 @@ const path = `/${service.data.urlSlug}/`;
   <CtaSection
     heading={`Ready to Schedule ${service.data.title}?`}
     description="Reach out today for a straightforward estimate, or call our emergency line if you need help right away."
+    secondaryCta={{ label: service.data.ctaLabel, href: ctaHref }}
   />
 </BaseLayout>
 
@@ -209,6 +261,37 @@ const path = `/${service.data.urlSlug}/`;
   @media (min-width: 720px) {
     .related-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .related-review-section {
+    padding-bottom: 0;
+  }
+  .emergency-cta-banner {
+    background: var(--color-ice);
+    border-radius: var(--radius-lg);
+    max-width: calc(var(--content-max) - 2 * var(--space-md));
+    margin-inline: auto;
+    padding-block: var(--space-lg);
+  }
+  .emergency-banner-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+    text-align: center;
+  }
+  .emergency-banner-inner h2 {
+    margin-bottom: 0.25rem;
+  }
+  .emergency-banner-inner p {
+    margin: 0;
+  }
+  @media (min-width: 640px) {
+    .emergency-banner-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
     }
   }
 </style>

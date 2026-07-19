@@ -4,6 +4,25 @@ interface Props {
   compact?: boolean;
 }
 const { formType = 'estimate', compact = false } = Astro.props;
+
+const serviceOptions = [
+  { value: 'ac-repair', label: 'AC Repair' },
+  { value: 'ac-installation-and-replacement', label: 'AC Installation / Replacement' },
+  { value: 'emergency-ac-service', label: 'Emergency Service' },
+  { value: 'residential-hvac', label: 'Residential HVAC' },
+  { value: 'commercial-hvac', label: 'Commercial HVAC' },
+  { value: 'preventive-maintenance', label: 'Preventive Maintenance' },
+  { value: 'maintenance-membership', label: 'V.I.P. Maintenance Membership' },
+  { value: 'indoor-air-quality', label: 'Indoor Air Quality' },
+  { value: 'duct-cleaning', label: 'Duct Cleaning' },
+  { value: 'uv-light-systems', label: 'UV Light Systems' },
+  { value: 'pool-heaters', label: 'Pool Heater' },
+  { value: 'water-heaters', label: 'Water Heater' },
+  { value: 'dryer-vent-cleaning', label: 'Dryer Vent Cleaning' },
+  { value: 'smart-wifi-thermostats', label: 'Smart / Wi-Fi Thermostat' },
+  { value: 'financing', label: 'Financing Question' },
+  { value: 'other', label: 'Other' },
+];
 ---
 
 <form class="estimate-form" data-estimate-form novalidate>
@@ -14,89 +33,112 @@ const { formType = 'estimate', compact = false } = Astro.props;
     <input type="text" id="company-website" name="companyWebsite" tabindex="-1" autocomplete="off" />
   </div>
   <input type="hidden" name="formStartedAt" data-form-start-time value="" />
+  <input type="hidden" name="utmSource" data-utm="utm_source" value="" />
+  <input type="hidden" name="utmMedium" data-utm="utm_medium" value="" />
+  <input type="hidden" name="utmCampaign" data-utm="utm_campaign" value="" />
+  <input type="hidden" name="utmContent" data-utm="utm_content" value="" />
+  <input type="hidden" name="gclid" data-utm="gclid" value="" />
 
   <div class="form-row">
     <div class="field">
       <label for="name">Full Name <span aria-hidden="true">*</span></label>
-      <input type="text" id="name" name="name" required autocomplete="name" />
+      <input type="text" id="name" name="name" required autocomplete="name" data-required />
+      <p class="field-error" data-error-for="name" hidden></p>
     </div>
     <div class="field">
       <label for="phone">Phone <span aria-hidden="true">*</span></label>
-      <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" data-required />
+      <p class="field-error" data-error-for="phone" hidden></p>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
-      <label for="email">Email <span aria-hidden="true">*</span></label>
-      <input type="email" id="email" name="email" required autocomplete="email" />
-    </div>
-    <div class="field">
       <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
-      <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" />
+      <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" data-required />
+      <p class="field-error" data-error-for="zip" hidden></p>
     </div>
+    {formType === 'estimate' ? (
+      <div class="field">
+        <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
+        <select id="serviceNeeded" name="serviceNeeded" required data-required data-service-select>
+          <option value="">Select a service</option>
+          {serviceOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+        </select>
+        <p class="field-error" data-error-for="serviceNeeded" hidden></p>
+      </div>
+    ) : (
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" autocomplete="email" />
+        <p class="field-error" data-error-for="email" hidden></p>
+      </div>
+    )}
   </div>
 
   {formType === 'estimate' && (
-    <>
+    <fieldset class="field urgency-field">
+      <legend>How Urgent Is This? <span aria-hidden="true">*</span></legend>
+      <div class="urgency-options" role="radiogroup" aria-required="true" data-urgency-group>
+        <label class="urgency-option">
+          <input type="radio" name="urgency" value="emergency" required data-required />
+          <span>Emergency</span>
+        </label>
+        <label class="urgency-option">
+          <input type="radio" name="urgency" value="soon" />
+          <span>Within a Few Days</span>
+        </label>
+        <label class="urgency-option">
+          <input type="radio" name="urgency" value="planning" />
+          <span>Planning Ahead</span>
+        </label>
+      </div>
+      <p class="field-error" data-error-for="urgency" hidden></p>
+    </fieldset>
+  )}
+
+  <div class="field">
+    <label for="message">{formType === 'estimate' ? 'Short Description' : 'Message'} <span aria-hidden="true">*</span></label>
+    <textarea id="message" name="message" rows={compact ? 3 : 4} required data-required placeholder={formType === 'estimate' ? "e.g. AC is blowing warm air, unit won't turn on..." : ''}></textarea>
+    <p class="field-error" data-error-for="message" hidden></p>
+  </div>
+
+  {formType === 'estimate' && (
+    <details class="optional-fields">
+      <summary>Additional details (optional)</summary>
       <div class="form-row">
         <div class="field">
-          <label for="propertyType">Property Type <span aria-hidden="true">*</span></label>
-          <select id="propertyType" name="propertyType" required>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" />
+          <p class="field-error" data-error-for="email" hidden></p>
+        </div>
+        <div class="field">
+          <label for="propertyType">Property Type</label>
+          <select id="propertyType" name="propertyType">
             <option value="">Select one</option>
             <option value="residential">Residential</option>
             <option value="commercial">Commercial</option>
           </select>
         </div>
-        <div class="field">
-          <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
-          <select id="serviceNeeded" name="serviceNeeded" required>
-            <option value="">Select one</option>
-            <option value="ac-repair">AC Repair</option>
-            <option value="ac-installation">AC Installation / Replacement</option>
-            <option value="emergency">Emergency Service</option>
-            <option value="maintenance">Preventive Maintenance</option>
-            <option value="indoor-air-quality">Indoor Air Quality</option>
-            <option value="water-heater">Water Heater</option>
-            <option value="pool-heater">Pool Heater</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
       </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label for="urgency">Urgency <span aria-hidden="true">*</span></label>
-          <select id="urgency" name="urgency" required>
-            <option value="">Select one</option>
-            <option value="emergency">Emergency — Need Help Now</option>
-            <option value="soon">Within the Next Few Days</option>
-            <option value="planning">Just Planning Ahead</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="contactMethod">Preferred Contact Method <span aria-hidden="true">*</span></label>
-          <select id="contactMethod" name="contactMethod" required>
-            <option value="">Select one</option>
-            <option value="phone">Phone Call</option>
-            <option value="text">Text Message</option>
-            <option value="email">Email</option>
-          </select>
-        </div>
+      <div class="field">
+        <label for="contactMethod">Preferred Contact Method</label>
+        <select id="contactMethod" name="contactMethod">
+          <option value="">No preference</option>
+          <option value="phone">Phone Call</option>
+          <option value="text">Text Message</option>
+          <option value="email">Email</option>
+        </select>
       </div>
-    </>
+    </details>
   )}
-
-  <div class="field">
-    <label for="message">{formType === 'estimate' ? 'Tell Us About the Issue' : 'Message'} {formType === 'contact' && <span aria-hidden="true">*</span>}</label>
-    <textarea id="message" name="message" rows={compact ? 3 : 4} required={formType === 'contact'}></textarea>
-  </div>
 
   <div class="field consent-field">
     <label class="checkbox-label">
-      <input type="checkbox" id="consent" name="consent" required />
+      <input type="checkbox" id="consent" name="consent" required data-required />
       <span>I agree to be contacted by Jireh Cooler about my request. <span aria-hidden="true">*</span></span>
     </label>
+    <p class="field-error" data-error-for="consent" hidden></p>
   </div>
 
   <button type="submit" class="btn btn-primary btn-lg btn-block" data-submit-btn>
@@ -129,24 +171,30 @@ const { formType = 'estimate', compact = false } = Astro.props;
     grid-template-columns: minmax(0, 1fr);
     gap: 0.4rem;
     min-width: 0;
+    border: none;
+    padding: 0;
+    margin: 0;
   }
-  .field label {
+  .field label,
+  .urgency-field legend {
     font-size: var(--fs-sm);
     font-weight: 600;
     color: var(--color-royal);
+    padding: 0;
   }
   input,
   select,
   textarea {
     font-family: var(--font-body);
     font-size: var(--fs-base);
-    padding: 0.75rem 0.9rem;
+    padding: 0.85rem 0.9rem;
     border: 1.5px solid var(--color-border-strong);
     border-radius: var(--radius-sm);
     background: var(--color-white);
     color: var(--color-charcoal);
     width: 100%;
     min-width: 0;
+    min-height: 48px;
   }
   input:focus,
   select:focus,
@@ -155,6 +203,71 @@ const { formType = 'estimate', compact = false } = Astro.props;
   }
   textarea {
     resize: vertical;
+    min-height: unset;
+  }
+  .field.has-error input,
+  .field.has-error select,
+  .field.has-error textarea {
+    border-color: var(--color-danger);
+  }
+  .field-error {
+    margin: 0;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--color-danger);
+  }
+  .urgency-field {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .urgency-options {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+  .urgency-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    min-height: 48px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    cursor: pointer;
+    transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+  }
+  .urgency-option input {
+    width: auto;
+    min-height: unset;
+    accent-color: var(--color-royal);
+  }
+  .urgency-option:has(input:checked) {
+    border-color: var(--color-royal);
+    background: var(--color-ice);
+    color: var(--color-royal);
+  }
+  .optional-fields {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+  }
+  .optional-fields summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-royal);
+  }
+  .optional-fields[open] summary {
+    margin-bottom: var(--space-sm);
+  }
+  .optional-fields .form-row,
+  .optional-fields .field {
+    margin-top: var(--space-sm);
+  }
+  .optional-fields .form-row:first-of-type {
+    margin-top: var(--space-sm);
   }
   .checkbox-label {
     display: flex;
@@ -166,6 +279,7 @@ const { formType = 'estimate', compact = false } = Astro.props;
   }
   .checkbox-label input {
     width: auto;
+    min-height: unset;
     margin-top: 0.2rem;
   }
   .hp-field {
@@ -201,10 +315,17 @@ const { formType = 'estimate', compact = false } = Astro.props;
     opacity: 0.7;
     cursor: not-allowed;
   }
+  .btn-block {
+    width: 100%;
+    min-height: 52px;
+  }
 
   @media (min-width: 640px) {
     .form-row {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .urgency-options {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 </style>
@@ -212,9 +333,108 @@ const { formType = 'estimate', compact = false } = Astro.props;
 <script>
   const forms = document.querySelectorAll<HTMLFormElement>('[data-estimate-form]');
 
+  function trackEvent(name: string, params: Record<string, unknown> = {}) {
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag === 'function') w.gtag('event', name, params);
+  }
+
   forms.forEach((form) => {
     const startField = form.querySelector<HTMLInputElement>('[data-form-start-time]');
     if (startField) startField.value = String(Date.now());
+
+    // Preselect the service dropdown from ?service=<slug> on the estimate form.
+    const serviceSelect = form.querySelector<HTMLSelectElement>('[data-service-select]');
+    if (serviceSelect) {
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get('service');
+      if (requested && [...serviceSelect.options].some((o) => o.value === requested)) {
+        serviceSelect.value = requested;
+      }
+    }
+
+    // Carry campaign parameters through as hidden fields, if present.
+    const searchParams = new URLSearchParams(window.location.search);
+    form.querySelectorAll<HTMLInputElement>('[data-utm]').forEach((input) => {
+      const key = input.dataset.utm;
+      if (key) input.value = searchParams.get(key) ?? '';
+    });
+
+    let started = false;
+    form.addEventListener(
+      'input',
+      () => {
+        if (!started) {
+          started = true;
+          trackEvent('estimate_form_start');
+        }
+      },
+      { once: true }
+    );
+
+    function clearErrors() {
+      form.querySelectorAll<HTMLElement>('.field-error').forEach((el) => {
+        el.hidden = true;
+        el.textContent = '';
+      });
+      form.querySelectorAll<HTMLElement>('.field.has-error, .urgency-field.has-error').forEach((el) => {
+        el.classList.remove('has-error');
+      });
+    }
+
+    function showError(name: string, message: string) {
+      const errorEl = form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+      if (!errorEl) return;
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      const container = errorEl.closest('.field') ?? errorEl.closest('.urgency-field');
+      container?.classList.add('has-error');
+    }
+
+    function validate(): boolean {
+      clearErrors();
+      let firstInvalid: HTMLElement | null = null;
+      let valid = true;
+
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('[data-required]').forEach((field) => {
+        if (field.type === 'radio') {
+          const group = form.querySelectorAll<HTMLInputElement>(`input[name="${field.name}"]`);
+          const checked = [...group].some((r) => r.checked);
+          if (!checked) {
+            valid = false;
+            showError('urgency', 'Please select one.');
+            firstInvalid ??= group[0];
+          }
+          return;
+        }
+        if (field.type === 'checkbox' && !(field as HTMLInputElement).checked) {
+          valid = false;
+          showError(field.name, 'Required to submit this form.');
+          firstInvalid ??= field;
+          return;
+        }
+        if (field.type !== 'checkbox' && !field.value.trim()) {
+          valid = false;
+          showError(field.name, 'This field is required.');
+          firstInvalid ??= field;
+          return;
+        }
+        if (field.name === 'zip' && field.value.trim() && !/^\d{5}$/.test(field.value.trim())) {
+          valid = false;
+          showError('zip', 'Enter a 5-digit ZIP code.');
+          firstInvalid ??= field;
+        }
+      });
+
+      const email = form.querySelector<HTMLInputElement>('#email');
+      if (email && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        valid = false;
+        showError('email', 'Enter a valid email address.');
+        firstInvalid ??= email;
+      }
+
+      if (firstInvalid) firstInvalid.focus();
+      return valid;
+    }
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -224,10 +444,8 @@ const { formType = 'estimate', compact = false } = Astro.props;
       const label = form.querySelector<HTMLElement>('[data-btn-label]');
       if (!status || !button || !label) return;
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+      if (button.disabled) return; // already submitting, prevent duplicate submission
+      if (!validate()) return;
 
       const originalLabel = label.textContent;
       button.disabled = true;
@@ -248,13 +466,14 @@ const { formType = 'estimate', compact = false } = Astro.props;
 
         if (!response.ok) throw new Error('Request failed');
 
+        trackEvent('estimate_form_submit', { form_type: String(payload.formType ?? 'estimate') });
         status.className = 'form-status success';
-        status.textContent = "Thanks — we've received your request and will be in touch shortly. For urgent issues, please call us directly.";
+        status.textContent = 'Success — redirecting…';
         form.reset();
+        window.location.href = '/thank-you/';
       } catch (err) {
         status.className = 'form-status error';
         status.textContent = "Something went wrong sending your request. Please call us directly so we don't miss you.";
-      } finally {
         button.disabled = false;
         label.textContent = originalLabel;
       }
