@@ -74,7 +74,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   <ul class="container trust-strip">
     <li><Icon name="shield" class="icon-sm" /> License {site.license.number}</li>
     <li><Icon name="clock" class="icon-sm" /> {site.emergencyAvailability} Emergency Service</li>
-    <li><Icon name="calendar" class="icon-sm" /> Serving South Florida Since {site.foundedYear}</li>
+    <li><Icon name="calendar" class="icon-sm" /> {new Date().getFullYear() - site.foundedYear}+ Years of Experience</li>
   </ul>
 
   <!-- PATHWAYS -->
@@ -463,6 +463,28 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     .hero-sub {
       margin-inline: auto;
     }
+    .hero-inner {
+      padding-block: var(--space-lg);
+    }
+    .hero-copy h1 {
+      font-size: 40px;
+      line-height: 1.08;
+      max-width: 340px;
+      margin-inline: auto;
+      text-wrap: balance;
+    }
+  }
+  @media (max-width: 599px) {
+    .hero-copy h1 {
+      font-size: 34px;
+      max-width: 300px;
+    }
+  }
+  @media (max-width: 389px) {
+    .hero-copy h1 {
+      font-size: 32px;
+      max-width: 270px;
+    }
   }
   .hero-actions {
     display: flex;
@@ -474,6 +496,8 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     .hero-actions {
       flex-direction: column;
       align-items: stretch;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
     .hero-actions .btn {
       justify-content: center;
