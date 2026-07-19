@@ -51,16 +51,12 @@ where useful), so the full original framing is always available and the
 crop adapts per breakpoint. The logo is never cropped (`Logo.astro` uses
 `object-fit: contain`, natural aspect ratio only).
 
-**Exception — `jireh-cooler-planning-blueprint.png`:** the upper portion of
-this source photo shows an unidentified stock model's face, not Moyses
-Oliveira or any Jireh Cooler staff member. Rather than risk that photo
-being read as "the owner," `scripts/recrop-blueprint-photo.mjs` permanently
-crops the production copy to only the lower portion of the frame (hands,
-pen, blueprint, drafting tools) before the usual resize/optimize step — no
-face is present in the cropped source at all, so no responsive crop can
-ever reintroduce it. The original, unmodified file is untouched in
-`jireh-originals/`. The alt text was also reworded to describe the scene
-generically rather than referring to "the owner."
+Note: `jireh-cooler-planning-blueprint.png` was briefly cropped to exclude
+its upper portion after a visual mismatch with the About page's owner
+portrait raised an identity question. The client confirmed the photo does
+show Moyses Oliveira, so the crop was reverted — the full original framing
+is used like the other four photos in this batch, and the alt text again
+credits it to the owner.
 
 A second batch of four official, branded photos was added later in
 `public/images/jireh-originals/new-jireh-images/` (originals preserved

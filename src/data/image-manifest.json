@@ -78,10 +78,10 @@
     "smHeight": 750
   },
   "/images/about/jireh-planning-blueprint.jpg": {
-    "width": 1254,
-    "height": 574,
-    "smWidth": 700,
-    "smHeight": 320
+    "width": 1200,
+    "height": 1200,
+    "smWidth": 600,
+    "smHeight": 600
   },
   "/images/services/jireh-technician-ac-unit.jpg": {
     "width": 1254,

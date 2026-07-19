@@ -82,11 +82,14 @@ as-is:
    full sourcing/licensing records and `ASSETS_NEEDED.md` for what's still
    on stock photography.
 
-   **Authenticity cleanup (photography audit):** two issues were found and
-   fixed. First, the About page's planning-blueprint photo showed an
-   unidentified stock model's face; it's now cropped to show only the
-   hands, pen, and blueprint, and the alt text no longer refers to him as
-   "the owner." Second, the Gallery page ("Our Work Across South Florida")
+   **Authenticity cleanup (photography audit):** the About page's
+   planning-blueprint photo initially looked visually inconsistent with
+   the owner portrait used elsewhere on the page, so it was temporarily
+   cropped and the alt text was reworded as a precaution. The client
+   confirmed the photo is genuinely Moyses Oliveira, so the original
+   framing and owner-attributed alt text have been restored.
+
+   Separately, the Gallery page ("Our Work Across South Florida")
    included several stock photos of generic technicians presented as
    completed Jireh Cooler projects — one of which visibly showed **a
    different HVAC company's branded uniform and phone number**. All nine

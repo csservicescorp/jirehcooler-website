@@ -263,7 +263,7 @@ content:
       - { name: imageAlt, label: "Primary Photo Alt Text", type: string }
       - { name: secondaryHeading, label: "Secondary Section Heading", type: string }
       - { name: secondaryText, label: "Secondary Section Text", type: text }
-      - { name: secondaryImage, label: "Secondary Photo", type: image, description: "Recommended: at least 1200×675px, wide landscape (16:9). A storytelling photo (planning, teamwork, a job in progress) — shown further down the page. Only use a real Jireh Cooler photo here, or a photo/crop with no identifiable face, so it can't be mistaken for a specific team member who isn't actually pictured." }
+      - { name: secondaryImage, label: "Secondary Photo", type: image, description: "Recommended: at least 1200×1200px, square or landscape. A storytelling photo (planning, teamwork, a job in progress) — shown further down the page." }
       - { name: secondaryImageAlt, label: "Secondary Photo Alt Text", type: string }
 
   # ---------------------------------------------------------------------
