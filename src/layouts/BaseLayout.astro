@@ -60,6 +60,17 @@ const combinedSchema = schema ? [orgSchema, ...(Array.isArray(schema) ? schema :
         fetchpriority="high"
       />
     )}
+    {import.meta.env.PUBLIC_GA4_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_ID}`}></script>
+        <script is:inline define:vars={{ GA4_ID: import.meta.env.PUBLIC_GA4_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', GA4_ID);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -89,6 +100,27 @@ const combinedSchema = schema ? [orgSchema, ...(Array.isArray(schema) ? schema :
         );
         items.forEach((el) => observer.observe(el));
       }
+    </script>
+    <script>
+      // Delegated conversion-event tracking: any element with data-track="event_name"
+      // (optionally data-track-params='{"key":"value"}') fires a GA4 event on click,
+      // only when analytics is actually loaded (PUBLIC_GA4_ID set).
+      document.addEventListener('click', (e) => {
+        const target = (e.target as HTMLElement)?.closest<HTMLElement>('[data-track]');
+        if (!target) return;
+        const eventName = target.dataset.track;
+        if (!eventName) return;
+        let params: Record<string, unknown> = {};
+        if (target.dataset.trackParams) {
+          try {
+            params = JSON.parse(target.dataset.trackParams);
+          } catch {
+            /* ignore malformed params */
+          }
+        }
+        const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+        if (typeof w.gtag === 'function') w.gtag('event', eventName, params);
+      });
     </script>
   </body>
 </html>
