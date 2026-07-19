@@ -10,12 +10,14 @@ interface Props {
   reviewDate?: string;
   sourceLabel: string;
   sourceUrl?: string;
+  featured?: boolean;
 }
 
-const { reviewerName, rating, reviewText, reviewDate, sourceLabel, sourceUrl } = Astro.props;
+const { reviewerName, rating, reviewText, reviewDate, sourceLabel, sourceUrl, featured = false } = Astro.props;
 
 const LONG_REVIEW_THRESHOLD = 320;
 const isLong = reviewText.length > LONG_REVIEW_THRESHOLD;
+const initial = reviewerName.trim().charAt(0).toUpperCase();
 
 let formattedDate: string | undefined;
 if (reviewDate) {
@@ -28,96 +30,164 @@ if (reviewDate) {
 const linkHref = sourceUrl || site.googleProfileUrl;
 ---
 
-<article class="card review-card">
-  <Icon name="quote" class="quote-icon" />
+<article class:list={['review-card', { featured }]}>
+  {featured && <span class="favorite-badge">Customer Favorite</span>}
+
+  <header class="review-head">
+    <span class="avatar" aria-hidden="true">{initial}</span>
+    <div class="review-who">
+      <strong class="reviewer-name">{reviewerName}</strong>
+      {formattedDate && <span class="review-date">{formattedDate}</span>}
+    </div>
+  </header>
+
   <StarRating rating={rating} class="review-stars" />
 
   {isLong ? (
     <details class="review-details">
-      <summary>Read full review</summary>
-      <p class="review-text">{reviewText}</p>
+      <summary>
+        <p class="review-text">{reviewText}</p>
+        <span class="read-more">Read full review</span>
+      </summary>
     </details>
   ) : (
     <p class="review-text">{reviewText}</p>
   )}
 
-  <footer class="review-footer">
-    <strong class="reviewer-name">{reviewerName}</strong>
-    {formattedDate && <span class="review-date">{formattedDate}</span>}
-    <a href={linkHref} target="_blank" rel="noopener noreferrer" class="review-source">
-      {sourceLabel}
-    </a>
-  </footer>
+  <a href={linkHref} target="_blank" rel="noopener noreferrer" class="review-source">
+    {sourceLabel}
+    <Icon name="external" class="source-icon" />
+  </a>
 </article>
 
 <style>
   .review-card {
+    position: relative;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 1.125rem;
+    padding: 1.625rem;
+    box-shadow: 0 1px 2px rgba(4, 54, 136, 0.04), 0 6px 18px rgba(4, 54, 136, 0.06);
+    transition: box-shadow var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out),
+      border-color var(--duration-base) var(--ease-out);
+  }
+  .review-card:hover {
+    box-shadow: 0 10px 26px rgba(4, 54, 136, 0.11);
+    border-color: var(--color-border-strong);
+    transform: translateY(-2px);
+  }
+  .review-card.featured {
+    border-color: rgba(4, 54, 136, 0.18);
+  }
+  .favorite-badge {
+    display: inline-block;
+    margin-bottom: 0.85rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--color-ice);
+    color: var(--color-royal);
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xs);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .review-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .avatar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--gradient-blue);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .review-who {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-width: 0;
+    gap: 0.1rem;
   }
-  .quote-icon {
-    width: 26px;
-    height: 26px;
-    color: var(--color-royal);
-    opacity: 0.5;
-    margin-bottom: var(--space-sm);
+  .reviewer-name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .review-date {
+    font-size: var(--fs-2xs);
+    color: var(--color-muted);
   }
   .review-stars {
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0.85rem;
   }
   .review-text {
     color: var(--color-charcoal);
-    line-height: var(--lh-relaxed);
-    flex-grow: 1;
+    font-size: var(--fs-sm);
+    line-height: 1.65;
     white-space: pre-line;
   }
   .review-details summary {
     cursor: pointer;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: var(--fs-sm);
-    color: var(--color-royal);
     list-style: none;
   }
   .review-details summary::-webkit-details-marker {
     display: none;
   }
-  .review-details summary::after {
-    content: '↓';
+  .review-details summary::marker {
+    content: '';
+  }
+  .review-details:not([open]) .review-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .read-more {
     display: inline-block;
-    margin-left: 0.35rem;
-    transition: transform var(--duration-base) var(--ease-out);
-  }
-  .review-details[open] summary::after {
-    transform: rotate(180deg);
-  }
-  .review-details[open] summary {
-    margin-bottom: var(--space-xs);
-  }
-  .review-footer {
-    margin-top: var(--space-md);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    font-size: var(--fs-sm);
-  }
-  .reviewer-name {
+    margin-top: 0.5rem;
     font-family: var(--font-heading);
-  }
-  .review-date {
-    color: var(--color-muted);
-    font-size: var(--fs-xs);
-  }
-  .review-source {
-    color: var(--color-royal);
     font-weight: 600;
     font-size: var(--fs-xs);
-    margin-top: 0.25rem;
+    color: var(--color-royal);
+  }
+  .read-more::after {
+    content: '↓';
+    display: inline-block;
+    margin-left: 0.3rem;
+  }
+  .review-details[open] .read-more {
+    display: none;
+  }
+  .review-source {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--color-royal);
+    text-decoration: none;
   }
   .review-source:hover {
     text-decoration: underline;
+  }
+  .source-icon {
+    width: 13px;
+    height: 13px;
   }
 </style>

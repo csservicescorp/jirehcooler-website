@@ -7,9 +7,11 @@ import ReviewCard from '@components/ReviewCard.astro';
 import CtaSection from '@components/CtaSection.astro';
 import site from '@data/site.json';
 
-const reviews = (await getCollection('testimonials', ({ data }) => data.published)).sort(
+const allReviews = (await getCollection('testimonials', ({ data }) => data.published)).sort(
   (a, b) => a.data.displayOrder - b.data.displayOrder
 );
+const featuredReviews = allReviews.filter((r) => r.data.featured);
+const otherReviews = allReviews.filter((r) => !r.data.featured);
 ---
 
 <BaseLayout
@@ -19,40 +21,74 @@ const reviews = (await getCollection('testimonials', ({ data }) => data.publishe
 >
   <PageHero
     eyebrow="Reviews"
-    title="What Our Customers Say"
-    description="Real feedback from customers who trusted Jireh Cooler with their comfort."
+    title="Trusted by South Florida Homeowners and Businesses"
+    description="Real customer experiences from people who trusted Jireh Cooler with their comfort."
     breadcrumbs={[
       { label: 'Home', href: '/' },
       { label: 'Reviews', href: '/reviews/' },
     ]}
-  />
+  >
+    <div class="hero-actions">
+      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+        Read More Reviews on Google
+      </a>
+      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+        Leave Us a Review
+      </a>
+    </div>
+  </PageHero>
 
-  <section>
-    <div class="container">
-      {reviews.length > 0 ? (
-        <>
-          <div class="review-grid">
-            {reviews.map((r) => (
-              <ReviewCard
-                reviewerName={r.data.reviewerName}
-                rating={r.data.rating}
-                reviewText={r.data.reviewText}
-                reviewDate={r.data.reviewDate}
-                sourceLabel={r.data.sourceLabel}
-                sourceUrl={r.data.sourceUrl}
-              />
-            ))}
+  {allReviews.length > 0 ? (
+    <>
+      {featuredReviews.length > 0 && (
+        <section class="section-ice">
+          <div class="container">
+            <div class="section-head center">
+              <p class="eyebrow">Featured</p>
+              <h2>Reviews That Stand Out</h2>
+            </div>
+            <div class="featured-grid">
+              {featuredReviews.map((r) => (
+                <ReviewCard
+                  reviewerName={r.data.reviewerName}
+                  rating={r.data.rating}
+                  reviewText={r.data.reviewText}
+                  reviewDate={r.data.reviewDate}
+                  sourceLabel={r.data.sourceLabel}
+                  sourceUrl={r.data.sourceUrl}
+                  featured
+                />
+              ))}
+            </div>
           </div>
-          <div class="reviews-actions">
-            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-              Read More Reviews on Google
-            </a>
-            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-              Leave Us a Review
-            </a>
+        </section>
+      )}
+
+      {otherReviews.length > 0 && (
+        <section>
+          <div class="container">
+            <div class="section-head center">
+              <h2>All Customer Reviews</h2>
+            </div>
+            <div class="review-grid">
+              {otherReviews.map((r) => (
+                <ReviewCard
+                  reviewerName={r.data.reviewerName}
+                  rating={r.data.rating}
+                  reviewText={r.data.reviewText}
+                  reviewDate={r.data.reviewDate}
+                  sourceLabel={r.data.sourceLabel}
+                  sourceUrl={r.data.sourceUrl}
+                />
+              ))}
+            </div>
           </div>
-        </>
-      ) : (
+        </section>
+      )}
+    </>
+  ) : (
+    <section>
+      <div class="container">
         <div class="empty-state container-narrow">
           <Icon name="star" class="empty-icon" />
           <h2>Reviews Coming Soon</h2>
@@ -60,51 +96,46 @@ const reviews = (await getCollection('testimonials', ({ data }) => data.publishe
             We're in the process of adding verified customer reviews to this page. In the meantime, you can read
             current reviews on our official Google Business Profile.
           </p>
-          <div class="reviews-actions">
-            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-              View Our Google Profile
-            </a>
-            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-              Leave Us a Review
-            </a>
-          </div>
         </div>
-      )}
-    </div>
-  </section>
+      </div>
+    </section>
+  )}
 
   <CtaSection heading="Ready to Become Our Next Happy Customer?" description="Reach out today for a straightforward estimate." />
 </BaseLayout>
 
 <style>
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-lg);
+  }
+  .featured-grid,
   .review-grid {
     display: grid;
+    align-items: start;
     gap: var(--space-md);
     grid-template-columns: minmax(0, 1fr);
-    margin-bottom: var(--space-xl);
+  }
+  .featured-grid {
+    margin-bottom: 0;
   }
   @media (min-width: 720px) {
+    .featured-grid,
     .review-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (min-width: 960px) {
+    .featured-grid,
     .review-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
-  .reviews-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-  }
   .empty-state {
     text-align: center;
     padding-block: var(--space-xl);
-  }
-  .empty-state .reviews-actions {
-    margin-top: var(--space-lg);
   }
   .empty-icon {
     width: 48px;
