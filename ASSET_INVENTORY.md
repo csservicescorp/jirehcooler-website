@@ -60,6 +60,7 @@ there, untouched) and processed with `scripts/optimize-jireh-photos-batch2.mjs`:
 | `jireh-cooler-commercial-thermostat-service.png.png` | `public/images/homepage/jireh-commercial-thermostat-service.*` | Homepage commercial pathway card, Commercial HVAC page, Smart & Wi-Fi Thermostats page |
 | `jireh-cooler-ac-repair-technician.png.png` | `public/images/services/jireh-ac-repair-technician.*` | AC Repair page |
 | `jireh-cooler-attic-hvac-service.png.png` | `public/images/services/jireh-attic-hvac-service.*` | Emergency AC Service page, Gallery ("Attic HVAC Service") |
+| `jireh-cooler-financing-consultation.png.png` | `public/images/financing/jireh-financing-consultation.*` | Financing page (beside the Financing Available / Qualified Applicants / Straightforward Process section) |
 
 The residential and commercial pathway source photos share identical
 1448×1086 source dimensions and the same `ratio="16 / 10"` card treatment,

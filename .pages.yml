@@ -322,7 +322,7 @@ content:
           - { name: label, label: "Label", type: string }
           - { name: description, label: "Description", type: text }
       - { name: disclaimer, label: "Disclaimer", type: text }
-      - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×900px (4:3). A home or neighborhood photo fits well here." }
+      - { name: image, label: "Photo", type: image, description: "Recommended: at least 1200×900px (4:3). A technician consulting with a homeowner works well here." }
       - { name: imageAlt, label: "Photo Alt Text", type: string }
 
   # ---------------------------------------------------------------------

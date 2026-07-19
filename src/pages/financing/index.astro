@@ -21,7 +21,14 @@ import financing from '@data/financing.json';
   <section>
     <div class="container financing-grid">
       <div data-reveal>
-        <ResponsiveImage src={financing.image} alt={financing.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="document" />
+        <ResponsiveImage
+          src={financing.image}
+          alt={financing.imageAlt}
+          ratio="4 / 3"
+          focal="center 38%"
+          variant="editorial"
+          fallbackIcon="document"
+        />
       </div>
       <div data-reveal>
         <TrustPoints

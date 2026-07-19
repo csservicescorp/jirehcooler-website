@@ -29,6 +29,7 @@ lists its recommended dimensions.
 | Homepage commercial pathway card, Commercial HVAC page, Smart & Wi-Fi Thermostats page | Technician adjusting a commercial thermostat |
 | AC Repair page | Technician using a diagnostic meter on an outdoor unit |
 | Emergency AC Service page, Gallery | Technician performing HVAC service in an attic |
+| Financing page | Technician explaining financing options to a homeowner |
 
 ## Still using stock photography (lower priority)
 
