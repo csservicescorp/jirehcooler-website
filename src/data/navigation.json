@@ -1,0 +1,55 @@
+{
+  "primary": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about/" },
+    {
+      "label": "Services",
+      "href": "/services/",
+      "children": [
+        { "label": "All Services", "href": "/services/" },
+        { "label": "AC Repair", "href": "/ac-repair/" },
+        { "label": "AC Installation & Replacement", "href": "/ac-installation-and-replacement/" },
+        { "label": "Emergency AC Service", "href": "/emergency-ac-service/" },
+        { "label": "Residential HVAC", "href": "/residential-hvac/" },
+        { "label": "Commercial HVAC", "href": "/commercial-hvac/" },
+        { "label": "Preventive Maintenance", "href": "/preventive-maintenance/" },
+        { "label": "Maintenance Membership", "href": "/maintenance-membership/" },
+        { "label": "Indoor Air Quality", "href": "/indoor-air-quality/" },
+        { "label": "Duct Cleaning", "href": "/duct-cleaning/" },
+        { "label": "UV Light Systems", "href": "/uv-light-systems/" },
+        { "label": "Pool Heaters", "href": "/pool-heaters/" },
+        { "label": "Water Heaters", "href": "/water-heaters/" },
+        { "label": "Dryer Vent Cleaning", "href": "/dryer-vent-cleaning/" },
+        { "label": "Smart & Wi-Fi Thermostats", "href": "/smart-wifi-thermostats/" }
+      ]
+    },
+    { "label": "Financing", "href": "/financing/" },
+    { "label": "Gallery", "href": "/gallery/" },
+    { "label": "Reviews", "href": "/reviews/" },
+    { "label": "Service Areas", "href": "/service-areas/" },
+    { "label": "FAQ", "href": "/faq/" },
+    { "label": "Contact", "href": "/contact/" }
+  ],
+  "footerServices": [
+    { "label": "AC Repair", "href": "/ac-repair/" },
+    { "label": "AC Installation & Replacement", "href": "/ac-installation-and-replacement/" },
+    { "label": "Emergency AC Service", "href": "/emergency-ac-service/" },
+    { "label": "Residential HVAC", "href": "/residential-hvac/" },
+    { "label": "Commercial HVAC", "href": "/commercial-hvac/" },
+    { "label": "Preventive Maintenance", "href": "/preventive-maintenance/" },
+    { "label": "Indoor Air Quality", "href": "/indoor-air-quality/" },
+    { "label": "Duct Cleaning", "href": "/duct-cleaning/" }
+  ],
+  "footerCompany": [
+    { "label": "About", "href": "/about/" },
+    { "label": "Gallery", "href": "/gallery/" },
+    { "label": "Reviews", "href": "/reviews/" },
+    { "label": "Service Areas", "href": "/service-areas/" },
+    { "label": "FAQ", "href": "/faq/" },
+    { "label": "Contact", "href": "/contact/" }
+  ],
+  "footerLegal": [
+    { "label": "Privacy Policy", "href": "/privacy-policy/" },
+    { "label": "Terms and Conditions", "href": "/terms-and-conditions/" }
+  ]
+}

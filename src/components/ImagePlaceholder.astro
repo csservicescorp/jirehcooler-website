@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  icon?: string;
+  label?: string;
+  ratio?: string;
+  variant?: 'navy' | 'ice' | 'blue';
+}
+const { icon = 'building', label, ratio = '4 / 3', variant = 'ice' } = Astro.props;
+---
+
+<div class:list={['img-placeholder', `variant-${variant}`]} style={`aspect-ratio:${ratio}`} role="img" aria-label={label ?? 'Photo placeholder'}>
+  <svg class="grid-pattern" aria-hidden="true">
+    <defs>
+      <pattern id={`grid-${icon}`} width="28" height="28" patternUnits="userSpaceOnUse">
+        <path d="M28 0H0V28" fill="none" stroke="currentColor" stroke-width="1" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill={`url(#grid-${icon})`} />
+  </svg>
+  <span class="ph-icon"><Icon name={icon} stroke-width={1.2} /></span>
+  {label && <span class="ph-label">{label}</span>}
+</div>
+
+<style>
+  .img-placeholder {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    color: var(--color-blue);
+  }
+  .variant-ice {
+    background: linear-gradient(150deg, var(--color-ice) 0%, #dceefa 100%);
+  }
+  .variant-navy {
+    background: var(--gradient-navy);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .variant-blue {
+    background: var(--gradient-blue);
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+    color: currentColor;
+  }
+  .ph-icon {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+  }
+  .variant-navy .ph-icon,
+  .variant-blue .ph-icon {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .ph-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .ph-label {
+    position: relative;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+</style>

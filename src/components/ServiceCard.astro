@@ -1,0 +1,67 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+}
+const { title, description, href, icon } = Astro.props;
+---
+
+<a href={href} class="service-card card" data-reveal>
+  <span class="service-icon"><Icon name={icon} /></span>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <span class="service-link">
+    Learn more
+    <Icon name="arrow-right" class="icon-xs" />
+  </span>
+</a>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+  }
+  .service-icon {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    background: var(--color-ice);
+    color: var(--color-blue);
+    margin-bottom: var(--space-sm);
+  }
+  .service-card h3 {
+    margin-bottom: var(--space-2xs);
+    font-size: var(--fs-md);
+  }
+  .service-card p {
+    font-size: var(--fs-sm);
+    flex: 1;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-blue);
+    margin-top: var(--space-xs);
+  }
+  .icon-xs {
+    width: 15px;
+    height: 15px;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .service-card:hover .icon-xs {
+    transform: translateX(3px);
+  }
+</style>

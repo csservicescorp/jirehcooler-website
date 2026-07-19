@@ -1,0 +1,97 @@
+---
+interface Faq {
+  question: string;
+  answer: string;
+}
+interface Props {
+  faqs: Faq[];
+  withSchema?: boolean;
+}
+const { faqs, withSchema = true } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+---
+
+<div class="faq-list">
+  {
+    faqs.map((faq) => (
+      <details class="faq-item" data-reveal>
+        <summary>
+          <span>{faq.question}</span>
+          <span class="faq-toggle" aria-hidden="true" />
+        </summary>
+        <p set:text={faq.answer} />
+      </details>
+    ))
+  }
+</div>
+{withSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />}
+
+<style>
+  .faq-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+  .faq-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.3rem;
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-navy);
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-toggle {
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+  .faq-toggle::before,
+  .faq-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--color-blue);
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .faq-toggle::before {
+    left: 0;
+    top: 9px;
+    width: 20px;
+    height: 2px;
+  }
+  .faq-toggle::after {
+    left: 9px;
+    top: 0;
+    width: 2px;
+    height: 20px;
+  }
+  .faq-item[open] .faq-toggle::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  .faq-item p {
+    margin: var(--space-sm) 0 0;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,263 @@
+---
+interface Props {
+  formType?: 'estimate' | 'contact';
+  compact?: boolean;
+}
+const { formType = 'estimate', compact = false } = Astro.props;
+---
+
+<form class="estimate-form" data-estimate-form novalidate>
+  <input type="hidden" name="formType" value={formType} />
+  <!-- Honeypot field: hidden from real users, bots often fill every field -->
+  <div class="hp-field" aria-hidden="true">
+    <label for="company-website">Company Website</label>
+    <input type="text" id="company-website" name="companyWebsite" tabindex="-1" autocomplete="off" />
+  </div>
+  <input type="hidden" name="formStartedAt" data-form-start-time value="" />
+
+  <div class="form-row">
+    <div class="field">
+      <label for="name">Full Name <span aria-hidden="true">*</span></label>
+      <input type="text" id="name" name="name" required autocomplete="name" />
+    </div>
+    <div class="field">
+      <label for="phone">Phone <span aria-hidden="true">*</span></label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="email">Email <span aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" required autocomplete="email" />
+    </div>
+    <div class="field">
+      <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
+      <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" />
+    </div>
+  </div>
+
+  {formType === 'estimate' && (
+    <>
+      <div class="form-row">
+        <div class="field">
+          <label for="propertyType">Property Type <span aria-hidden="true">*</span></label>
+          <select id="propertyType" name="propertyType" required>
+            <option value="">Select one</option>
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
+          <select id="serviceNeeded" name="serviceNeeded" required>
+            <option value="">Select one</option>
+            <option value="ac-repair">AC Repair</option>
+            <option value="ac-installation">AC Installation / Replacement</option>
+            <option value="emergency">Emergency Service</option>
+            <option value="maintenance">Preventive Maintenance</option>
+            <option value="indoor-air-quality">Indoor Air Quality</option>
+            <option value="water-heater">Water Heater</option>
+            <option value="pool-heater">Pool Heater</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="urgency">Urgency <span aria-hidden="true">*</span></label>
+          <select id="urgency" name="urgency" required>
+            <option value="">Select one</option>
+            <option value="emergency">Emergency — Need Help Now</option>
+            <option value="soon">Within the Next Few Days</option>
+            <option value="planning">Just Planning Ahead</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contactMethod">Preferred Contact Method <span aria-hidden="true">*</span></label>
+          <select id="contactMethod" name="contactMethod" required>
+            <option value="">Select one</option>
+            <option value="phone">Phone Call</option>
+            <option value="text">Text Message</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+      </div>
+    </>
+  )}
+
+  <div class="field">
+    <label for="message">{formType === 'estimate' ? 'Tell Us About the Issue' : 'Message'} {formType === 'contact' && <span aria-hidden="true">*</span>}</label>
+    <textarea id="message" name="message" rows={compact ? 3 : 4} required={formType === 'contact'}></textarea>
+  </div>
+
+  <div class="field consent-field">
+    <label class="checkbox-label">
+      <input type="checkbox" id="consent" name="consent" required />
+      <span>I agree to be contacted by Jireh Cooler about my request. <span aria-hidden="true">*</span></span>
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg btn-block" data-submit-btn>
+    <span data-btn-label>{formType === 'estimate' ? 'Request My Estimate' : 'Send Message'}</span>
+  </button>
+
+  <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
+  <noscript>
+    <p class="noscript-note">
+      This form requires JavaScript to submit online. Please call us directly to reach our team.
+    </p>
+  </noscript>
+</form>
+
+<style>
+  .estimate-form {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+    min-width: 0;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+    min-width: 0;
+  }
+  .field {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  .field label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  input,
+  select,
+  textarea {
+    font-family: var(--font-body);
+    font-size: var(--fs-base);
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-white);
+    color: var(--color-charcoal);
+    width: 100%;
+    min-width: 0;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--color-blue);
+  }
+  textarea {
+    resize: vertical;
+  }
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--fs-sm);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .checkbox-label input {
+    width: auto;
+    margin-top: 0.2rem;
+  }
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-status {
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+  }
+  .form-status.success {
+    background: #e7f5ee;
+    color: var(--color-success);
+  }
+  .form-status.error {
+    background: #fbeceb;
+    color: var(--color-danger);
+  }
+  .form-status.loading {
+    background: var(--color-ice);
+    color: var(--color-blue);
+  }
+  .noscript-note {
+    font-size: var(--fs-sm);
+    color: var(--color-danger);
+  }
+  [data-submit-btn][disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-estimate-form]');
+
+  forms.forEach((form) => {
+    const startField = form.querySelector<HTMLInputElement>('[data-form-start-time]');
+    if (startField) startField.value = String(Date.now());
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const status = form.querySelector<HTMLElement>('[data-form-status]');
+      const button = form.querySelector<HTMLButtonElement>('[data-submit-btn]');
+      const label = form.querySelector<HTMLElement>('[data-btn-label]');
+      if (!status || !button || !label) return;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const originalLabel = label.textContent;
+      button.disabled = true;
+      label.textContent = 'Sending…';
+      status.hidden = false;
+      status.className = 'form-status loading';
+      status.textContent = 'Sending your request…';
+
+      try {
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+
+        const response = await fetch('/api/estimate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error('Request failed');
+
+        status.className = 'form-status success';
+        status.textContent = "Thanks — we've received your request and will be in touch shortly. For urgent issues, please call us directly.";
+        form.reset();
+      } catch (err) {
+        status.className = 'form-status error';
+        status.textContent = "Something went wrong sending your request. Please call us directly so we don't miss you.";
+      } finally {
+        button.disabled = false;
+        label.textContent = originalLabel;
+      }
+    });
+  });
+</script>

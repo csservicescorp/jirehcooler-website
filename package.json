@@ -1,0 +1,21 @@
+{
+  "name": "jirehcooler-website",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^7.1.1",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.6.3",
+    "sharp": "^0.33.5",
+    "zod": "^4.4.3"
+  }
+}

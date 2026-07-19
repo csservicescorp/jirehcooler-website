@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import site from '@data/site.json';
+
+const updated = 'July 18, 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy | Jireh Cooler"
+  description="Jireh Cooler's privacy policy explaining how we collect, use, and protect information submitted through our website."
+  path="/privacy-policy/"
+>
+  <PageHero
+    eyebrow="Legal"
+    title="Privacy Policy"
+    description={`Last updated: ${updated}`}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Privacy Policy', href: '/privacy-policy/' },
+    ]}
+  />
+
+  <section>
+    <div class="container container-narrow legal-content">
+      <p>
+        This Privacy Policy describes how {site.legalName} ("Jireh Cooler," "we," "us," or "our") collects, uses, and
+        protects information you provide through jirehcooler.com (the "Site").
+      </p>
+
+      <h2>Information We Collect</h2>
+      <p>When you use our estimate request or contact forms, we may collect:</p>
+      <ul>
+        <li>Your name, phone number, and email address</li>
+        <li>Your property address or ZIP code</li>
+        <li>Details about the service you're requesting</li>
+        <li>Any additional information you choose to include in a message</li>
+      </ul>
+
+      <h2>How We Use Information</h2>
+      <p>We use the information you submit to:</p>
+      <ul>
+        <li>Respond to your service or estimate request</li>
+        <li>Schedule and coordinate appointments</li>
+        <li>Communicate with you about your project</li>
+        <li>Maintain accurate business and service records</li>
+      </ul>
+      <p>We do not sell your personal information to third parties.</p>
+
+      <h2>How We Protect Information</h2>
+      <p>
+        Form submissions are transmitted securely and delivered to our business email for follow-up. We take
+        reasonable steps to protect the information you provide, but no method of electronic transmission or storage
+        is completely secure.
+      </p>
+
+      <h2>Third-Party Services</h2>
+      <p>
+        We may use third-party services (such as email delivery providers) to process and deliver form submissions.
+        These providers only receive the information necessary to complete that function.
+      </p>
+
+      <h2>Your Choices</h2>
+      <p>
+        You may contact us at any time to ask what information we have on file for you or to request that it be
+        removed from our records, subject to any legal or business recordkeeping requirements.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        Questions about this policy can be directed to {site.email} or {site.phone}.
+      </p>
+
+      <p class="verification-note">
+        This policy is a general template pending legal review. See CLIENT_VERIFICATION.md for details.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-content h2 {
+    margin-top: var(--space-xl);
+  }
+  .legal-content p,
+  .legal-content li {
+    color: var(--color-muted);
+  }
+  .verification-note {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+    font-style: italic;
+  }
+</style>

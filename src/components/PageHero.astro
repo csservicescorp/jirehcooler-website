@@ -1,0 +1,46 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Crumb {
+  label: string;
+  href: string;
+}
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  breadcrumbs: Crumb[];
+}
+const { eyebrow, title, description, breadcrumbs } = Astro.props;
+---
+
+<section class="page-hero section-navy">
+  <div class="container">
+    <Breadcrumbs items={breadcrumbs} />
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {description && <p class="hero-desc">{description}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-lg) var(--space-2xl);
+  }
+  .page-hero :global(.breadcrumbs a),
+  .page-hero :global(.breadcrumbs .sep) {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .page-hero :global(.breadcrumbs [aria-current='page']) {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .page-hero h1 {
+    max-width: 20ch;
+    margin-top: var(--space-2xs);
+  }
+  .hero-desc {
+    max-width: 60ch;
+    font-size: var(--fs-md);
+    color: rgba(255, 255, 255, 0.78);
+  }
+</style>

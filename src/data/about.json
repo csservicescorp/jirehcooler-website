@@ -1,0 +1,31 @@
+{
+  "seoTitle": "About Jireh Cooler | South Florida AC Company Since 1994",
+  "metaDescription": "Jireh Cooler is a family-operated, state-certified air conditioning company serving Broward and Palm Beach County since 1994.",
+  "heading": "Family-Operated. State-Certified. South Florida, Since 1994.",
+  "intro": "Jireh Cooler has provided air conditioning installation, repair, and maintenance to South Florida homes and businesses since 1994. The company is owned and operated by Moyses Oliveira, a graduate of South Technical Education Center, alongside his wife Evelise Oliveira.",
+  "story": [
+    "Jireh Cooler was built on a simple idea: South Florida homeowners and business owners deserve an air conditioning company they can actually reach, and actually trust, when something goes wrong.",
+    "For three decades, that has meant showing up, diagnosing the real problem, and doing the work right the first time, whether it's a same-day repair on a 95-degree afternoon or a full system replacement planned months in advance.",
+    "As a family-operated business, Jireh Cooler is led directly by its owners rather than a corporate call center, and every job carries that same level of personal accountability."
+  ],
+  "values": [
+    {
+      "label": "Certified Expertise",
+      "description": "State-Certified Air Conditioning Contractor, license CAC1815741, insured for residential and commercial work."
+    },
+    {
+      "label": "Direct Accountability",
+      "description": "Owner-operated since 1994, with hands-on involvement in how jobs are scoped, priced, and completed."
+    },
+    {
+      "label": "Always Available",
+      "description": "Emergency service available 24 hours a day, 7 days a week, 365 days a year."
+    },
+    {
+      "label": "Built to Last",
+      "description": "Work performed to code, with major brands including Carrier, Bryant, Rheem, Goodman, and Lennox."
+    }
+  ],
+  "image": "/images/about/team.jpg",
+  "imageAlt": "Jireh Cooler owner and technician on a service call in South Florida"
+}

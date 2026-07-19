@@ -1,0 +1,239 @@
+---
+import site from '@data/site.json';
+import nav from '@data/navigation.json';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="/" class="brand" aria-label={`${site.businessName} home`}>
+        <span class="brand-mark">JC</span>
+        <span class="brand-text">
+          <span class="brand-name">Jireh Cooler</span>
+          <span class="brand-tagline">Air Conditioning Experts</span>
+        </span>
+      </a>
+      <p>
+        Family-operated, state-certified air conditioning company serving Broward and Palm Beach County since {site.foundedYear}.
+      </p>
+      <div class="footer-social">
+        {site.social.facebook && (
+          <a href={site.social.facebook} aria-label="Jireh Cooler on Facebook" rel="noopener noreferrer" target="_blank">
+            <Icon name="users" class="icon-sm" />
+          </a>
+        )}
+        {site.social.instagram && (
+          <a href={site.social.instagram} aria-label="Jireh Cooler on Instagram" rel="noopener noreferrer" target="_blank">
+            <Icon name="spark" class="icon-sm" />
+          </a>
+        )}
+        {site.social.youtube && (
+          <a href={site.social.youtube} aria-label="Jireh Cooler on YouTube" rel="noopener noreferrer" target="_blank">
+            <Icon name="check-circle" class="icon-sm" />
+          </a>
+        )}
+      </div>
+    </div>
+
+    <nav class="footer-col" aria-label="Services">
+      <h3>Services</h3>
+      <ul>
+        {nav.footerServices.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Company">
+      <h3>Company</h3>
+      <ul>
+        {nav.footerCompany.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="footer-col footer-contact">
+      <h3>Contact</h3>
+      <ul>
+        <li>
+          <a href={`tel:${site.phoneRaw}`}>
+            <Icon name="phone" class="icon-sm" /> {site.phone}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`}>
+            <Icon name="mail" class="icon-sm" /> {site.email}
+          </a>
+        </li>
+        <li>
+          <span>
+            <Icon name="pin" class="icon-sm" /> {site.address.full}
+          </span>
+        </li>
+        <li>
+          <span>
+            <Icon name="clock" class="icon-sm" /> {site.hours.emergency}
+          </span>
+        </li>
+      </ul>
+      <a href="/request-an-estimate/" class="btn btn-primary btn-block">Request an Estimate</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>
+        &copy; {year} {site.legalName}. All rights reserved. License {site.license.number}.
+      </p>
+      <ul class="footer-legal">
+        {nav.footerLegal.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--gradient-navy);
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .footer-top {
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: var(--space-2xl);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: var(--space-sm);
+  }
+  .brand-mark {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    background: var(--gradient-blue);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .brand-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-white);
+  }
+  .brand-tagline {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+  }
+  .footer-brand p {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 32ch;
+  }
+  .footer-social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: var(--space-sm);
+  }
+  .footer-social a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.85);
+    transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+  .footer-social a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .footer-col h3 {
+    color: var(--color-white);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+  }
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+  .footer-col a,
+  .footer-col span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: var(--fs-sm);
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .footer-col a:hover {
+    color: var(--color-white);
+  }
+  .footer-contact .btn {
+    margin-top: var(--space-sm);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .footer-bottom-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-block: var(--space-md);
+    font-size: var(--fs-xs);
+  }
+  .footer-bottom-inner p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .footer-legal {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .footer-legal a {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .footer-legal a:hover {
+    color: var(--color-white);
+  }
+
+  @media (min-width: 720px) {
+    .footer-top {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr);
+    }
+  }
+</style>

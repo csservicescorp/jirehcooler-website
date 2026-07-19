@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import EstimateForm from '@components/EstimateForm.astro';
+import TrustPoints from '@components/TrustPoints.astro';
+import site from '@data/site.json';
+---
+
+<BaseLayout
+  title="Request an Estimate | Jireh Cooler"
+  description="Request a written estimate for AC repair, installation, or maintenance from Jireh Cooler. Serving Broward and Palm Beach County."
+  path="/request-an-estimate/"
+>
+  <PageHero
+    eyebrow="Request an Estimate"
+    title="Tell Us What's Going On"
+    description="Fill out the form below and our team will follow up to schedule your estimate. For emergencies, call us directly."
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Request an Estimate', href: '/request-an-estimate/' },
+    ]}
+  />
+
+  <section>
+    <div class="container estimate-grid">
+      <div class="form-panel card" data-reveal>
+        <EstimateForm formType="estimate" />
+      </div>
+      <aside class="estimate-aside" data-reveal>
+        <TrustPoints
+          columns={1}
+          points={[
+            { label: 'Written Estimates', description: 'Clear pricing before any work begins.', icon: 'document' },
+            { label: 'Fast Response', description: 'Our team follows up quickly to schedule your visit.', icon: 'clock' },
+            { label: 'Licensed & Insured', description: `License ${site.license.number}.`, icon: 'shield' },
+          ]}
+        />
+        <div class="call-card">
+          <p>Need help right now?</p>
+          <a href={`tel:${site.phoneRaw}`} class="btn btn-primary btn-block">Call {site.phone}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .estimate-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: start;
+  }
+  .form-panel {
+    padding: var(--space-xl);
+  }
+  .estimate-aside {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+  .call-card {
+    background: var(--color-ice);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    text-align: center;
+  }
+  .call-card p {
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  @media (min-width: 960px) {
+    .estimate-grid {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    }
+  }
+</style>

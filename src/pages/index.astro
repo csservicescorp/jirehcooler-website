@@ -1,0 +1,453 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Icon from '@components/Icon.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import TrustPoints from '@components/TrustPoints.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
+import CtaSection from '@components/CtaSection.astro';
+import site from '@data/site.json';
+import home from '@data/homepage.json';
+import { getCollection } from 'astro:content';
+import { localBusinessSchema } from '@/lib/schema';
+
+const allServices = await getCollection('services', ({ data }) => data.published);
+const featured = home.services.featuredSlugs
+  .map((slug) => allServices.find((s) => s.data.urlSlug === slug))
+  .filter(Boolean);
+
+const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+const areas = (await getCollection('serviceAreas', ({ data }) => data.published)).slice(0, 8);
+---
+
+<BaseLayout
+  title="Jireh Cooler | South Florida Air Conditioning Experts"
+  description="Family-operated, state-certified AC repair, installation, and maintenance in Broward and Palm Beach County since 1994. 24/7 emergency service."
+  schema={localBusinessSchema()}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy" data-reveal>
+        <p class="eyebrow">{home.hero.eyebrow}</p>
+        <h1>{home.hero.headline}</h1>
+        <p class="hero-sub">{home.hero.subheadline}</p>
+        <div class="hero-actions">
+          <a href={home.hero.primaryCta.href} class="btn btn-primary btn-lg">
+            <Icon name="phone" class="icon-sm" />
+            {home.hero.primaryCta.label}
+          </a>
+          <a href={home.hero.secondaryCta.href} class="btn btn-outline btn-lg">{home.hero.secondaryCta.label}</a>
+        </div>
+        <ul class="hero-facts">
+          <li><Icon name="shield" class="icon-sm" /> License {site.license.number}</li>
+          <li><Icon name="clock" class="icon-sm" /> {site.emergencyAvailability} Emergency Service</li>
+          <li><Icon name="calendar" class="icon-sm" /> Serving South Florida Since {site.foundedYear}</li>
+        </ul>
+      </div>
+      <div class="hero-media" data-reveal>
+        <ImagePlaceholder icon="thermostat" label="Service Photography" ratio="4 / 5" variant="blue" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PATHWAYS -->
+  <section class="pathways">
+    <div class="container">
+      <div class="section-head center">
+        <h2>{home.pathways.heading}</h2>
+      </div>
+      <div class="pathway-grid">
+        <a href={home.pathways.residential.href} class="pathway-card" data-reveal>
+          <ImagePlaceholder icon="home" ratio="16 / 10" variant="ice" />
+          <div class="pathway-body">
+            <h3>{home.pathways.residential.label}</h3>
+            <p>{home.pathways.residential.description}</p>
+            <span class="pathway-link">Explore Residential <Icon name="arrow-right" class="icon-xs" /></span>
+          </div>
+        </a>
+        <a href={home.pathways.commercial.href} class="pathway-card" data-reveal style="transition-delay:80ms">
+          <ImagePlaceholder icon="building" ratio="16 / 10" variant="navy" />
+          <div class="pathway-body">
+            <h3>{home.pathways.commercial.label}</h3>
+            <p>{home.pathways.commercial.description}</p>
+            <span class="pathway-link">Explore Commercial <Icon name="arrow-right" class="icon-xs" /></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="section-navy trust-section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Why South Florida Trusts Us</p>
+        <h2>{home.trust.heading}</h2>
+        <p>{home.trust.subheading}</p>
+      </div>
+      <TrustPoints points={home.trust.points} columns={4} />
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Complete AC Services</p>
+        <h2>{home.services.heading}</h2>
+        <p>{home.services.subheading}</p>
+      </div>
+      <div class="services-grid">
+        {
+          featured.map((service) => (
+            <ServiceCard
+              title={service!.data.title}
+              description={service!.data.shortDescription}
+              href={`/${service!.data.urlSlug}/`}
+              icon={service!.data.icon}
+            />
+          ))
+        }
+      </div>
+      <div class="services-cta">
+        <a href="/services/" class="btn btn-outline">View All Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY -->
+  <section class="emergency-section">
+    <div class="container emergency-grid">
+      <div class="emergency-copy" data-reveal>
+        <p class="eyebrow">Emergency Service</p>
+        <h2>{home.emergency.heading}</h2>
+        <p>{home.emergency.description}</p>
+        <div class="hero-actions">
+          <a href={home.emergency.cta.href} class="btn btn-primary btn-lg">
+            <Icon name="bolt" class="icon-sm" />
+            {home.emergency.cta.label}
+          </a>
+          <a href={home.emergency.href} class="btn btn-outline btn-lg">Learn More</a>
+        </div>
+      </div>
+      <div class="emergency-media" data-reveal>
+        <ImagePlaceholder icon="bolt" ratio="4 / 3" variant="ice" label="24/7 Response" />
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="section-soft why-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">The Jireh Cooler Difference</p>
+        <h2>{home.whyChooseUs.heading}</h2>
+      </div>
+      <TrustPoints points={home.whyChooseUs.points} columns={4} />
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">How It Works</p>
+        <h2>{home.process.heading}</h2>
+      </div>
+      <ProcessSteps steps={home.process.steps} />
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section class="section-navy membership-section">
+    <div class="container membership-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="check-circle" ratio="4 / 3" variant="blue" label="V.I.P. Membership" />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Preventive Maintenance</p>
+        <h2>{home.membership.heading}</h2>
+        <p>{home.membership.description}</p>
+        <ul class="check-list">
+          {home.membership.highlights.map((h) => (
+            <li><Icon name="check" class="icon-sm" /> {h}</li>
+          ))}
+        </ul>
+        <a href={home.membership.cta.href} class="btn btn-white btn-lg">{home.membership.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCING -->
+  <section class="financing-section">
+    <div class="container financing-grid">
+      <div data-reveal>
+        <p class="eyebrow">Financing</p>
+        <h2>{home.financing.heading}</h2>
+        <p>{home.financing.description}</p>
+        <a href={home.financing.cta.href} class="btn btn-primary btn-lg">{home.financing.cta.label}</a>
+      </div>
+      <div data-reveal>
+        <ImagePlaceholder icon="document" ratio="4 / 3" variant="ice" label="Financing" />
+      </div>
+    </div>
+  </section>
+
+  <!-- AIR QUALITY -->
+  <section class="section-ice air-quality-section">
+    <div class="container air-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="wind" ratio="4 / 3" variant="blue" label="Indoor Air Quality" />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Indoor Air Quality</p>
+        <h2>{home.airQuality.heading}</h2>
+        <p>{home.airQuality.description}</p>
+        <a href={home.airQuality.cta.href} class="btn btn-primary btn-lg">{home.airQuality.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS TEASER -->
+  <section class="reviews-teaser">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Reviews</p>
+        <h2>Hear From South Florida</h2>
+        <p>Real customer reviews are being compiled for this page. Visit our Google Business Profile or Facebook page for current, verified reviews in the meantime.</p>
+      </div>
+      <div class="reviews-actions">
+        <a href="/reviews/" class="btn btn-outline">See Reviews Page</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE AREAS -->
+  <section class="section-soft areas-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Where We Work</p>
+        <h2>Proudly Serving {site.serviceAreaSummary}</h2>
+      </div>
+      <ul class="areas-list">
+        {areas.map((area) => (
+          <li>
+            <Icon name="pin" class="icon-sm" /> {area.data.city}
+          </li>
+        ))}
+      </ul>
+      <div class="services-cta">
+        <a href="/service-areas/" class="btn btn-outline">View All Service Areas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container container-narrow">
+      <div class="section-head center">
+        <p class="eyebrow">Common Questions</p>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <FaqAccordion faqs={faqs.map((f) => f.data)} />
+      <div class="services-cta">
+        <a href="/faq/" class="btn btn-outline">View All FAQs</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection heading={home.finalCta.heading} description={home.finalCta.description} primaryCta={home.finalCta.primaryCta} secondaryCta={home.finalCta.secondaryCta} />
+</BaseLayout>
+
+<style>
+  .hero {
+    background: var(--gradient-ice);
+    padding-block: var(--space-2xl) var(--space-2xl);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .hero-sub {
+    font-size: var(--fs-md);
+    max-width: 52ch;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block: var(--space-md);
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+  }
+  .icon-xs {
+    width: 15px;
+    height: 15px;
+  }
+  .hero-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    list-style: none;
+    margin: var(--space-sm) 0 0;
+    padding: 0;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  .hero-facts li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+  .pathway-card {
+    display: block;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+  }
+  .pathway-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .pathway-body {
+    padding: var(--space-lg);
+  }
+  .pathway-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-blue);
+  }
+
+  .services-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .services-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xl);
+  }
+
+  .emergency-section {
+    background: var(--color-navy-deep);
+    color: var(--color-white);
+  }
+  .emergency-section .eyebrow {
+    color: var(--color-blue-light);
+  }
+  .emergency-section h2 {
+    color: var(--color-white);
+  }
+  .emergency-section p {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .emergency-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .membership-grid,
+  .financing-grid,
+  .air-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .check-list {
+    list-style: none;
+    margin: var(--space-sm) 0 var(--space-md);
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+  .check-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .reviews-teaser {
+    text-align: center;
+  }
+  .reviews-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .areas-list {
+    list-style: none;
+    margin: 0 0 var(--space-lg);
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    max-width: 760px;
+    margin-inline: auto;
+  }
+  .areas-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    font-size: var(--fs-sm);
+  }
+
+  @media (min-width: 720px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    }
+    .pathway-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .services-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .emergency-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .membership-grid,
+    .financing-grid,
+    .air-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .financing-grid > div:first-child {
+      order: 1;
+    }
+    .financing-grid > div:last-child {
+      order: 2;
+    }
+    .areas-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 960px) {
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

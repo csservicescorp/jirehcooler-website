@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Icon from '@components/Icon.astro';
+import CtaSection from '@components/CtaSection.astro';
+import site from '@data/site.json';
+
+const testimonials = await getCollection('testimonials', ({ data }) => data.published);
+---
+
+<BaseLayout
+  title="Reviews | Jireh Cooler"
+  description="See what South Florida customers say about Jireh Cooler's air conditioning repair, installation, and maintenance service."
+  path="/reviews/"
+>
+  <PageHero
+    eyebrow="Reviews"
+    title="What South Florida Says About Us"
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Reviews', href: '/reviews/' },
+    ]}
+  />
+
+  <section>
+    <div class="container">
+      {testimonials.length > 0 ? (
+        <div class="testimonial-grid">
+          {testimonials.map((t) => (
+            <blockquote class="card testimonial-card">
+              <Icon name="quote" class="quote-icon" />
+              <p>{t.data.quote}</p>
+              <footer>
+                <strong>{t.data.author}</strong>
+                {t.data.location && <span>{t.data.location}</span>}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      ) : (
+        <div class="empty-state container-narrow">
+          <Icon name="star" class="empty-icon" />
+          <h2>Reviews Coming Soon</h2>
+          <p>
+            We're in the process of compiling verified customer reviews for this page. In the meantime, you can see current reviews on our
+            {' '}<a href={site.social.facebook} target="_blank" rel="noopener noreferrer">Facebook page</a>.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <CtaSection heading="Ready to Become Our Next Happy Customer?" description="Reach out today for a straightforward estimate." />
+</BaseLayout>
+
+<style>
+  .testimonial-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .testimonial-card {
+    margin: 0;
+  }
+  .quote-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-blue);
+    opacity: 0.5;
+    margin-bottom: var(--space-sm);
+  }
+  .testimonial-card footer {
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fs-sm);
+  }
+  .testimonial-card footer span {
+    color: var(--color-muted);
+  }
+  .empty-state {
+    text-align: center;
+    padding-block: var(--space-xl);
+  }
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-blue);
+    margin-inline: auto;
+    margin-bottom: var(--space-sm);
+  }
+  @media (min-width: 720px) {
+    .testimonial-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 960px) {
+    .testimonial-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

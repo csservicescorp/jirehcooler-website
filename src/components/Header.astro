@@ -1,0 +1,421 @@
+---
+import site from '@data/site.json';
+import nav from '@data/navigation.json';
+import Icon from './Icon.astro';
+
+const { pathname } = Astro.url;
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+---
+
+<header class="site-header" data-header>
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <p class="utility-message">
+        <Icon name="clock" class="icon-sm" />
+        Emergency service available 24/7/365 &middot; Broward &amp; Palm Beach County
+      </p>
+      <a class="utility-phone" href={`tel:${site.phoneRaw}`}>
+        <Icon name="phone" class="icon-sm" />
+        {site.phone}
+      </a>
+    </div>
+  </div>
+
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label={`${site.businessName} home`}>
+      <span class="brand-mark">JC</span>
+      <span class="brand-text">
+        <span class="brand-name">Jireh Cooler</span>
+        <span class="brand-tagline">Air Conditioning Experts</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        {
+          nav.primary.map((item) => (
+            <li class:list={['nav-item', { 'has-children': item.children }]}>
+              {item.children ? (
+                <>
+                  <button
+                    class:list={['nav-link', { 'is-active': isActive(item.href) }]}
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                    data-dropdown-trigger
+                  >
+                    {item.label}
+                    <Icon name="chevron-down" class="icon-xs" />
+                  </button>
+                  <div class="dropdown" data-dropdown>
+                    <ul>
+                      {item.children.map((child) => (
+                        <li>
+                          <a href={child.href} class:list={{ 'is-active': pathname === child.href }}>
+                            {child.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <a href={item.href} class:list={['nav-link', { 'is-active': isActive(item.href) }]}>
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline header-call">
+        <Icon name="phone" class="icon-sm" />
+        <span>Call Now</span>
+      </a>
+      <a href={site.headerCta.href} class="btn btn-primary header-estimate">{site.headerCta.label}</a>
+      <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">
+        <Icon name="menu" class="icon-menu-open" />
+        <Icon name="close" class="icon-menu-close" />
+        <span class="visually-hidden">Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        {
+          nav.primary.map((item) => (
+            <li>
+              <a href={item.href} class:list={{ 'is-active': isActive(item.href) }}>
+                {item.label}
+              </a>
+              {item.children && (
+                <ul class="mobile-submenu">
+                  {item.children.slice(1).map((child) => (
+                    <li>
+                      <a href={child.href}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="mobile-menu-actions">
+      <a href={`tel:${site.phoneRaw}`} class="btn btn-outline btn-block">
+        <Icon name="phone" class="icon-sm" /> Call {site.phone}
+      </a>
+      <a href={site.headerCta.href} class="btn btn-primary btn-block">{site.headerCta.label}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .utility-bar {
+    background: var(--color-navy-deep);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: var(--fs-2xs);
+  }
+  .utility-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-block: 0.45rem;
+  }
+  .utility-message {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .utility-phone {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-white);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .icon-sm {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .icon-xs {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 720px) {
+    .utility-message {
+      display: none;
+    }
+    .utility-inner {
+      justify-content: center;
+    }
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding-block: 0.85rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+  }
+  .brand-mark {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    background: var(--gradient-blue);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .brand-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--color-navy);
+  }
+  .brand-tagline {
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+
+  .primary-nav {
+    flex: 1;
+    display: none;
+  }
+  .primary-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-item {
+    position: relative;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: none;
+    border: none;
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    padding: 0.6rem 0.7rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+  }
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--color-blue);
+    background: var(--color-ice);
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 280px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out),
+      visibility var(--duration-base);
+    z-index: 10;
+  }
+  .has-children:hover .dropdown,
+  .has-children:focus-within .dropdown,
+  .dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dropdown a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-charcoal);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+  }
+  .dropdown a:hover,
+  .dropdown a.is-active {
+    background: var(--color-ice);
+    color: var(--color-blue);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+  .header-call,
+  .header-estimate {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--color-border-strong);
+    background: var(--color-white);
+    color: var(--color-navy);
+    cursor: pointer;
+  }
+  .icon-menu-close {
+    display: none;
+  }
+  .menu-toggle[aria-expanded='true'] .icon-menu-open {
+    display: none;
+  }
+  .menu-toggle[aria-expanded='true'] .icon-menu-close {
+    display: block;
+  }
+
+  .mobile-menu {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-white);
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .mobile-menu nav > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem var(--space-md);
+  }
+  .mobile-menu nav > ul > li > a {
+    display: block;
+    padding: 0.85rem 0.25rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .mobile-menu nav > ul > li > a.is-active {
+    color: var(--color-blue);
+  }
+  .mobile-submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0 0.6rem 0.75rem;
+  }
+  .mobile-submenu a {
+    display: block;
+    padding: 0.5rem 0.25rem;
+    font-size: var(--fs-sm);
+    color: var(--color-muted);
+  }
+  .mobile-menu-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+    padding: var(--space-md);
+  }
+
+  @media (min-width: 1080px) {
+    .primary-nav {
+      display: block;
+    }
+    .header-call,
+    .header-estimate {
+      display: inline-flex;
+    }
+    .menu-toggle {
+      display: none;
+    }
+    .mobile-menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+  const menu = document.querySelector('[data-mobile-menu]') as HTMLElement | null;
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    if (menu) menu.hidden = expanded;
+  });
+
+  // Touch-friendly dropdown toggle (desktop hover already handled in CSS)
+  document.querySelectorAll('[data-dropdown-trigger]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const expanded = trigger.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('[data-dropdown-trigger]').forEach((t) => t.setAttribute('aria-expanded', 'false'));
+      document.querySelectorAll('[data-dropdown]').forEach((d) => d.classList.remove('is-open'));
+      if (!expanded) {
+        trigger.setAttribute('aria-expanded', 'true');
+        trigger.nextElementSibling?.classList.add('is-open');
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('.has-children')) {
+      document.querySelectorAll('[data-dropdown-trigger]').forEach((t) => t.setAttribute('aria-expanded', 'false'));
+      document.querySelectorAll('[data-dropdown]').forEach((d) => d.classList.remove('is-open'));
+    }
+  });
+</script>

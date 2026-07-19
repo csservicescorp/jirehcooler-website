@@ -1,0 +1,50 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import TrustPoints from '@components/TrustPoints.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import CtaSection from '@components/CtaSection.astro';
+import maintenance from '@data/maintenance.json';
+
+const p = maintenance.preventive;
+---
+
+<BaseLayout title={p.seoTitle} description={p.metaDescription} path="/preventive-maintenance/">
+  <PageHero
+    eyebrow="Maintenance"
+    title={p.heading}
+    description={p.intro}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Preventive Maintenance', href: '/preventive-maintenance/' },
+    ]}
+  />
+
+  <section>
+    <div class="container maint-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="thermostat" ratio="4 / 3" variant="ice" label="Preventive Maintenance" />
+      </div>
+      <div data-reveal>
+        <h2>The Benefits of Staying Ahead</h2>
+        <TrustPoints points={p.benefits.map((b: { label: string; description: string }) => ({ ...b, icon: 'check-circle' }))} columns={2} />
+      </div>
+    </div>
+  </section>
+
+  <CtaSection heading="Schedule Your Maintenance Visit" description="A short visit now can prevent a much bigger problem during South Florida's hottest months." primaryCta={p.cta} />
+</BaseLayout>
+
+<style>
+  .maint-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: start;
+  }
+  @media (min-width: 860px) {
+    .maint-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    }
+  }
+</style>

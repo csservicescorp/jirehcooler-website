@@ -1,0 +1,44 @@
+{
+  "businessName": "Jireh Cooler",
+  "legalName": "Jireh Cooler Air Conditioning",
+  "tagline": "South Florida Air Conditioning Experts",
+  "shortTagline": "Comfort you can count on.",
+  "foundedYear": 1994,
+  "phone": "(954) 426-6010",
+  "phoneRaw": "+19544266010",
+  "email": "coolerac1@gmail.com",
+  "address": {
+    "street": "270 S. Military Trail",
+    "city": "Deerfield Beach",
+    "state": "FL",
+    "zip": "33442",
+    "full": "270 S. Military Trail, Deerfield Beach, FL 33442"
+  },
+  "license": {
+    "label": "State Certified Air Conditioning Contractor",
+    "number": "CAC1815741"
+  },
+  "hours": {
+    "office": "Monday – Friday, 8:00 AM – 6:00 PM",
+    "emergency": "Emergency service available 24 hours a day, 7 days a week"
+  },
+  "emergencyAvailability": "24/7/365",
+  "social": {
+    "facebook": "https://www.facebook.com/JirehCoolerAC/",
+    "instagram": "https://www.instagram.com/jireh.cooler_air.conditioning/",
+    "youtube": "https://www.youtube.com/channel/UCFEiMXwQgAc89BGVbRJbmOQ"
+  },
+  "whatsapp": {
+    "enabled": false,
+    "number": ""
+  },
+  "serviceAreaSummary": "Broward and Palm Beach County, Florida",
+  "headerCta": {
+    "label": "Request an Estimate",
+    "href": "/request-an-estimate/"
+  },
+  "callCta": {
+    "label": "Call Now",
+    "href": "tel:+19544266010"
+  }
+}

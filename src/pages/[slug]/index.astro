@@ -1,0 +1,159 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import Icon from '@components/Icon.astro';
+import CtaSection from '@components/CtaSection.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import site from '@data/site.json';
+import { serviceSchema } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services', ({ data }) => data.published);
+  return services.map((service) => ({
+    params: { slug: service.data.urlSlug },
+    props: { service, allSlugs: services.map((s) => s.data.urlSlug) },
+  }));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+const allServices = await getCollection('services', ({ data }) => data.published);
+const related = allServices.filter((s) => s.data.urlSlug !== service.data.urlSlug).slice(0, 3);
+const path = `/${service.data.urlSlug}/`;
+---
+
+<BaseLayout
+  title={service.data.seoTitle}
+  description={service.data.metaDescription}
+  path={path}
+  schema={serviceSchema({ name: service.data.title, description: service.data.shortDescription, path })}
+>
+  <PageHero
+    eyebrow="Services"
+    title={service.data.title}
+    description={service.data.shortDescription}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Services', href: '/services/' },
+      { label: service.data.title, href: path },
+    ]}
+  />
+
+  <section class="service-body">
+    <div class="container service-grid">
+      <article class="service-content" data-reveal>
+        <Content />
+      </article>
+      <aside class="service-sidebar" data-reveal>
+        <ImagePlaceholder icon={service.data.icon} ratio="4 / 3" variant="ice" />
+        <div class="sidebar-card">
+          <h3>What's Included</h3>
+          <ul class="check-list">
+            {service.data.benefits.map((b: string) => (
+              <li><Icon name="check" class="icon-sm" /> {b}</li>
+            ))}
+          </ul>
+          <a href="/request-an-estimate/" class="btn btn-primary btn-block">{service.data.ctaLabel}</a>
+          <a href={`tel:${site.phoneRaw}`} class="btn btn-outline btn-block">
+            <Icon name="phone" class="icon-sm" /> {site.phone}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-soft related-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Related Services</p>
+        <h2>You May Also Need</h2>
+      </div>
+      <div class="related-grid">
+        {related.map((r) => (
+          <ServiceCard title={r.data.title} description={r.data.shortDescription} href={`/${r.data.urlSlug}/`} icon={r.data.icon} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection
+    heading={`Ready to Schedule ${service.data.title}?`}
+    description="Reach out today for a straightforward estimate, or call our emergency line if you need help right away."
+  />
+</BaseLayout>
+
+<style>
+  .service-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+  .service-content :global(h2) {
+    margin-top: var(--space-xl);
+  }
+  .service-content :global(ul) {
+    color: var(--color-muted);
+  }
+  .service-sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+    align-content: start;
+  }
+  .sidebar-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-sm);
+    box-shadow: var(--shadow-sm);
+  }
+  .check-list {
+    list-style: none;
+    margin: 0 0 var(--space-xs);
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+    font-size: var(--fs-sm);
+  }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: var(--color-charcoal);
+  }
+  .check-list :global(svg) {
+    color: var(--color-blue);
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+  }
+  .related-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 860px) {
+    .service-grid {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+    .service-sidebar {
+      position: sticky;
+      top: 110px;
+    }
+  }
+  @media (min-width: 720px) {
+    .related-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

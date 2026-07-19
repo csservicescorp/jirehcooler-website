@@ -1,0 +1,91 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import site from '@data/site.json';
+
+const updated = 'July 18, 2026';
+---
+
+<BaseLayout
+  title="Terms and Conditions | Jireh Cooler"
+  description="Terms and conditions for using the Jireh Cooler website and requesting services."
+  path="/terms-and-conditions/"
+>
+  <PageHero
+    eyebrow="Legal"
+    title="Terms and Conditions"
+    description={`Last updated: ${updated}`}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Terms and Conditions', href: '/terms-and-conditions/' },
+    ]}
+  />
+
+  <section>
+    <div class="container container-narrow legal-content">
+      <p>
+        These Terms and Conditions govern your use of jirehcooler.com (the "Site"), operated by {site.legalName}.
+        By using the Site, you agree to these terms.
+      </p>
+
+      <h2>Use of the Site</h2>
+      <p>
+        This Site is provided for informational purposes and to allow visitors to learn about our services and
+        request estimates or contact our team. Content on this Site does not constitute a binding service agreement.
+      </p>
+
+      <h2>Estimates and Service Agreements</h2>
+      <p>
+        Submitting a form through this Site is a request for contact and does not guarantee scheduling, pricing, or
+        availability. Actual service terms, pricing, and scope are confirmed directly with our team and, where
+        applicable, documented in a separate written estimate or service agreement prior to work beginning.
+      </p>
+
+      <h2>Licensing</h2>
+      <p>
+        Jireh Cooler is a State-Certified Air Conditioning Contractor, license {site.license.number}. Proof of
+        licensing and insurance is available upon request.
+      </p>
+
+      <h2>Intellectual Property</h2>
+      <p>
+        The content, design, and branding on this Site are the property of {site.legalName} and may not be
+        reproduced without permission.
+      </p>
+
+      <h2>Limitation of Liability</h2>
+      <p>
+        Information on this Site is provided "as is." While we work to keep it accurate, we make no warranties
+        regarding completeness or availability of any service described here at any given time.
+      </p>
+
+      <h2>Governing Law</h2>
+      <p>These terms are governed by the laws of the State of Florida.</p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms can be directed to {site.email} or {site.phone}.
+      </p>
+
+      <p class="verification-note">
+        These terms are a general template pending legal review. See CLIENT_VERIFICATION.md for details.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-content h2 {
+    margin-top: var(--space-xl);
+  }
+  .legal-content p {
+    color: var(--color-muted);
+  }
+  .verification-note {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+    font-style: italic;
+  }
+</style>

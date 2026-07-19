@@ -1,0 +1,343 @@
+# Pages CMS configuration (https://pagescms.org)
+# Organizes editable content into a client-friendly editor. Anything not
+# listed here (layout, components, CSS, Astro config) stays code-only.
+
+media:
+  input: public/images
+  output: /images
+
+content:
+  # ---------------------------------------------------------------------
+  # WEBSITE SETTINGS
+  # ---------------------------------------------------------------------
+  - name: settings
+    label: "Website Settings"
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - { name: businessName, label: "Business Name", type: string }
+      - { name: legalName, label: "Legal Business Name", type: string }
+      - { name: tagline, label: "Tagline", type: string }
+      - { name: shortTagline, label: "Short Tagline", type: string }
+      - { name: foundedYear, label: "Founded Year", type: number }
+      - { name: phone, label: "Phone (display format)", type: string, description: "e.g. (954) 426-6010" }
+      - { name: phoneRaw, label: "Phone (dialing format)", type: string, description: "e.g. +19544266010, used in call links" }
+      - { name: email, label: "Business Email", type: string }
+      - name: address
+        label: "Address"
+        type: object
+        fields:
+          - { name: street, label: "Street", type: string }
+          - { name: city, label: "City", type: string }
+          - { name: state, label: "State", type: string }
+          - { name: zip, label: "ZIP Code", type: string }
+          - { name: full, label: "Full Address (display)", type: string }
+      - name: license
+        label: "License Information"
+        type: object
+        fields:
+          - { name: label, label: "License Label", type: string }
+          - { name: number, label: "License Number", type: string }
+      - name: hours
+        label: "Business Hours"
+        type: object
+        fields:
+          - { name: office, label: "Office Hours", type: string }
+          - { name: emergency, label: "Emergency Hours Statement", type: string }
+      - { name: emergencyAvailability, label: "Emergency Availability Badge", type: string, description: "e.g. 24/7/365" }
+      - name: social
+        label: "Social Links"
+        type: object
+        fields:
+          - { name: facebook, label: "Facebook URL", type: string }
+          - { name: instagram, label: "Instagram URL", type: string }
+          - { name: youtube, label: "YouTube URL", type: string }
+      - name: whatsapp
+        label: "WhatsApp"
+        type: object
+        fields:
+          - { name: enabled, label: "Show WhatsApp Button", type: boolean }
+          - { name: number, label: "WhatsApp Number", type: string }
+      - { name: serviceAreaSummary, label: "Service Area Summary", type: string }
+      - name: headerCta
+        label: "Header Estimate Button"
+        type: object
+        fields:
+          - { name: label, label: "Button Label", type: string }
+          - { name: href, label: "Button Link", type: string }
+      - name: callCta
+        label: "Header Call Button"
+        type: object
+        fields:
+          - { name: label, label: "Button Label", type: string }
+          - { name: href, label: "Button Link", type: string }
+
+  # ---------------------------------------------------------------------
+  # HOMEPAGE
+  # ---------------------------------------------------------------------
+  - name: homepage
+    label: "Homepage"
+    type: file
+    path: src/data/homepage.json
+    format: json
+    fields:
+      - name: hero
+        label: "Hero Section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow Text", type: string }
+          - { name: headline, label: "Headline", type: string }
+          - { name: subheadline, label: "Subheadline", type: text }
+          - { name: image, label: "Hero Image", type: image }
+          - { name: imageAlt, label: "Hero Image Alt Text", type: string }
+          - name: primaryCta
+            label: "Primary Button"
+            type: object
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: href, label: "Link", type: string }
+          - name: secondaryCta
+            label: "Secondary Button"
+            type: object
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: href, label: "Link", type: string }
+      - name: trust
+        label: "Trust Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: subheading, label: "Subheading", type: text }
+          - name: points
+            label: "Trust Points"
+            type: array
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: description, label: "Description", type: text }
+      - name: whyChooseUs
+        label: "Why Choose Us Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - name: points
+            label: "Points"
+            type: array
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: description, label: "Description", type: text }
+      - name: emergency
+        label: "Emergency Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: description, label: "Description", type: text }
+      - name: membership
+        label: "Maintenance Membership Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: description, label: "Description", type: text }
+          - { name: highlights, label: "Highlights", type: array, list: { type: string } }
+      - name: financing
+        label: "Financing Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: description, label: "Description", type: text }
+      - name: airQuality
+        label: "Indoor Air Quality Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: description, label: "Description", type: text }
+      - name: finalCta
+        label: "Final Call-to-Action Section"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: description, label: "Description", type: text }
+
+  # ---------------------------------------------------------------------
+  # SERVICES
+  # ---------------------------------------------------------------------
+  - name: services
+    label: "Services"
+    type: collection
+    path: src/content/services
+    format: yaml-frontmatter
+    filename: "{fields.urlSlug}.md"
+    fields:
+      - { name: title, label: "Service Name", type: string }
+      - { name: urlSlug, label: "URL Slug", type: string, description: "e.g. ac-repair — determines the page URL /ac-repair/" }
+      - { name: category, label: "Category", type: select, options: { values: [residential, commercial, both] } }
+      - { name: shortDescription, label: "Short Description", type: text, description: "Used on cards and in search results" }
+      - { name: icon, label: "Icon Identifier", type: string, description: "Matches an icon in the site's icon set" }
+      - { name: image, label: "Image", type: image }
+      - { name: imageAlt, label: "Image Alt Text", type: string }
+      - { name: benefits, label: "Benefits List", type: array, list: { type: string } }
+      - { name: ctaLabel, label: "Call-to-Action Label", type: string }
+      - { name: seoTitle, label: "SEO Title", type: string }
+      - { name: metaDescription, label: "Meta Description", type: text }
+      - { name: published, label: "Published", type: boolean }
+      - { name: featured, label: "Featured on Homepage", type: boolean }
+      - { name: order, label: "Sort Order", type: number }
+      - { name: body, label: "Full Description", type: rich-text }
+
+  # ---------------------------------------------------------------------
+  # ABOUT
+  # ---------------------------------------------------------------------
+  - name: about
+    label: "About Page"
+    type: file
+    path: src/data/about.json
+    format: json
+    fields:
+      - { name: seoTitle, label: "SEO Title", type: string }
+      - { name: metaDescription, label: "Meta Description", type: text }
+      - { name: heading, label: "Page Heading", type: string }
+      - { name: intro, label: "Intro Paragraph", type: text }
+      - { name: story, label: "Story Paragraphs", type: array, list: { type: text } }
+      - name: values
+        label: "Company Values"
+        type: array
+        fields:
+          - { name: label, label: "Label", type: string }
+          - { name: description, label: "Description", type: text }
+      - { name: image, label: "Image", type: image }
+      - { name: imageAlt, label: "Image Alt Text", type: string }
+
+  # ---------------------------------------------------------------------
+  # MAINTENANCE
+  # ---------------------------------------------------------------------
+  - name: maintenance
+    label: "Maintenance Pages"
+    type: file
+    path: src/data/maintenance.json
+    format: json
+    fields:
+      - name: membership
+        label: "V.I.P. Maintenance Membership Page"
+        type: object
+        fields:
+          - { name: seoTitle, label: "SEO Title", type: string }
+          - { name: metaDescription, label: "Meta Description", type: text }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro", type: text }
+          - { name: included, label: "What's Included", type: array, list: { type: string } }
+          - { name: note, label: "Note / Disclaimer", type: text }
+      - name: preventive
+        label: "Preventive Maintenance Page"
+        type: object
+        fields:
+          - { name: seoTitle, label: "SEO Title", type: string }
+          - { name: metaDescription, label: "Meta Description", type: text }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro", type: text }
+          - name: benefits
+            label: "Benefits"
+            type: array
+            fields:
+              - { name: label, label: "Label", type: string }
+              - { name: description, label: "Description", type: text }
+
+  # ---------------------------------------------------------------------
+  # FINANCING
+  # ---------------------------------------------------------------------
+  - name: financing
+    label: "Financing Page"
+    type: file
+    path: src/data/financing.json
+    format: json
+    fields:
+      - { name: seoTitle, label: "SEO Title", type: string }
+      - { name: metaDescription, label: "Meta Description", type: text }
+      - { name: heading, label: "Heading", type: string }
+      - { name: intro, label: "Intro", type: text }
+      - name: highlights
+        label: "Highlights"
+        type: array
+        fields:
+          - { name: label, label: "Label", type: string }
+          - { name: description, label: "Description", type: text }
+      - { name: disclaimer, label: "Disclaimer", type: text }
+
+  # ---------------------------------------------------------------------
+  # GALLERY
+  # ---------------------------------------------------------------------
+  - name: gallery
+    label: "Gallery"
+    type: collection
+    path: src/content/gallery
+    format: json
+    fields:
+      - { name: title, label: "Title", type: string }
+      - { name: image, label: "Image", type: image }
+      - { name: alt, label: "Alt Text", type: string }
+      - { name: category, label: "Category", type: select, options: { values: [residential, commercial, installation, repair, maintenance] } }
+      - { name: published, label: "Published", type: boolean }
+
+  # ---------------------------------------------------------------------
+  # TESTIMONIALS
+  # ---------------------------------------------------------------------
+  - name: testimonials
+    label: "Testimonials"
+    type: collection
+    path: src/content/testimonials
+    format: json
+    fields:
+      - { name: quote, label: "Quote", type: text }
+      - { name: author, label: "Author Name", type: string }
+      - { name: location, label: "Author Location", type: string }
+      - { name: serviceType, label: "Service Type", type: string }
+      - { name: published, label: "Published", type: boolean }
+
+  # ---------------------------------------------------------------------
+  # FAQS
+  # ---------------------------------------------------------------------
+  - name: faqs
+    label: "FAQs"
+    type: collection
+    path: src/content/faqs
+    format: json
+    fields:
+      - { name: question, label: "Question", type: string }
+      - { name: answer, label: "Answer", type: text }
+      - { name: category, label: "Category", type: select, options: { values: [general, repair, installation, maintenance, financing, emergency] } }
+      - { name: order, label: "Sort Order", type: number }
+
+  # ---------------------------------------------------------------------
+  # SERVICE AREAS
+  # ---------------------------------------------------------------------
+  - name: serviceAreas
+    label: "Service Areas"
+    type: collection
+    path: src/content/serviceAreas
+    format: json
+    fields:
+      - { name: city, label: "City", type: string }
+      - { name: county, label: "County", type: select, options: { values: [Broward, "Palm Beach"] } }
+      - { name: published, label: "Published", type: boolean }
+
+  # ---------------------------------------------------------------------
+  # CONTACT
+  # ---------------------------------------------------------------------
+  - name: contact-settings
+    label: "Contact Info"
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - { name: phone, label: "Phone (display format)", type: string }
+      - { name: email, label: "Business Email", type: string }
+      - name: address
+        label: "Address"
+        type: object
+        fields:
+          - { name: full, label: "Full Address (display)", type: string }
+      - name: hours
+        label: "Business Hours"
+        type: object
+        fields:
+          - { name: office, label: "Office Hours", type: string }
+          - { name: emergency, label: "Emergency Hours Statement", type: string }

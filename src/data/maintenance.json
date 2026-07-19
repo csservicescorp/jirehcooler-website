@@ -1,0 +1,40 @@
+{
+  "membership": {
+    "seoTitle": "V.I.P. Maintenance Membership | Jireh Cooler",
+    "metaDescription": "Join the Jireh Cooler V.I.P. Maintenance Membership for twice-yearly, 18-point AC inspections and priority scheduling in South Florida.",
+    "heading": "V.I.P. Maintenance Membership",
+    "intro": "Routine maintenance is the difference between a system that lasts and one that fails at the worst possible time. Our V.I.P. Maintenance Membership keeps your system running efficiently year-round.",
+    "included": [
+      "18-point system inspection",
+      "Two scheduled maintenance visits per year",
+      "Priority scheduling for members"
+    ],
+    "note": "Specific membership pricing and additional benefits are confirmed at signup. Ask our team for current details.",
+    "cta": { "label": "Ask About Membership", "href": "/request-an-estimate/" }
+  },
+  "preventive": {
+    "seoTitle": "Preventive AC Maintenance | Jireh Cooler",
+    "metaDescription": "Preventive air conditioning maintenance from Jireh Cooler helps South Florida homes and businesses avoid costly breakdowns.",
+    "heading": "Preventive Maintenance That Prevents Breakdowns",
+    "intro": "Most emergency AC failures start as small, ignorable issues. Regular preventive maintenance catches worn components, refrigerant issues, and airflow problems before they take your system down.",
+    "benefits": [
+      {
+        "label": "Fewer Breakdowns",
+        "description": "Catching wear and tear early reduces the risk of a system failure during peak summer heat."
+      },
+      {
+        "label": "Lower Energy Bills",
+        "description": "A clean, well-tuned system doesn't have to work as hard to keep your space comfortable."
+      },
+      {
+        "label": "Extended System Life",
+        "description": "Routine care protects the investment you've already made in your equipment."
+      },
+      {
+        "label": "Manufacturer Compliance",
+        "description": "Many manufacturer warranties require documented, regular maintenance."
+      }
+    ],
+    "cta": { "label": "Schedule Maintenance", "href": "/request-an-estimate/" }
+  }
+}

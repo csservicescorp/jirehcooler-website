@@ -1,0 +1,83 @@
+---
+import Icon from './Icon.astro';
+
+interface Point {
+  label: string;
+  description: string;
+  icon?: string;
+}
+interface Props {
+  points: Point[];
+  columns?: 1 | 2 | 3 | 4;
+}
+const { points, columns = 4 } = Astro.props;
+---
+
+<div class:list={['trust-grid', `cols-${columns}`]}>
+  {
+    points.map((point, i) => (
+      <div class="trust-point" data-reveal style={`transition-delay:${i * 60}ms`}>
+        <span class="trust-icon">
+          <Icon name={point.icon ?? 'check-circle'} />
+        </span>
+        <h3>{point.label}</h3>
+        <p>{point.description}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .trust-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .trust-point {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .trust-icon {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-md);
+    background: var(--color-ice);
+    color: var(--color-blue);
+  }
+  .section-navy .trust-icon {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-blue-light);
+  }
+  .trust-point h3 {
+    font-size: var(--fs-md);
+    margin-bottom: 0.15rem;
+  }
+  .trust-point p {
+    font-size: var(--fs-sm);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cols-3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .cols-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 960px) {
+    .cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

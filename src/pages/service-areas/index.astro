@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Icon from '@components/Icon.astro';
+import CtaSection from '@components/CtaSection.astro';
+import site from '@data/site.json';
+
+const areas = await getCollection('serviceAreas', ({ data }) => data.published);
+const broward = areas.filter((a) => a.data.county === 'Broward');
+const palmBeach = areas.filter((a) => a.data.county === 'Palm Beach');
+---
+
+<BaseLayout
+  title="Service Areas | Jireh Cooler South Florida AC Company"
+  description="Jireh Cooler provides air conditioning services throughout Broward and Palm Beach County, Florida, from our Deerfield Beach location."
+  path="/service-areas/"
+>
+  <PageHero
+    eyebrow="Service Areas"
+    title={`Proudly Serving ${site.serviceAreaSummary}`}
+    description={`Based in ${site.address.city}, we provide residential and commercial AC service throughout the surrounding communities.`}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Service Areas', href: '/service-areas/' },
+    ]}
+  />
+
+  <section>
+    <div class="container area-columns">
+      <div>
+        <h2>Broward County</h2>
+        <ul class="area-list">
+          {broward.map((a) => (
+            <li><Icon name="pin" class="icon-sm" /> {a.data.city}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Palm Beach County</h2>
+        <ul class="area-list">
+          {palmBeach.map((a) => (
+            <li><Icon name="pin" class="icon-sm" /> {a.data.city}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <p class="area-note container-narrow">
+      Don't see your city listed? Call us at {site.phone} to confirm coverage for your address.
+    </p>
+  </section>
+
+  <CtaSection heading="Serving Your Neighborhood" description="Request an estimate today and let us know your address, we'll confirm availability right away." />
+</BaseLayout>
+
+<style>
+  .area-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .area-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+  .area-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+    color: var(--color-blue);
+    flex-shrink: 0;
+  }
+  .area-note {
+    margin-top: var(--space-xl);
+    text-align: center;
+    color: var(--color-muted);
+  }
+  @media (min-width: 720px) {
+    .area-columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

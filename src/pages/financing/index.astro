@@ -1,0 +1,58 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import TrustPoints from '@components/TrustPoints.astro';
+import CtaSection from '@components/CtaSection.astro';
+import financing from '@data/financing.json';
+---
+
+<BaseLayout title={financing.seoTitle} description={financing.metaDescription} path="/financing/">
+  <PageHero
+    eyebrow="Financing"
+    title={financing.heading}
+    description={financing.intro}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Financing', href: '/financing/' },
+    ]}
+  />
+
+  <section>
+    <div class="container financing-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="document" ratio="4 / 3" variant="ice" label="Financing" />
+      </div>
+      <div data-reveal>
+        <TrustPoints
+          points={financing.highlights.map((h: { label: string; description: string }) => ({ ...h, icon: 'check-circle' }))}
+          columns={1}
+        />
+      </div>
+    </div>
+    <p class="disclaimer container-narrow">{financing.disclaimer}</p>
+  </section>
+
+  <CtaSection heading="Ready to Talk Financing?" description="Ask about current programs when you request your estimate." primaryCta={financing.cta} />
+</BaseLayout>
+
+<style>
+  .financing-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .disclaimer {
+    margin-top: var(--space-xl);
+    font-size: var(--fs-xs);
+    color: var(--color-muted);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+  @media (min-width: 860px) {
+    .financing-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    }
+  }
+</style>

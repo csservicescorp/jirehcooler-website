@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import CtaSection from '@components/CtaSection.astro';
+
+const items = await getCollection('gallery', ({ data }) => data.published);
+
+const iconByCategory: Record<string, string> = {
+  installation: 'install',
+  commercial: 'building',
+  repair: 'wrench',
+  maintenance: 'thermostat',
+  residential: 'home',
+};
+---
+
+<BaseLayout
+  title="Project Gallery | Jireh Cooler"
+  description="A look at residential and commercial air conditioning work completed by Jireh Cooler across Broward and Palm Beach County."
+  path="/gallery/"
+>
+  <PageHero
+    eyebrow="Gallery"
+    title="Our Work Across South Florida"
+    description="Photography from real installations, repairs, and maintenance visits is being added to this gallery. Placeholders below mark where finished project photos will appear."
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Gallery', href: '/gallery/' },
+    ]}
+  />
+
+  <section>
+    <div class="container">
+      <div class="gallery-grid">
+        {items.map((item, i) => (
+          <figure class="gallery-item" data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
+            <ImagePlaceholder icon={iconByCategory[item.data.category] ?? 'building'} ratio="4 / 3" variant={i % 2 === 0 ? 'ice' : 'blue'} />
+            <figcaption>{item.data.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection heading="Have a Project in Mind?" description="Request an estimate and let's talk about what your space needs." />
+</BaseLayout>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gallery-item {
+    margin: 0;
+  }
+  .gallery-item figcaption {
+    margin-top: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-navy);
+  }
+  @media (min-width: 720px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

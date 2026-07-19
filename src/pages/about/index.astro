@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import TrustPoints from '@components/TrustPoints.astro';
+import CtaSection from '@components/CtaSection.astro';
+import about from '@data/about.json';
+import site from '@data/site.json';
+---
+
+<BaseLayout title={about.seoTitle} description={about.metaDescription} path="/about/">
+  <PageHero
+    eyebrow="About Jireh Cooler"
+    title={about.heading}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about/' },
+    ]}
+  />
+
+  <section>
+    <div class="container about-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="users" ratio="4 / 3" variant="ice" label={about.imageAlt} />
+      </div>
+      <div data-reveal>
+        <p class="intro">{about.intro}</p>
+        {about.story.map((p: string) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">What We Stand For</p>
+        <h2>Values That Have Held Up Since {site.foundedYear}</h2>
+      </div>
+      <TrustPoints
+        points={about.values.map((v: { label: string; description: string }) => ({ ...v, icon: 'shield' }))}
+        columns={4}
+      />
+    </div>
+  </section>
+
+  <CtaSection heading="Work With a Team That's Been Here Since 1994" description="Reach out today for a straightforward estimate on your next project." />
+</BaseLayout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .intro {
+    font-size: var(--fs-md);
+    color: var(--color-charcoal);
+    font-weight: 500;
+  }
+  @media (min-width: 860px) {
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    }
+  }
+</style>

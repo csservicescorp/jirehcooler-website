@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
+import CtaSection from '@components/CtaSection.astro';
+
+const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order);
+
+const categories: Record<string, string> = {
+  general: 'General',
+  repair: 'Repair',
+  installation: 'Installation & Replacement',
+  maintenance: 'Maintenance',
+  financing: 'Financing',
+  emergency: 'Emergency Service',
+};
+
+const grouped = Object.keys(categories).map((key) => ({
+  key,
+  label: categories[key],
+  items: faqs.filter((f) => f.data.category === key),
+})).filter((g) => g.items.length > 0);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.data.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.data.answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Frequently Asked Questions | Jireh Cooler"
+  description="Answers to common questions about AC repair, installation, maintenance, financing, and emergency service from Jireh Cooler."
+  path="/faq/"
+  schema={faqSchema}
+>
+  <PageHero
+    eyebrow="FAQ"
+    title="Frequently Asked Questions"
+    description="Answers to the questions we hear most from South Florida homeowners and businesses."
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'FAQ', href: '/faq/' },
+    ]}
+  />
+
+  <section>
+    <div class="container container-narrow faq-groups">
+      {grouped.map((group) => (
+        <div class="faq-group">
+          <h2>{group.label}</h2>
+          <FaqAccordion faqs={group.items.map((f) => f.data)} withSchema={false} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaSection heading="Still Have Questions?" description="Call our team directly, we're happy to walk through your specific situation." />
+</BaseLayout>
+
+<style>
+  .faq-groups {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xl);
+  }
+</style>

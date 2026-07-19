@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import Icon from '@components/Icon.astro';
+import CtaSection from '@components/CtaSection.astro';
+import maintenance from '@data/maintenance.json';
+
+const m = maintenance.membership;
+---
+
+<BaseLayout title={m.seoTitle} description={m.metaDescription} path="/maintenance-membership/">
+  <PageHero
+    eyebrow="Maintenance"
+    title={m.heading}
+    description={m.intro}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Maintenance Membership', href: '/maintenance-membership/' },
+    ]}
+  />
+
+  <section>
+    <div class="container membership-grid">
+      <div data-reveal>
+        <ImagePlaceholder icon="check-circle" ratio="4 / 3" variant="ice" label="V.I.P. Membership" />
+      </div>
+      <div class="membership-copy" data-reveal>
+        <h2>What's Included</h2>
+        <ul class="check-list">
+          {m.included.map((item: string) => (
+            <li><Icon name="check" class="icon-sm" /> {item}</li>
+          ))}
+        </ul>
+        <p class="note">{m.note}</p>
+        <a href={m.cta.href} class="btn btn-primary btn-lg">{m.cta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaSection heading="Protect Your System Year-Round" description="Join the V.I.P. Maintenance Membership and let us stay ahead of the small issues before they become expensive ones." />
+</BaseLayout>
+
+<style>
+  .membership-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .check-list {
+    list-style: none;
+    margin: var(--space-sm) 0 var(--space-md);
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+  .check-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+    color: var(--color-blue);
+    flex-shrink: 0;
+  }
+  .note {
+    font-size: var(--fs-sm);
+    font-style: italic;
+  }
+  @media (min-width: 860px) {
+    .membership-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+</style>

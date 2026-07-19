@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "eyebrow": "Serving Broward & Palm Beach County Since 1994",
+    "headline": "South Florida's Trusted Air Conditioning Experts",
+    "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
+    "image": "/images/hero/hero-technician.jpg",
+    "imageAlt": "Jireh Cooler technician servicing a residential air conditioning unit in South Florida",
+    "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
+    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
+  },
+  "pathways": {
+    "heading": "Built for Your Home. Ready for Your Business.",
+    "residential": {
+      "label": "Residential HVAC",
+      "description": "Reliable comfort for your home, from same-day repairs to full system replacements.",
+      "href": "/residential-hvac/",
+      "image": "/images/pathways/residential.jpg"
+    },
+    "commercial": {
+      "label": "Commercial HVAC",
+      "description": "Dependable climate control for offices, restaurants, and retail spaces that can't afford downtime.",
+      "href": "/commercial-hvac/",
+      "image": "/images/pathways/commercial.jpg"
+    }
+  },
+  "trust": {
+    "heading": "Three Decades of South Florida Comfort",
+    "subheading": "Jireh Cooler has been a family-operated fixture in Broward and Palm Beach County since 1994.",
+    "points": [
+      {
+        "label": "Founded in 1994",
+        "description": "Three decades of hands-on HVAC experience in South Florida's climate."
+      },
+      {
+        "label": "State-Certified & Insured",
+        "description": "Licensed Air Conditioning Contractor, CAC1815741."
+      },
+      {
+        "label": "Family-Operated",
+        "description": "Owner-led business built on direct accountability, not a call center."
+      },
+      {
+        "label": "24/7 Emergency Availability",
+        "description": "On call for urgent breakdowns, day or night."
+      }
+    ]
+  },
+  "services": {
+    "heading": "Complete Air Conditioning Services",
+    "subheading": "From emergency repairs to full installations, we handle every part of your comfort system.",
+    "featuredSlugs": [
+      "ac-repair",
+      "ac-installation-and-replacement",
+      "emergency-ac-service",
+      "indoor-air-quality",
+      "duct-cleaning",
+      "smart-wifi-thermostats"
+    ]
+  },
+  "emergency": {
+    "heading": "AC Down? We're Already On Our Way.",
+    "description": "South Florida heat doesn't wait for business hours, and neither do we. Our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year.",
+    "cta": { "label": "Call for Emergency Service", "href": "tel:+19544266010" },
+    "href": "/emergency-ac-service/"
+  },
+  "whyChooseUs": {
+    "heading": "Why South Florida Chooses Jireh Cooler",
+    "points": [
+      {
+        "label": "Direct Owner Involvement",
+        "description": "Founded and still run by Moyses Oliveira, with decades of hands-on technical experience behind every job."
+      },
+      {
+        "label": "Straightforward Pricing",
+        "description": "Written estimates before work begins, with no pressure and no surprises."
+      },
+      {
+        "label": "Certified Technicians",
+        "description": "Trained on the major brands we install and service, including Carrier, Bryant, Rheem, Goodman, and Lennox."
+      },
+      {
+        "label": "Built for the Long Term",
+        "description": "Three decades of repeat customers across Broward and Palm Beach County."
+      }
+    ]
+  },
+  "process": {
+    "heading": "What Happens When You Call",
+    "steps": [
+      {
+        "step": "1",
+        "label": "You Call or Request an Estimate",
+        "description": "Reach our team by phone or through our online request form, 24 hours a day."
+      },
+      {
+        "step": "2",
+        "label": "We Diagnose the Problem",
+        "description": "A certified technician evaluates your system and explains what's going on in plain language."
+      },
+      {
+        "step": "3",
+        "label": "You Get a Clear Estimate",
+        "description": "We provide written pricing before any work begins. No surprises on the invoice."
+      },
+      {
+        "step": "4",
+        "label": "We Get It Done Right",
+        "description": "Our technicians complete the repair, installation, or maintenance to code and to spec."
+      }
+    ]
+  },
+  "membership": {
+    "heading": "V.I.P. Maintenance Membership",
+    "description": "Our maintenance membership covers a comprehensive multi-point inspection twice a year, helping catch small issues before they become expensive breakdowns.",
+    "highlights": [
+      "18-point system inspection",
+      "Two scheduled visits per year",
+      "Priority scheduling for members"
+    ],
+    "cta": { "label": "Learn About Membership", "href": "/maintenance-membership/" }
+  },
+  "financing": {
+    "heading": "Flexible Financing Options",
+    "description": "Financing is available for qualified homeowners so a system replacement doesn't have to be an all-at-once expense.",
+    "cta": { "label": "Explore Financing", "href": "/financing/" }
+  },
+  "airQuality": {
+    "heading": "Breathe Easier Indoors",
+    "description": "UV light systems, duct cleaning, and filtration upgrades that improve the air quality inside your home or business.",
+    "cta": { "label": "See Indoor Air Quality Options", "href": "/indoor-air-quality/" },
+    "image": "/images/sections/air-quality.jpg"
+  },
+  "finalCta": {
+    "heading": "Ready for Reliable Comfort?",
+    "description": "Talk to a real technician, not a call center. Reach out today for a straightforward estimate or emergency service.",
+    "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
+    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
+  }
+}
