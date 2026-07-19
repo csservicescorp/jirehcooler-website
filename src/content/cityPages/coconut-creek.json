@@ -1,0 +1,21 @@
+{
+  "city": "Coconut Creek",
+  "slug": "coconut-creek",
+  "county": "Broward",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Coconut Creek, FL, part of our Broward County service area.",
+  "intro": [
+    "Coconut Creek is part of our Broward County service area, and most of the calls we get from the city are residential: repairs on systems that are struggling to keep up, and replacements for units that have reached the end of their useful life.",
+    "As with every home we work in, a Coconut Creek service visit starts with an honest diagnosis and a written estimate before anything is repaired or replaced, so you know what you're paying for and why."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler serve Coconut Creek?",
+      "answer": "Yes, Coconut Creek is part of our Broward County service area for residential AC repair, installation, and maintenance."
+    },
+    {
+      "question": "What if I'm not sure whether my AC needs a repair or a full replacement?",
+      "answer": "That's exactly what the diagnostic visit is for. We'll evaluate your system and give you an honest recommendation, along with written pricing, before you decide."
+    }
+  ],
+  "published": true
+}

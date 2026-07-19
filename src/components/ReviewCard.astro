@@ -19,19 +19,27 @@ const LONG_REVIEW_THRESHOLD = 320;
 const isLong = reviewText.length > LONG_REVIEW_THRESHOLD;
 const initial = reviewerName.trim().charAt(0).toUpperCase();
 
+// reviewDate is expected as either a full ISO date ("YYYY-MM-DD") — reformatted
+// with day precision — or a stable "Month YYYY" approximation, displayed as-is.
+// Relative labels ("3 weeks ago") are never stored: they'd silently go stale.
 let formattedDate: string | undefined;
 if (reviewDate) {
-  const parsed = new Date(reviewDate);
-  formattedDate = Number.isNaN(parsed.getTime())
-    ? reviewDate
-    : parsed.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const isIsoDate = /^\d{4}-\d{2}-\d{2}$/.test(reviewDate);
+  if (isIsoDate) {
+    const parsed = new Date(reviewDate);
+    formattedDate = Number.isNaN(parsed.getTime())
+      ? undefined
+      : parsed.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  } else {
+    formattedDate = reviewDate;
+  }
 }
 
 const linkHref = sourceUrl || site.googleProfileUrl;
 ---
 
 <article class:list={['review-card', { featured }]}>
-  {featured && <span class="favorite-badge">Customer Favorite</span>}
+  {featured && <span class="favorite-badge">Featured Review</span>}
 
   <header class="review-head">
     <span class="avatar" aria-hidden="true">{initial}</span>
@@ -54,7 +62,14 @@ const linkHref = sourceUrl || site.googleProfileUrl;
     <p class="review-text">{reviewText}</p>
   )}
 
-  <a href={linkHref} target="_blank" rel="noopener noreferrer" class="review-source">
+  <a
+    href={linkHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="review-source"
+    data-track="google_reviews_click"
+    data-track-params={JSON.stringify({ location: 'review_card' })}
+  >
     {sourceLabel}
     <Icon name="external" class="source-icon" />
   </a>

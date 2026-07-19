@@ -1,0 +1,21 @@
+{
+  "city": "Coral Springs",
+  "slug": "coral-springs",
+  "county": "Broward",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Coral Springs, FL, part of our Broward County service area.",
+  "intro": [
+    "Coral Springs is a primarily residential community in western Broward County, and it's part of the area Jireh Cooler serves for AC repair, installation, and maintenance. Homes here range widely in age, which means system sizing and ductwork condition vary a lot from house to house.",
+    "We evaluate each system on its own before recommending a repair or a replacement, so Coral Springs homeowners get a solution that actually fits their house rather than a generic recommendation."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler install new AC systems in Coral Springs?",
+      "answer": "Yes, we handle full system installations and replacements in Coral Springs, sized to your specific home rather than a one-size-fits-all approach."
+    },
+    {
+      "question": "Is preventive maintenance available for Coral Springs homes?",
+      "answer": "Yes. Our V.I.P. Maintenance Membership includes twice-yearly inspections and is available to Coral Springs customers."
+    }
+  ],
+  "published": true
+}

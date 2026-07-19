@@ -7,10 +7,13 @@ export function localBusinessSchema() {
     '@context': 'https://schema.org',
     '@type': 'HVACBusiness',
     name: site.businessName,
+    legalName: site.legalName,
     image: `${siteUrl}/images/og/default-og.jpg`,
+    logo: `${siteUrl}${site.logo.image}`,
     url: siteUrl,
     telephone: site.phoneRaw,
     email: site.email,
+    foundingDate: String(site.foundedYear),
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.address.street,
@@ -25,6 +28,13 @@ export function localBusinessSchema() {
     ],
     priceRange: '$$',
     openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '08:00',
+        closes: '18:00',
+        description: 'Office hours',
+      },
       {
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],

@@ -1,0 +1,21 @@
+{
+  "city": "Delray Beach",
+  "slug": "delray-beach",
+  "county": "Palm Beach",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Delray Beach, FL, part of our Palm Beach County service area.",
+  "intro": [
+    "Delray Beach is part of the Palm Beach County service area Jireh Cooler covers from our Deerfield Beach office. Homes in the area range from older construction with original ductwork to newer builds, and both come with their own set of AC repair and installation considerations.",
+    "Whether it's a same-day repair call, a full system replacement, or getting on a preventive maintenance schedule before the next heat wave, our technicians handle it with a written estimate up front and no pressure to decide on the spot."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler serve Delray Beach?",
+      "answer": "Yes, Delray Beach is part of our Palm Beach County service area for both residential and commercial AC work."
+    },
+    {
+      "question": "Can you service older AC systems and ductwork in Delray Beach homes?",
+      "answer": "Yes. Our technicians regularly work on both older and newer residential systems, including diagnosing issues tied to aging ductwork."
+    }
+  ],
+  "published": true
+}

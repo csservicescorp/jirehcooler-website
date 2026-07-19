@@ -1,0 +1,21 @@
+{
+  "city": "Pompano Beach",
+  "slug": "pompano-beach",
+  "county": "Broward",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Pompano Beach, FL, part of our Broward County service area.",
+  "intro": [
+    "Pompano Beach is one of the closer Broward County cities to our Deerfield Beach office, and we cover both its residential neighborhoods and its commercial corridors, including offices, restaurants, and retail spaces that can't afford unplanned downtime.",
+    "From emergency repairs to scheduled installations, our technicians show up with a written estimate before any work begins, and V.I.P. Maintenance Members get priority scheduling when something urgent comes up."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler serve Pompano Beach businesses as well as homes?",
+      "answer": "Yes. We handle both residential and commercial HVAC work in Pompano Beach, including offices, restaurants, and retail spaces."
+    },
+    {
+      "question": "How fast is your response time in Pompano Beach?",
+      "answer": "We don't publish a fixed response time, since it depends on current call volume and your specific situation. Call our 24/7 line and we'll give you a realistic estimate for your visit."
+    }
+  ],
+  "published": true
+}

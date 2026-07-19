@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Icon from '@components/Icon.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
+import CtaSection from '@components/CtaSection.astro';
+import site from '@data/site.json';
+import { serviceSchema } from '@/lib/schema';
+
+export async function getStaticPaths() {
+  const cities = await getCollection('cityPages', ({ data }) => data.published);
+  return cities.map((cityPage) => ({
+    params: { city: cityPage.data.slug },
+    props: { cityPage },
+  }));
+}
+
+const { cityPage } = Astro.props;
+const c = cityPage.data;
+const path = `/service-areas/${c.slug}/`;
+
+const coreServices = [
+  { label: 'AC Repair', href: '/ac-repair/', icon: 'wrench' },
+  { label: 'AC Installation & Replacement', href: '/ac-installation-and-replacement/', icon: 'install' },
+  { label: 'Emergency AC Service', href: '/emergency-ac-service/', icon: 'bolt' },
+];
+---
+
+<BaseLayout
+  title={`AC Repair & Installation in ${c.city}, FL | Jireh Cooler`}
+  description={c.metaDescription}
+  path={path}
+  schema={serviceSchema({
+    name: `Air Conditioning Services in ${c.city}, FL`,
+    description: c.metaDescription,
+    path,
+  })}
+>
+  <PageHero
+    eyebrow="Service Area"
+    title={`Air Conditioning Service in ${c.city}, FL`}
+    breadcrumbs={[
+      { label: 'Home', href: '/' },
+      { label: 'Service Areas', href: '/service-areas/' },
+      { label: c.city, href: path },
+    ]}
+  />
+
+  <section>
+    <div class="container container-narrow city-intro">
+      {c.intro.map((p: string) => <p>{p}</p>)}
+      <div class="city-cta-row">
+        <a href={`tel:${site.phoneRaw}`} class="btn btn-primary btn-lg" data-track="phone_click" data-track-params={JSON.stringify({ location: 'city_page' })}>
+          <Icon name="phone" class="icon-sm" /> Call {site.phone}
+        </a>
+        <a href="/request-an-estimate/" class="btn btn-outline btn-lg" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: 'city_page' })}>
+          Schedule Service
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-soft">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Popular in {c.city}</p>
+        <h2>Services We Provide</h2>
+      </div>
+      <div class="service-links-grid">
+        {coreServices.map((s) => (
+          <a href={s.href} class="service-link-card">
+            <Icon name={s.icon} class="icon-md" />
+            <span>{s.label}</span>
+            <Icon name="arrow-right" class="icon-xs" />
+          </a>
+        ))}
+      </div>
+      <p class="more-services">
+        Also serving {c.city}: <a href="/residential-hvac/">Residential HVAC</a>, <a href="/commercial-hvac/">Commercial HVAC</a>,{' '}
+        <a href="/maintenance-membership/">V.I.P. Maintenance</a>, and <a href="/financing/">financing</a> for qualified customers.
+      </p>
+    </div>
+  </section>
+
+  {c.faqs.length > 0 && (
+    <section>
+      <div class="container container-narrow">
+        <div class="section-head center">
+          <p class="eyebrow">Common Questions</p>
+          <h2>{c.city} FAQ</h2>
+        </div>
+        <FaqAccordion faqs={c.faqs} withSchema={false} />
+      </div>
+    </section>
+  )}
+
+  <section class="section-soft">
+    <div class="container container-narrow" style="text-align:center;">
+      <p>
+        Read what customers across South Florida have to say on our <a href="/reviews/">Reviews page</a>, or{' '}
+        <a href="/contact/">contact us</a> directly with any questions before requesting an estimate.
+      </p>
+    </div>
+  </section>
+
+  <CtaSection
+    heading={`Ready to Schedule Service in ${c.city}?`}
+    description="Reach out today for a straightforward estimate, or call our emergency line if you need help right away."
+    secondaryCta={{ label: 'Request an Estimate', href: '/request-an-estimate/' }}
+  />
+</BaseLayout>
+
+<style>
+  .city-intro p {
+    font-size: var(--fs-md);
+  }
+  .city-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--space-md);
+  }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+  }
+  .icon-md {
+    width: 26px;
+    height: 26px;
+    color: var(--color-royal);
+  }
+  .icon-xs {
+    width: 15px;
+    height: 15px;
+    margin-left: auto;
+    color: var(--color-muted);
+  }
+  .service-links-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+  .service-link-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-charcoal);
+    transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+  }
+  .service-link-card:hover {
+    border-color: var(--color-royal);
+    transform: translateY(-2px);
+  }
+  .more-services {
+    margin-top: var(--space-lg);
+    text-align: center;
+    color: var(--color-muted);
+  }
+  @media (min-width: 720px) {
+    .service-links-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

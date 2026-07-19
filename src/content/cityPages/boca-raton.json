@@ -1,0 +1,21 @@
+{
+  "city": "Boca Raton",
+  "slug": "boca-raton",
+  "county": "Palm Beach",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Boca Raton, FL, part of our Palm Beach County service area.",
+  "intro": [
+    "Boca Raton sits just north of Broward County in Palm Beach County, and it's one of the Palm Beach County communities we regularly serve from our Deerfield Beach office. Between the year-round heat and the salt air near the coast, AC systems in the area work hard, and a system that isn't sized or maintained correctly tends to show it fast.",
+    "Jireh Cooler works on both residential and commercial systems in Boca Raton, from routine repairs to full replacements, backed by written estimates and technicians trained on the major brands we install and service."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler serve Boca Raton?",
+      "answer": "Yes. Boca Raton is part of our Palm Beach County service area, and we handle residential and commercial AC repair, installation, and maintenance there."
+    },
+    {
+      "question": "Do you have an office in Boca Raton?",
+      "answer": "No, our office is located in Deerfield Beach. We serve Boca Raton from there, not from a local Boca Raton office."
+    }
+  ],
+  "published": true
+}

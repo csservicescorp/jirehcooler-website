@@ -29,10 +29,10 @@ const otherReviews = allReviews.filter((r) => !r.data.featured);
     ]}
   >
     <div class="hero-actions">
-      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" data-track="google_reviews_click" data-track-params={JSON.stringify({ location: 'reviews_page' })}>
         Read More Reviews on Google
       </a>
-      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+      <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg" data-track="leave_review_click" data-track-params={JSON.stringify({ location: 'reviews_page' })}>
         Leave Us a Review
       </a>
     </div>

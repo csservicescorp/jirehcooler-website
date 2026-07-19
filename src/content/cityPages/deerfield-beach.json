@@ -1,0 +1,21 @@
+{
+  "city": "Deerfield Beach",
+  "slug": "deerfield-beach",
+  "county": "Broward",
+  "metaDescription": "Jireh Cooler is based in Deerfield Beach, FL, providing AC repair, installation, and maintenance to homes and businesses throughout the city.",
+  "intro": [
+    "Deerfield Beach is home base for Jireh Cooler. Our office is located right on S. Military Trail, which means requests from Deerfield Beach homes and businesses are close to where our technicians and vehicles already are.",
+    "We've worked on residential and commercial AC systems throughout the city since 1994, from repair and installation to the twice-yearly inspections covered under our V.I.P. Maintenance Membership."
+  ],
+  "faqs": [
+    {
+      "question": "Is Jireh Cooler actually based in Deerfield Beach?",
+      "answer": "Yes. Our office is located at 270 S. Military Trail, Deerfield Beach, FL 33442, and has been since 1994."
+    },
+    {
+      "question": "Do you serve both homes and businesses in Deerfield Beach?",
+      "answer": "Yes, we handle residential and commercial AC repair, installation, and maintenance throughout the city."
+    }
+  ],
+  "published": true
+}

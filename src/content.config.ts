@@ -67,4 +67,21 @@ const gallery = defineCollection({
   }),
 });
 
-export const collections = { services, faqs, testimonials, serviceAreas, gallery };
+// Unique, non-thin local landing pages for a priority subset of the cities
+// listed in `serviceAreas`. Each entry needs genuinely distinct intro copy
+// and FAQ — this collection intentionally does not cover every city in
+// serviceAreas, only the ones with a real page written for them.
+const cityPages = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/cityPages' }),
+  schema: z.object({
+    city: z.string(),
+    slug: z.string(),
+    county: z.enum(['Broward', 'Palm Beach']),
+    metaDescription: z.string(),
+    intro: z.array(z.string()),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })),
+    published: z.boolean().default(true),
+  }),
+});
+
+export const collections = { services, faqs, testimonials, serviceAreas, gallery, cityPages };

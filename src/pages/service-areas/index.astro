@@ -7,6 +7,10 @@ import CtaSection from '@components/CtaSection.astro';
 import site from '@data/site.json';
 
 const areas = await getCollection('serviceAreas', ({ data }) => data.published);
+const cityPages = await getCollection('cityPages', ({ data }) => data.published);
+const citySlugs = new Set(cityPages.map((c) => c.data.slug));
+const slugify = (city: string) => city.toLowerCase().replace(/\s+/g, '-');
+
 const broward = areas.filter((a) => a.data.county === 'Broward');
 const palmBeach = areas.filter((a) => a.data.county === 'Palm Beach');
 ---
@@ -32,7 +36,14 @@ const palmBeach = areas.filter((a) => a.data.county === 'Palm Beach');
         <h2>Broward County</h2>
         <ul class="area-list">
           {broward.map((a) => (
-            <li><Icon name="pin" class="icon-sm" /> {a.data.city}</li>
+            <li>
+              <Icon name="pin" class="icon-sm" />
+              {citySlugs.has(slugify(a.data.city)) ? (
+                <a href={`/service-areas/${slugify(a.data.city)}/`}>{a.data.city}</a>
+              ) : (
+                <span>{a.data.city}</span>
+              )}
+            </li>
           ))}
         </ul>
       </div>
@@ -40,7 +51,14 @@ const palmBeach = areas.filter((a) => a.data.county === 'Palm Beach');
         <h2>Palm Beach County</h2>
         <ul class="area-list">
           {palmBeach.map((a) => (
-            <li><Icon name="pin" class="icon-sm" /> {a.data.city}</li>
+            <li>
+              <Icon name="pin" class="icon-sm" />
+              {citySlugs.has(slugify(a.data.city)) ? (
+                <a href={`/service-areas/${slugify(a.data.city)}/`}>{a.data.city}</a>
+              ) : (
+                <span>{a.data.city}</span>
+              )}
+            </li>
           ))}
         </ul>
       </div>

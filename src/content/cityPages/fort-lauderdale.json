@@ -1,0 +1,21 @@
+{
+  "city": "Fort Lauderdale",
+  "slug": "fort-lauderdale",
+  "county": "Broward",
+  "metaDescription": "Jireh Cooler provides AC repair, installation, and maintenance for homes and businesses in Fort Lauderdale, FL, part of our Broward County service area.",
+  "intro": [
+    "Fort Lauderdale is the largest city in the Broward County area Jireh Cooler serves, with a mix of single-family homes, condos, and a dense concentration of commercial properties, offices, restaurants, and retail among them, all depending on reliable cooling to operate.",
+    "We work on both residential and commercial systems throughout Fort Lauderdale: rooftop and split systems for businesses, full-home systems for residential customers, and preventive maintenance plans for either, so small issues get caught before they turn into a breakdown."
+  ],
+  "faqs": [
+    {
+      "question": "Does Jireh Cooler work on commercial rooftop units in Fort Lauderdale?",
+      "answer": "Yes. We service rooftop and multi-zone commercial systems as well as residential AC systems throughout Fort Lauderdale."
+    },
+    {
+      "question": "Do you offer emergency AC service in Fort Lauderdale?",
+      "answer": "Yes, our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year for both residential and commercial customers."
+    }
+  ],
+  "published": true
+}
