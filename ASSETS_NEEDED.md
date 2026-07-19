@@ -57,11 +57,19 @@ priority order:
 
 ## Gallery page
 
-`src/content/gallery/*.json` has 11 entries — two real photos (company
-fleet, attic HVAC service) plus a mix of stock photography (some reused
-from other pages, some unique). Real before/after and in-progress project
-photos should replace the remaining stock entries over time — the gallery
-is exactly the kind of page where authentic work photos matter most.
+`src/content/gallery/*.json` has 2 entries — both real Jireh Cooler photos
+(company fleet, attic HVAC service). Nine stock-photo entries were
+deliberately removed during an authenticity review: several showed generic
+stock technicians presented as completed Jireh Cooler projects, and one
+showed two technicians wearing a **different HVAC company's branded
+uniforms and phone number**, visible in the photo. None of that is
+appropriate for a page framed as real project photography. The page is now
+titled "Services in Action" with copy that doesn't claim every future image
+is a completed project photo. Add real before/after and in-progress photos
+here as they become available — this is exactly the kind of page where
+authentic work photos matter most. Generic stock photography can still be
+used as illustrations on individual service pages, just not in this
+gallery.
 
 ## Fonts
 

@@ -50,6 +50,17 @@ where useful), so the full original framing is always available and the
 crop adapts per breakpoint. The logo is never cropped (`Logo.astro` uses
 `object-fit: contain`, natural aspect ratio only).
 
+**Exception — `jireh-cooler-planning-blueprint.png`:** the upper portion of
+this source photo shows an unidentified stock model's face, not Moyses
+Oliveira or any Jireh Cooler staff member. Rather than risk that photo
+being read as "the owner," `scripts/recrop-blueprint-photo.mjs` permanently
+crops the production copy to only the lower portion of the frame (hands,
+pen, blueprint, drafting tools) before the usual resize/optimize step — no
+face is present in the cropped source at all, so no responsive crop can
+ever reintroduce it. The original, unmodified file is untouched in
+`jireh-originals/`. The alt text was also reworded to describe the scene
+generically rather than referring to "the owner."
+
 A second batch of four official, branded photos was added later in
 `public/images/jireh-originals/new-jireh-images/` (originals preserved
 there, untouched) and processed with `scripts/optimize-jireh-photos-batch2.mjs`:
@@ -101,13 +112,10 @@ Pexels source.
 
 | File (`public/images/...`) | Pexels photo ID | Photographer | Pexels URL |
 |---|---|---|---|
-| `homepage/residential-modern-home-exterior.jpg` | 3665354 | Blue Rhino Media | pexels.com/photo/3665354 |
-| `homepage/commercial-rooftop-hvac-skyline.jpg` | 8065903 | Katterinaaa | pexels.com/photo/8065903 |
 | `homepage/emergency-technician-response.jpg` | 6471911 | José Andrés Pacheco Cortes | pexels.com/photo/6471911 |
 | `homepage/membership-technician-inspection.jpg` | 5463581 | José Andrés Pacheco Cortes | pexels.com/photo/5463581 |
 | `homepage/financing-suburban-homes.jpg` | 30433180 | Onbab | pexels.com/photo/30433180 |
 | `backgrounds/cta-background-rooftop-units.jpg` | 2539462 | Sergei A | pexels.com/photo/2539462 |
-| `services/ac-repair-manifold-gauge.jpg` | 6471912 | José Andrés Pacheco Cortes | pexels.com/photo/6471912 |
 | `services/ac-installation-technician.jpg` | 5463582 | José Andrés Pacheco Cortes | pexels.com/photo/5463582 |
 | `services/indoor-air-quality-bright-interior.jpg` | 8146213 | Artbovich | pexels.com/photo/8146213 |
 | `services/duct-cleaning-industrial-ducts.jpg` | 8297856 | Mikhail Nilov | pexels.com/photo/8297856 |
@@ -115,15 +123,26 @@ Pexels source.
 | `services/pool-heater-miami-villa-sunset.jpg` | 7313084 | Onbab | pexels.com/photo/7313084 |
 | `services/water-heater-installation.jpg` | 34938439 | (Pexels contributor 2157750954) | pexels.com/photo/34938439 |
 | `services/dryer-vent-laundry-closet.jpg` | 9515294 | introspectivedsgn | pexels.com/photo/9515294 |
-| `services/smart-thermostat-wall-adjust.jpg` | 36730582 | silverkblack | pexels.com/photo/36730582 |
-| `gallery/commercial-technicians-rooftop.jpg` | 5463577 | José Andrés Pacheco Cortes | pexels.com/photo/5463577 |
-| `gallery/technician-inspecting-outdoor-unit.jpg` | 32497161 | Kathleen Austin Kuhn | pexels.com/photo/32497161 |
-| `gallery/technician-outdoor-maintenance.jpg` | 6471914 | José Andrés Pacheco Cortes | pexels.com/photo/6471914 |
 
-Several of the files above are reused by path across multiple pages (e.g.
-`homepage/commercial-rooftop-hvac-skyline.jpg` is also used on the
-Commercial HVAC service page and in the Gallery) rather than duplicated —
-see `CLIENT_VERIFICATION.md` and `ASSETS_NEEDED.md` for where each is used.
+### Stock photos removed during the photography authenticity audit
+
+Seven stock photos were deleted from the repository (not just unused —
+removed outright) after a review of the Gallery page:
+
+| File (`public/images/...`) | Reason removed |
+|---|---|
+| `gallery/commercial-technicians-rooftop.jpg` | Showed two technicians in **a different HVAC company's branded uniforms**, with that company's own phone number printed on the shirts — a real but unrelated business's work, not Jireh Cooler's |
+| `gallery/technician-inspecting-outdoor-unit.jpg` | Generic stock technician presented as a completed Jireh Cooler project in the Gallery |
+| `gallery/technician-outdoor-maintenance.jpg` | Same — generic stock technician presented as a completed Jireh Cooler project |
+| `homepage/commercial-rooftop-hvac-skyline.jpg` | No longer used anywhere (superseded by real photos on the pages that used it; its remaining Gallery use was removed) |
+| `homepage/residential-modern-home-exterior.jpg` | Same — no longer used anywhere after its Gallery entry was removed |
+| `services/ac-repair-manifold-gauge.jpg` | No longer used anywhere (superseded by the real AC Repair page photo; its Gallery use was removed) |
+| `services/smart-thermostat-wall-adjust.jpg` | No longer used anywhere (superseded by the real Smart Thermostats page photo; its Gallery use was removed) |
+
+See `CLIENT_VERIFICATION.md` item 7 for the full account of this cleanup.
+Stock photography that's still genuinely in use (table above) remains
+appropriate as illustration on individual service pages — the issue was
+specifically presenting it as "our work" inside the Gallery.
 
 Two stock photos that were originally used for the homepage hero and the
 About page's primary image (a generic technician photo and a generic

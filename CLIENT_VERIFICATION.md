@@ -70,20 +70,32 @@ as-is:
    the Facebook page. Once Google Business Profile or other verified reviews
    are available, add them via the CMS (see `CMS_GUIDE.md`).
 
-7. **Gallery and site-wide photography** — the client has since provided six
-   official assets (logo, service vans, owner portrait, planning photo,
-   technician-with-equipment photo, and company fleet photo), now used for
-   the header/footer logo, homepage hero, homepage trust section, both About
-   page images, the Preventive Maintenance page, and the lead Gallery photo.
-   Every other image slot still uses appropriately-licensed Pexels stock
-   photography (technicians at work, HVAC equipment, South Florida homes) as
-   a realistic, professional placeholder until more real photos are
-   available. None of the stock photography is labeled or implied to be
-   Jireh Cooler's own staff or completed jobs — alt text describes those
-   photos generically, while the real photos have honest, specific alt text
-   (e.g., naming the owners). See `ASSET_INVENTORY.md` for full sourcing/
-   licensing records and `ASSETS_NEEDED.md` for what's still on stock
-   photography.
+7. **Gallery and site-wide photography** — the client has since provided
+   several official assets (logo, service vans, owner portrait, planning
+   photo, technician-with-equipment photos, and company fleet photo), now
+   used for the header/footer logo, homepage hero, homepage trust section,
+   both About page images, the Preventive Maintenance page, the Financing
+   page, and most of the Gallery. Every other image slot still uses
+   appropriately-licensed Pexels stock photography (technicians at work,
+   HVAC equipment, South Florida homes) as a realistic, professional
+   placeholder on individual service pages. See `ASSET_INVENTORY.md` for
+   full sourcing/licensing records and `ASSETS_NEEDED.md` for what's still
+   on stock photography.
+
+   **Authenticity cleanup (photography audit):** two issues were found and
+   fixed. First, the About page's planning-blueprint photo showed an
+   unidentified stock model's face; it's now cropped to show only the
+   hands, pen, and blueprint, and the alt text no longer refers to him as
+   "the owner." Second, the Gallery page ("Our Work Across South Florida")
+   included several stock photos of generic technicians presented as
+   completed Jireh Cooler projects — one of which visibly showed **a
+   different HVAC company's branded uniform and phone number**. All nine
+   non-authentic Gallery entries were removed; the Gallery now shows only
+   the two real Jireh Cooler photos it has (company fleet, attic HVAC
+   service) and was renamed "Services in Action" with copy that doesn't
+   claim every image is a completed project photo. Stock photography
+   remains fine as illustration on individual service pages — it was only
+   the Gallery's "our work" framing that made it a problem.
 
 8. **WhatsApp number** — the old site mentioned WhatsApp availability but did
    not display a specific number in the crawled content. `whatsapp.enabled`

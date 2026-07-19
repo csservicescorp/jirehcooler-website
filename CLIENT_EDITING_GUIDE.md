@@ -40,7 +40,11 @@ reviews were deliberately left out of the initial build.
 
 Gallery → Add entry → upload the photo, write a short **Title** and
 **Alt Text** (a plain description of the photo, for accessibility and SEO),
-choose a **Category** → Save.
+choose a **Category** → Save. The Gallery page ("Services in Action") is
+framed as real Jireh Cooler work, so only add authentic photos of your own
+team, vehicles, or job sites — never a stock photo or a photo showing
+another company's uniform, logo, or branding. Generic stock photography is
+fine elsewhere on the site (individual service pages), just not here.
 
 ### Update a service description
 

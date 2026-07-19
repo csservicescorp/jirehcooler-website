@@ -1,16 +1,4 @@
 {
-  "/images/homepage/residential-modern-home-exterior.jpg": {
-    "width": 1400,
-    "height": 766,
-    "smWidth": 700,
-    "smHeight": 383
-  },
-  "/images/homepage/commercial-rooftop-hvac-skyline.jpg": {
-    "width": 1400,
-    "height": 2100,
-    "smWidth": 700,
-    "smHeight": 1050
-  },
   "/images/homepage/emergency-technician-response.jpg": {
     "width": 1400,
     "height": 2100,
@@ -34,12 +22,6 @@
     "height": 1280,
     "smWidth": 800,
     "smHeight": 533
-  },
-  "/images/services/ac-repair-manifold-gauge.jpg": {
-    "width": 1400,
-    "height": 2002,
-    "smWidth": 700,
-    "smHeight": 1001
   },
   "/images/services/ac-installation-technician.jpg": {
     "width": 1400,
@@ -83,30 +65,6 @@
     "smWidth": 700,
     "smHeight": 1050
   },
-  "/images/services/smart-thermostat-wall-adjust.jpg": {
-    "width": 1400,
-    "height": 788,
-    "smWidth": 700,
-    "smHeight": 394
-  },
-  "/images/gallery/commercial-technicians-rooftop.jpg": {
-    "width": 1000,
-    "height": 773,
-    "smWidth": 600,
-    "smHeight": 464
-  },
-  "/images/gallery/technician-inspecting-outdoor-unit.jpg": {
-    "width": 1000,
-    "height": 667,
-    "smWidth": 600,
-    "smHeight": 400
-  },
-  "/images/gallery/technician-outdoor-maintenance.jpg": {
-    "width": 1000,
-    "height": 1520,
-    "smWidth": 600,
-    "smHeight": 912
-  },
   "/images/homepage/jireh-vans-residential.jpg": {
     "width": 1672,
     "height": 941,
@@ -120,10 +78,10 @@
     "smHeight": 750
   },
   "/images/about/jireh-planning-blueprint.jpg": {
-    "width": 1200,
-    "height": 1200,
-    "smWidth": 600,
-    "smHeight": 600
+    "width": 1254,
+    "height": 574,
+    "smWidth": 700,
+    "smHeight": 320
   },
   "/images/services/jireh-technician-ac-unit.jpg": {
     "width": 1254,
