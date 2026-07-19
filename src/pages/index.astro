@@ -49,9 +49,11 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     </div>
     <div class="container hero-inner">
       <div class="hero-copy" data-reveal>
-        <p class="eyebrow">{home.hero.eyebrow}</p>
+        <p class="eyebrow eyebrow-desktop">{home.hero.eyebrow}</p>
+        <p class="eyebrow eyebrow-mobile">{home.hero.mobileEyebrow}</p>
         <h1>{home.hero.headline}</h1>
-        <p class="hero-sub">{home.hero.subheadline}</p>
+        <p class="hero-sub hero-sub-desktop">{home.hero.subheadline}</p>
+        <p class="hero-sub hero-sub-mobile">{home.hero.mobileSubheadline}</p>
         <div class="hero-actions">
           <a href={home.hero.primaryCta.href} class="btn btn-primary btn-lg">
             <Icon name="phone" class="icon-sm" />
@@ -59,7 +61,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
           </a>
           <a href={home.hero.secondaryCta.href} class="btn btn-outline btn-lg">{home.hero.secondaryCta.label}</a>
         </div>
-        <ul class="hero-facts">
+        <ul class="hero-facts hero-facts-desktop">
           <li><Icon name="shield" class="icon-sm" /> License {site.license.number}</li>
           <li><Icon name="clock" class="icon-sm" /> {site.emergencyAvailability} Emergency Service</li>
           <li><Icon name="calendar" class="icon-sm" /> Serving South Florida Since {site.foundedYear}</li>
@@ -67,6 +69,13 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
       </div>
     </div>
   </section>
+
+  <!-- MOBILE TRUST STRIP (hero facts, moved out of the hero image area on small screens) -->
+  <ul class="container trust-strip">
+    <li><Icon name="shield" class="icon-sm" /> License {site.license.number}</li>
+    <li><Icon name="clock" class="icon-sm" /> {site.emergencyAvailability} Emergency Service</li>
+    <li><Icon name="calendar" class="icon-sm" /> Serving South Florida Since {site.foundedYear}</li>
+  </ul>
 
   <!-- PATHWAYS -->
   <section class="pathways">
@@ -216,7 +225,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
         <a href={home.financing.cta.href} class="btn btn-primary btn-lg">{home.financing.cta.label}</a>
       </div>
       <div data-reveal>
-        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" variant="editorial" />
+        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" focal="center 38%" variant="editorial" />
       </div>
     </div>
   </section>
@@ -317,9 +326,12 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   .hero-photo {
     position: relative;
     overflow: hidden;
-    min-height: 560px;
+    min-height: 520px;
     display: flex;
     align-items: center;
+    /* Subtle angled lower edge — mobile/small-tablet only (see below), a
+       bold branded panel rather than a plain rectangle. */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 95%);
   }
   .hero-bg {
     position: absolute;
@@ -333,21 +345,96 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   .hero-scrim {
     position: absolute;
     inset: 0;
-    /* Mobile/tablet default: uniformly strong scrim, since the stacked,
-       nearly full-width copy column doesn't leave room to dodge the logo
-       wall visible in the photo's left portion. */
-    background: rgba(4, 14, 32, 0.78);
+    /* Mobile default: a bold, on-brand royal-blue panel over the photo
+       (lighter near the top so the office is still visible, strongly
+       royal-blue toward the bottom where the text sits) rather than a
+       generic dark tint. */
+    background: linear-gradient(180deg, rgba(4, 54, 136, 0.32) 0%, rgba(4, 40, 92, 0.74) 45%, rgba(4, 23, 58, 0.94) 100%);
   }
   .hero-inner {
     position: relative;
     z-index: 1;
-    padding-block: var(--space-2xl);
+    padding-block: var(--space-xl);
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
   }
   .hero-copy {
     max-width: 640px;
-    text-align: left;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .eyebrow-desktop,
+  .hero-sub-desktop {
+    display: none;
+  }
+  .hero-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    list-style: none;
+    margin: var(--space-sm) 0 0;
+    padding: 0;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--color-white);
+  }
+  .hero-facts li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-facts-desktop {
+    display: none;
+  }
+  .trust-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    list-style: none;
+    padding-block: var(--space-md);
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .trust-strip li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--color-royal);
+  }
+  @media (min-width: 720px) {
+    .hero-photo {
+      clip-path: none;
+    }
+    .hero-scrim {
+      /* Tablet/desktop default: uniformly strong neutral scrim, since the
+         stacked, nearly full-width copy column doesn't leave room to
+         dodge the logo wall visible in the photo's left portion. */
+      background: rgba(4, 14, 32, 0.78);
+    }
+    .hero-inner {
+      justify-content: flex-start;
+    }
+    .hero-copy {
+      max-width: 640px;
+      text-align: left;
+      margin-inline: 0;
+    }
+    .eyebrow-mobile,
+    .hero-sub-mobile {
+      display: none;
+    }
+    .eyebrow-desktop,
+    .hero-sub-desktop {
+      display: block;
+    }
+    .hero-facts-desktop {
+      display: flex;
+    }
+    .trust-strip {
+      display: none;
+    }
   }
   @media (min-width: 1280px) {
     /* Only once the container reaches its own max-width is there enough
@@ -372,11 +459,25 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     max-width: 52ch;
     color: rgba(255, 255, 255, 0.86);
   }
+  @media (max-width: 719px) {
+    .hero-sub {
+      margin-inline: auto;
+    }
+  }
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-block: var(--space-md);
+  }
+  @media (max-width: 719px) {
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .hero-actions .btn {
+      justify-content: center;
+    }
   }
   .hero-photo .btn-outline {
     background: rgba(4, 54, 136, 0.35);
@@ -394,22 +495,6 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   .icon-xs {
     width: 15px;
     height: 15px;
-  }
-  .hero-facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.2rem;
-    list-style: none;
-    margin: var(--space-sm) 0 0;
-    padding: 0;
-    font-size: var(--fs-xs);
-    font-weight: 600;
-    color: var(--color-white);
-  }
-  .hero-facts li {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
   }
 
   .pathway-grid {

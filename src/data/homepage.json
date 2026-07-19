@@ -1,8 +1,10 @@
 {
   "hero": {
     "eyebrow": "Serving Broward & Palm Beach County Since 1994",
+    "mobileEyebrow": "Serving Broward & Palm Beach County",
     "headline": "South Florida's Trusted Air Conditioning Experts",
     "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
+    "mobileSubheadline": "Family-owned HVAC service for repairs, installation, and maintenance.",
     "image": "/images/homepage/jireh-cooler-office-hero.jpg",
     "imageAlt": "Jireh Cooler office reception area with the company logo on the accent wall",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
@@ -131,8 +133,8 @@
     "heading": "Flexible Financing Options",
     "description": "Financing is available for qualified homeowners so a system replacement doesn't have to be an all-at-once expense.",
     "cta": { "label": "Explore Financing", "href": "/financing/" },
-    "image": "/images/homepage/financing-suburban-homes.jpg",
-    "imageAlt": "Sunset view of a South Florida suburban neighborhood with palm trees"
+    "image": "/images/financing/jireh-financing-consultation.jpg",
+    "imageAlt": "Jireh Cooler HVAC professional explaining financing options to a homeowner"
   },
   "airQuality": {
     "heading": "Breathe Easier Indoors",
