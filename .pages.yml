@@ -59,6 +59,7 @@ content:
           - { name: facebook, label: "Facebook URL", type: string }
           - { name: instagram, label: "Instagram URL", type: string }
           - { name: youtube, label: "YouTube URL", type: string }
+      - { name: googleProfileUrl, label: "Google Business Profile URL", type: string, description: "Used for the \"Read More Reviews on Google\" and \"Leave Us a Review\" buttons on the Reviews page and homepage." }
       - name: whatsapp
         label: "WhatsApp"
         type: object
@@ -340,19 +341,29 @@ content:
       - { name: published, label: "Published", type: boolean }
 
   # ---------------------------------------------------------------------
-  # TESTIMONIALS
+  # CUSTOMER REVIEWS
   # ---------------------------------------------------------------------
   - name: testimonials
-    label: "Testimonials"
+    label: "Customer Reviews"
+    description: >-
+      Add only authentic reviews you are authorized to display (e.g. copied
+      from your Google Business Profile with the customer's original wording).
+      Do not invent reviewer names, ratings, dates, or review text, and do not
+      reword or change the meaning of a customer's review. Use "Add an entry"
+      to add a new review, and the trash icon on an entry to remove one.
     type: collection
     path: src/content/testimonials
     format: json
     fields:
-      - { name: quote, label: "Quote", type: text }
-      - { name: author, label: "Author Name", type: string }
-      - { name: location, label: "Author Location", type: string }
-      - { name: serviceType, label: "Service Type", type: string }
-      - { name: published, label: "Published", type: boolean }
+      - { name: reviewerName, label: "Reviewer Name", type: string, description: "The customer's name exactly as it appears on the original review." }
+      - { name: rating, label: "Star Rating (1-5)", type: number, description: "Whole number from 1 to 5, matching the original review's rating." }
+      - { name: reviewText, label: "Review Text", type: text, description: "Copy the customer's original wording exactly — do not edit or rephrase it." }
+      - { name: reviewDate, label: "Review Date", type: date, description: "Optional. The date the review was originally posted, if known." }
+      - { name: sourceLabel, label: "Source Label", type: string, description: "Shown on the review card, e.g. \"Originally posted on Google\"." }
+      - { name: sourceUrl, label: "Source Link (optional)", type: string, description: "Optional direct link to this specific review. If left blank, the review links to the main Google Business Profile." }
+      - { name: published, label: "Published", type: boolean, description: "Turn off to hide this review from the site without deleting it." }
+      - { name: featured, label: "Featured on Homepage", type: boolean, description: "Check to include this review in the homepage's \"Customer Stories\" section (shows up to 3)." }
+      - { name: displayOrder, label: "Display Order", type: number, description: "Lower numbers appear first. Use this to control the order reviews are shown in." }
 
   # ---------------------------------------------------------------------
   # FAQS

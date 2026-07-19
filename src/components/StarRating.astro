@@ -1,0 +1,39 @@
+---
+interface Props {
+  rating: number;
+  class?: string;
+}
+const { rating, class: className = '' } = Astro.props;
+const stars = [1, 2, 3, 4, 5];
+const starPath = 'M12 3.5 14.6 9.4 21 10.2 16.2 14.5 17.6 20.8 12 17.5 6.4 20.8 7.8 14.5 3 10.2 9.4 9.4 12 3.5Z';
+---
+
+<span class:list={['star-rating', className]} role="img" aria-label={`Rated ${rating} out of 5 stars`}>
+  {stars.map((n) => (
+    <svg
+      class:list={['star', n <= Math.round(rating) ? 'filled' : 'empty']}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={starPath} />
+    </svg>
+  ))}
+</span>
+
+<style>
+  .star-rating {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .star {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+  .star.filled {
+    fill: var(--color-gold-accent);
+  }
+  .star.empty {
+    fill: var(--color-border-strong);
+  }
+</style>

@@ -3,20 +3,24 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import Icon from '@components/Icon.astro';
+import ReviewCard from '@components/ReviewCard.astro';
 import CtaSection from '@components/CtaSection.astro';
 import site from '@data/site.json';
 
-const testimonials = await getCollection('testimonials', ({ data }) => data.published);
+const reviews = (await getCollection('testimonials', ({ data }) => data.published)).sort(
+  (a, b) => a.data.displayOrder - b.data.displayOrder
+);
 ---
 
 <BaseLayout
   title="Reviews | Jireh Cooler"
-  description="See what South Florida customers say about Jireh Cooler's air conditioning repair, installation, and maintenance service."
+  description="Real customer reviews for Jireh Cooler's air conditioning repair, installation, and maintenance service in South Florida."
   path="/reviews/"
 >
   <PageHero
     eyebrow="Reviews"
-    title="What South Florida Says About Us"
+    title="What Our Customers Say"
+    description="Real feedback from customers who trusted Jireh Cooler with their comfort."
     breadcrumbs={[
       { label: 'Home', href: '/' },
       { label: 'Reviews', href: '/reviews/' },
@@ -25,27 +29,45 @@ const testimonials = await getCollection('testimonials', ({ data }) => data.publ
 
   <section>
     <div class="container">
-      {testimonials.length > 0 ? (
-        <div class="testimonial-grid">
-          {testimonials.map((t) => (
-            <blockquote class="card testimonial-card">
-              <Icon name="quote" class="quote-icon" />
-              <p>{t.data.quote}</p>
-              <footer>
-                <strong>{t.data.author}</strong>
-                {t.data.location && <span>{t.data.location}</span>}
-              </footer>
-            </blockquote>
-          ))}
-        </div>
+      {reviews.length > 0 ? (
+        <>
+          <div class="review-grid">
+            {reviews.map((r) => (
+              <ReviewCard
+                reviewerName={r.data.reviewerName}
+                rating={r.data.rating}
+                reviewText={r.data.reviewText}
+                reviewDate={r.data.reviewDate}
+                sourceLabel={r.data.sourceLabel}
+                sourceUrl={r.data.sourceUrl}
+              />
+            ))}
+          </div>
+          <div class="reviews-actions">
+            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+              Read More Reviews on Google
+            </a>
+            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+              Leave Us a Review
+            </a>
+          </div>
+        </>
       ) : (
         <div class="empty-state container-narrow">
           <Icon name="star" class="empty-icon" />
           <h2>Reviews Coming Soon</h2>
           <p>
-            We're in the process of compiling verified customer reviews for this page. In the meantime, you can see current reviews on our
-            {' '}<a href={site.social.facebook} target="_blank" rel="noopener noreferrer">Facebook page</a>.
+            We're in the process of adding verified customer reviews to this page. In the meantime, you can read
+            current reviews on our official Google Business Profile.
           </p>
+          <div class="reviews-actions">
+            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+              View Our Google Profile
+            </a>
+            <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+              Leave Us a Review
+            </a>
+          </div>
         </div>
       )}
     </div>
@@ -55,33 +77,34 @@ const testimonials = await getCollection('testimonials', ({ data }) => data.publ
 </BaseLayout>
 
 <style>
-  .testimonial-grid {
+  .review-grid {
     display: grid;
     gap: var(--space-md);
     grid-template-columns: minmax(0, 1fr);
+    margin-bottom: var(--space-xl);
   }
-  .testimonial-card {
-    margin: 0;
+  @media (min-width: 720px) {
+    .review-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
-  .quote-icon {
-    width: 28px;
-    height: 28px;
-    color: var(--color-royal);
-    opacity: 0.5;
-    margin-bottom: var(--space-sm);
+  @media (min-width: 960px) {
+    .review-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
-  .testimonial-card footer {
-    margin-top: var(--space-sm);
+  .reviews-actions {
     display: flex;
-    flex-direction: column;
-    font-size: var(--fs-sm);
-  }
-  .testimonial-card footer span {
-    color: var(--color-muted);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
   }
   .empty-state {
     text-align: center;
     padding-block: var(--space-xl);
+  }
+  .empty-state .reviews-actions {
+    margin-top: var(--space-lg);
   }
   .empty-icon {
     width: 48px;
@@ -89,15 +112,5 @@ const testimonials = await getCollection('testimonials', ({ data }) => data.publ
     color: var(--color-royal);
     margin-inline: auto;
     margin-bottom: var(--space-sm);
-  }
-  @media (min-width: 720px) {
-    .testimonial-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (min-width: 960px) {
-    .testimonial-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
   }
 </style>

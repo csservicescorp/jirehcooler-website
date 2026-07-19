@@ -35,11 +35,15 @@ const faqs = defineCollection({
 const testimonials = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/testimonials' }),
   schema: z.object({
-    quote: z.string(),
-    author: z.string(),
-    location: z.string().optional(),
-    serviceType: z.string().optional(),
+    reviewerName: z.string(),
+    rating: z.number().min(1).max(5),
+    reviewText: z.string(),
+    reviewDate: z.string().optional(),
+    sourceLabel: z.string().default('Originally posted on Google'),
+    sourceUrl: z.string().optional(),
     published: z.boolean().default(true),
+    featured: z.boolean().default(false),
+    displayOrder: z.number().default(99),
   }),
 });
 

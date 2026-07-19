@@ -37,11 +37,16 @@ The editor is organized into these sections, matching `.pages.yml`:
 - **Financing** — heading, intro, highlights, disclaimer text.
 - **Gallery** — add/remove/reorder gallery photos with captions and
   categories.
-- **Testimonials** — add real customer reviews here once available. This
-  collection is intentionally empty at launch (see `CLIENT_VERIFICATION.md`)
-  — the Reviews page automatically shows a "coming soon" message until at
-  least one testimonial exists, and automatically switches to displaying
-  real testimonials the moment one is added. No code changes needed.
+- **Customer Reviews** — a manual, client-managed reviews system (reviewer
+  name, star rating, review text, date, source label/link, published,
+  featured, display order). This collection is intentionally empty at
+  launch (see `CLIENT_VERIFICATION.md`) — both the Reviews page and the
+  homepage's "Customer Stories" section automatically show a "coming soon"
+  state until at least one review exists, and automatically switch to
+  displaying real reviews the moment one is added and published. No code
+  changes needed. This is a manual system by design — reviews are not
+  pulled automatically from Google or any other source, and do not update
+  themselves; add each one by hand as it comes in.
 - **FAQs** — add/edit/reorder frequently asked questions by category.
 - **Service Areas** — add/remove cities and their county.
 - **Contact** — the subset of Website Settings relevant to the Contact page.

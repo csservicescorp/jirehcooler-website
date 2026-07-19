@@ -9,9 +9,9 @@ here.
 Once set up (see `CMS_GUIDE.md`), log in at
 [app.pagescms.org](https://app.pagescms.org), select this site, and you'll
 see a menu of editable sections: Website Settings, Homepage, Services,
-About, Maintenance, Financing, Gallery, Testimonials, FAQs, Service Areas,
-and Contact. Click into any section, edit the fields, and save. Changes go
-live automatically within a couple of minutes.
+About, Maintenance, Financing, Gallery, Customer Reviews, FAQs, Service
+Areas, and Contact. Click into any section, edit the fields, and save.
+Changes go live automatically within a couple of minutes.
 
 ## Common tasks
 
@@ -23,12 +23,18 @@ automatically, since every page pulls from this one place.
 
 ### Add a customer review
 
-Testimonials → Add entry → fill in the **Quote**, **Author Name**, and
-optionally **Location** and **Service Type** → make sure **Published** is
-checked → Save. It will appear on the Reviews page automatically. Only add
-real reviews from real customers — see the note in `CLIENT_VERIFICATION.md`
-about why fabricated reviews were deliberately left out of the initial
-build.
+Customer Reviews → Add entry → fill in **Reviewer Name**, **Star Rating**,
+and **Review Text** (copy the customer's original wording exactly — don't
+edit or reword it), optionally **Review Date** and **Source Link** → make
+sure **Published** is checked → Save. It will appear on the Reviews page
+automatically, sorted by **Display Order** (lower numbers first). Check
+**Featured on Homepage** to also show it in the homepage's "Customer
+Stories" section (shows up to 3 featured reviews).
+
+Only add real, authentic reviews you're authorized to display (e.g. copied
+from your Google Business Profile) — never invented names, ratings, dates,
+or text. See the note in `CLIENT_VERIFICATION.md` about why fabricated
+reviews were deliberately left out of the initial build.
 
 ### Add a photo to the gallery
 

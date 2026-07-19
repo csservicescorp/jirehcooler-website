@@ -1,0 +1,122 @@
+---
+import Icon from './Icon.astro';
+import StarRating from './StarRating.astro';
+import site from '@data/site.json';
+
+interface Props {
+  reviewerName: string;
+  rating: number;
+  reviewText: string;
+  reviewDate?: string;
+  sourceLabel: string;
+  sourceUrl?: string;
+}
+
+const { reviewerName, rating, reviewText, reviewDate, sourceLabel, sourceUrl } = Astro.props;
+
+const LONG_REVIEW_THRESHOLD = 320;
+const isLong = reviewText.length > LONG_REVIEW_THRESHOLD;
+
+let formattedDate: string | undefined;
+if (reviewDate) {
+  const parsed = new Date(reviewDate);
+  formattedDate = Number.isNaN(parsed.getTime())
+    ? reviewDate
+    : parsed.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const linkHref = sourceUrl || site.googleProfileUrl;
+---
+
+<article class="card review-card">
+  <Icon name="quote" class="quote-icon" />
+  <StarRating rating={rating} class="review-stars" />
+
+  {isLong ? (
+    <details class="review-details">
+      <summary>Read full review</summary>
+      <p class="review-text">{reviewText}</p>
+    </details>
+  ) : (
+    <p class="review-text">{reviewText}</p>
+  )}
+
+  <footer class="review-footer">
+    <strong class="reviewer-name">{reviewerName}</strong>
+    {formattedDate && <span class="review-date">{formattedDate}</span>}
+    <a href={linkHref} target="_blank" rel="noopener noreferrer" class="review-source">
+      {sourceLabel}
+    </a>
+  </footer>
+</article>
+
+<style>
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .quote-icon {
+    width: 26px;
+    height: 26px;
+    color: var(--color-royal);
+    opacity: 0.5;
+    margin-bottom: var(--space-sm);
+  }
+  .review-stars {
+    margin-bottom: var(--space-sm);
+  }
+  .review-text {
+    color: var(--color-charcoal);
+    line-height: var(--lh-relaxed);
+    flex-grow: 1;
+  }
+  .review-details summary {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-royal);
+    list-style: none;
+  }
+  .review-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .review-details summary::after {
+    content: '↓';
+    display: inline-block;
+    margin-left: 0.35rem;
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+  .review-details[open] summary::after {
+    transform: rotate(180deg);
+  }
+  .review-details[open] summary {
+    margin-bottom: var(--space-xs);
+  }
+  .review-footer {
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: var(--fs-sm);
+  }
+  .reviewer-name {
+    font-family: var(--font-heading);
+  }
+  .review-date {
+    color: var(--color-muted);
+    font-size: var(--fs-xs);
+  }
+  .review-source {
+    color: var(--color-royal);
+    font-weight: 600;
+    font-size: var(--fs-xs);
+    margin-top: 0.25rem;
+  }
+  .review-source:hover {
+    text-decoration: underline;
+  }
+</style>
