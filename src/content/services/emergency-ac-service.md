@@ -28,8 +28,21 @@ A dead air conditioner in South Florida is more than an inconvenience. It's a re
 - Water is actively leaking or pooling near your indoor unit
 - Your commercial space depends on cooling to stay open and operating
 
+## What Counts as an HVAC Emergency?
+
+Not every AC problem needs to wait until morning, and not every one needs an after-hours call either. Situations that warrant calling our emergency line right away include a complete loss of cooling during extreme heat, burning smells or visible sparks near the unit or electrical panel, water actively leaking or pooling near the indoor unit, and a commercial system failure that's affecting a business that depends on it to stay open.
+
 ## What Happens When You Call
 
 You'll speak with our team directly, describe what's happening, and get next steps on getting a technician to your property. V.I.P. Maintenance Members receive priority scheduling during emergency calls.
+
+## What to Do While Waiting for Service
+
+- Turn the system off at the thermostat if you notice burning smells, sparking, or unusual electrical sounds, and avoid touching the unit
+- If water is leaking indoors, place towels or a container under the leak and, if it's safe to do so, shut off the system to limit further water damage
+- Keep pets and children away from the outdoor unit or any exposed wiring
+- Use fans and close blinds to manage indoor temperature while you wait, rather than attempting to open up or repair the unit yourself
+
+We'll always walk you through anything that's genuinely safe to do while you wait. Beyond that, leave diagnosis and repair to a licensed technician; opening up refrigerant lines, electrical components, or the unit itself without training carries real safety risk.
 
 Reliable, documented, code-compliant work doesn't stop just because it's after hours.

@@ -32,3 +32,15 @@ Downtime costs businesses money. Whether it's a restaurant kitchen, a retail flo
 ## Built Around Your Operation
 
 We work around your business hours where possible and keep you informed throughout the job, so you can plan around the work instead of being caught off guard by it.
+
+## Businesses We Serve
+
+Our commercial work spans offices, restaurants, and retail spaces, the kinds of properties where an HVAC failure directly affects customers, staff, or inventory, not just comfort.
+
+## Scheduling Around Your Hours
+
+Commercial HVAC work doesn't have to mean shutting down during business hours. We coordinate scheduled maintenance and non-emergency repairs around your operating hours where possible, and treat business-critical failures as the priority they are.
+
+## Maintenance and Repair, Under One Roof
+
+Preventive maintenance reduces the odds of an unplanned failure in the first place; when something does go wrong, the same team handles the repair. Our [V.I.P. Maintenance Membership](/maintenance-membership/) is available for commercial properties as well as residential ones.

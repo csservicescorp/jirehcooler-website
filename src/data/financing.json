@@ -17,6 +17,16 @@
       "description": "We'll walk you through the application during your in-home or on-site estimate."
     }
   ],
+  "howItWorks": {
+    "heading": "How Financing Works",
+    "steps": [
+      { "step": "1", "label": "Request an Installation Estimate", "description": "Tell us about your system and schedule an in-home or on-site estimate." },
+      { "step": "2", "label": "Review the Recommended System", "description": "We'll walk you through the options and written pricing for your replacement." },
+      { "step": "3", "label": "Apply Securely Through the Financing Provider", "description": "If you'd like to finance the project, you apply directly with our financing partner." },
+      { "step": "4", "label": "Review Available Approved Payment Options", "description": "See the terms you're approved for and choose the option that works for you." },
+      { "step": "5", "label": "Schedule the Installation", "description": "Once financing is settled, we schedule your installation at a time that works for you." }
+    ]
+  },
   "disclaimer": "Financing terms, promotional periods, and approval are subject to credit qualification and are determined by our financing partner, not Jireh Cooler directly. Contact us for current rates and terms.",
   "cta": { "label": "Ask About Financing", "href": "/request-an-estimate/" },
   "image": "/images/financing/jireh-financing-consultation.jpg",

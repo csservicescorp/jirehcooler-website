@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TrustPoints from '@components/TrustPoints.astro';
+import ProcessSteps from '@components/ProcessSteps.astro';
 import CtaSection from '@components/CtaSection.astro';
 import financing from '@data/financing.json';
 ---
@@ -40,7 +41,17 @@ import financing from '@data/financing.json';
     <p class="disclaimer container-narrow">{financing.disclaimer}</p>
   </section>
 
-  <CtaSection heading="Ready to Talk Financing?" description="Ask about current programs when you request your estimate." primaryCta={financing.cta} />
+  <section class="section-soft">
+    <div class="container container-narrow">
+      <div class="section-head center">
+        <p class="eyebrow">The Process</p>
+        <h2>{financing.howItWorks.heading}</h2>
+      </div>
+      <ProcessSteps steps={financing.howItWorks.steps} />
+    </div>
+  </section>
+
+  <CtaSection heading="Ready to Talk Financing?" description="Ask about current programs when you request your estimate." primaryCta={{ ...financing.cta, href: '/request-an-estimate/?service=financing' }} />
 </BaseLayout>
 
 <style>

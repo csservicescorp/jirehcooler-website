@@ -5,6 +5,10 @@ import EstimateForm from '@components/EstimateForm.astro';
 import Icon from '@components/Icon.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import site from '@data/site.json';
+
+const mapQuery = encodeURIComponent(site.address.full);
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 ---
 
 <BaseLayout
@@ -30,7 +34,7 @@ import site from '@data/site.json';
             <Icon name="phone" class="icon-md" />
             <div>
               <h3>Phone</h3>
-              <a href={`tel:${site.phoneRaw}`}>{site.phone}</a>
+              <a href={`tel:${site.phoneRaw}`} data-track="phone_click" data-track-params={JSON.stringify({ location: 'contact_page' })}>{site.phone}</a>
             </div>
           </li>
           <li>
@@ -52,14 +56,25 @@ import site from '@data/site.json';
             <div>
               <h3>Hours</h3>
               <p>{site.hours.office}</p>
-              <p>{site.hours.emergency}</p>
+              <p class="emergency-note">{site.hours.emergency}</p>
             </div>
           </li>
         </ul>
+        <a
+          href={directionsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary btn-block directions-btn"
+          data-track="directions_click"
+          data-track-params={JSON.stringify({ location: 'contact_page' })}
+        >
+          <Icon name="pin" class="icon-sm" /> Get Directions
+        </a>
         <ResponsiveImage
-          src="/images/homepage/financing-suburban-homes.jpg"
-          alt="South Florida neighborhood we serve, at sunset"
+          src="/images/homepage/jireh-cooler-office-hero.jpg"
+          alt="Jireh Cooler office reception area with the company logo on the accent wall"
           ratio="4 / 3"
+          focal="22% 40%"
           variant="editorial"
           fallbackIcon="map"
         />
@@ -67,6 +82,23 @@ import site from '@data/site.json';
       <div class="form-panel card" data-reveal>
         <h2>Send a Message</h2>
         <EstimateForm formType="contact" compact />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-soft map-section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Find Us</p>
+        <h2>{site.address.full}</h2>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src={mapEmbedSrc}
+          title={`Map showing the location of Jireh Cooler at ${site.address.full}`}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
     </div>
   </section>
@@ -98,6 +130,10 @@ import site from '@data/site.json';
     flex-shrink: 0;
     margin-top: 0.15rem;
   }
+  .icon-sm {
+    width: 18px;
+    height: 18px;
+  }
   .info-list h3 {
     font-size: var(--fs-sm);
     text-transform: uppercase;
@@ -110,8 +146,34 @@ import site from '@data/site.json';
     color: var(--color-charcoal);
     font-weight: 500;
   }
+  .emergency-note {
+    color: var(--color-royal);
+    font-weight: 600;
+  }
+  .directions-btn {
+    margin-bottom: var(--space-lg);
+  }
   .form-panel {
     padding: var(--space-xl);
+  }
+  .map-section {
+    text-align: center;
+  }
+  .map-embed {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    aspect-ratio: 16 / 9;
+  }
+  .map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  @media (min-width: 720px) {
+    .map-embed {
+      aspect-ratio: 21 / 9;
+    }
   }
   @media (min-width: 960px) {
     .contact-grid {

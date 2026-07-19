@@ -1,12 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Icon from '@components/Icon.astro';
+import FaqAccordion from '@components/FaqAccordion.astro';
 import CtaSection from '@components/CtaSection.astro';
 import maintenance from '@data/maintenance.json';
 
 const m = maintenance.membership;
+const faqs = (await getCollection('faqs', ({ data }) => data.category === 'maintenance')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout title={m.seoTitle} description={m.metaDescription} path="/maintenance-membership/">
@@ -21,24 +24,59 @@ const m = maintenance.membership;
   />
 
   <section>
+    <div class="container container-narrow">
+      <h2>Why Preventive Maintenance Matters</h2>
+      <p>{m.whyItMatters}</p>
+    </div>
+  </section>
+
+  <section class="section-soft">
     <div class="container membership-grid">
       <div data-reveal>
         <ResponsiveImage src={m.image} alt={m.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="check-circle" />
       </div>
       <div class="membership-copy" data-reveal>
-        <h2>What's Included</h2>
+        <h2>What Each Visit Includes</h2>
         <ul class="check-list">
           {m.included.map((item: string) => (
             <li><Icon name="check" class="icon-sm" /> {item}</li>
           ))}
         </ul>
+        {m.checklist.length > 0 ? (
+          <ul class="check-list checklist-detail">
+            {m.checklist.map((item: string) => (
+              <li><Icon name="check" class="icon-sm" /> {item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="checklist-note">{m.checklistNote}</p>
+        )}
         <p class="note">{m.note}</p>
-        <a href={m.cta.href} class="btn btn-primary btn-lg">{m.cta.label}</a>
+        <a href={m.cta.href} class="btn btn-primary btn-lg" data-track="maintenance_click" data-track-params={JSON.stringify({ location: 'maintenance_page' })}>{m.cta.label}</a>
       </div>
     </div>
   </section>
 
-  <CtaSection heading="Protect Your System Year-Round" description="Join the V.I.P. Maintenance Membership and let us stay ahead of the small issues before they become expensive ones." />
+  <section>
+    <div class="container container-narrow">
+      <h2>Who the Plan Is For</h2>
+      <p>{m.whoItsFor}</p>
+    </div>
+  </section>
+
+  {faqs.length > 0 && (
+    <section class="section-soft faq-section">
+      <div class="container container-narrow">
+        <div class="section-head center">
+          <p class="eyebrow">Common Questions</p>
+          <h2>Maintenance Membership FAQ</h2>
+        </div>
+        <FaqAccordion faqs={faqs.map((f) => f.data)} withSchema={false} />
+      </div>
+    </section>
+  )}
+
+  <CtaSection heading="Protect Your System Year-Round" description="Join the V.I.P. Maintenance Membership and let us stay ahead of the small issues before they become expensive ones." primaryCta={{ label: m.cta.label, href: m.cta.href }} />
 </BaseLayout>
 
 <style>
@@ -62,6 +100,17 @@ const m = maintenance.membership;
     gap: 0.5rem;
     font-weight: 600;
     color: var(--color-royal);
+  }
+  .checklist-detail li {
+    font-weight: 500;
+    color: var(--color-charcoal);
+  }
+  .checklist-note {
+    font-size: var(--fs-sm);
+    color: var(--color-muted);
+    background: var(--color-ice);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
   }
   .icon-sm {
     width: 18px;

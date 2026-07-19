@@ -1,16 +1,20 @@
 {
   "membership": {
     "seoTitle": "V.I.P. Maintenance Membership | Jireh Cooler",
-    "metaDescription": "Join the Jireh Cooler V.I.P. Maintenance Membership for twice-yearly, 18-point AC inspections and priority scheduling in South Florida.",
+    "metaDescription": "Join the Jireh Cooler V.I.P. Maintenance Membership for twice-yearly AC inspections and priority scheduling in South Florida.",
     "heading": "V.I.P. Maintenance Membership",
     "intro": "Routine maintenance is the difference between a system that lasts and one that fails at the worst possible time. Our V.I.P. Maintenance Membership keeps your system running efficiently year-round.",
+    "whyItMatters": "Air conditioning systems in South Florida run harder and longer than almost anywhere else in the country. Without regular attention, small issues like worn parts, refrigerant loss, and airflow restrictions build up quietly until they cause a breakdown, usually during the hottest, least convenient stretch of the year. Scheduled preventive maintenance catches those issues while they're still inexpensive to fix.",
     "included": [
       "18-point system inspection",
       "Two scheduled maintenance visits per year",
       "Priority scheduling for members"
     ],
+    "checklist": [],
+    "checklistNote": "A full itemized list of everything covered in the 18-point inspection has not yet been provided by Jireh Cooler. The three confirmed highlights above are published; the client should supply the complete point-by-point checklist so it can be listed here instead of a placeholder.",
+    "whoItsFor": "The membership is available to South Florida homeowners and businesses who want to stay ahead of AC problems rather than react to them, whether that's a single-family home, a rental property, or a commercial building on a working schedule that can't afford surprise downtime.",
     "note": "Specific membership pricing and additional benefits are confirmed at signup. Ask our team for current details.",
-    "cta": { "label": "Ask About Membership", "href": "/request-an-estimate/" },
+    "cta": { "label": "Join the V.I.P. Maintenance Plan", "href": "/request-an-estimate/?service=maintenance-membership" },
     "image": "/images/homepage/membership-technician-inspection.jpg",
     "imageAlt": "Technician performing hands-on maintenance work on an outdoor air conditioning unit"
   },

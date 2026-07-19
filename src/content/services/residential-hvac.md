@@ -33,3 +33,11 @@ Your home's comfort system works harder in South Florida than almost anywhere el
 ## A Family Business, Working in Your Home
 
 Jireh Cooler has served South Florida homeowners since 1994. As a family-operated company, every technician who comes to your door represents the same standard of work the owners built the business on.
+
+## What to Expect
+
+Every visit starts with a clear explanation of what we're looking at and why, followed by a written estimate before any work begins. Whether it's a same-day repair call or a scheduled installation, you'll know the scope and the cost up front, with no pressure to decide on the spot.
+
+## Keeping Your System Running Between Visits
+
+Beyond repairs and installations, our [V.I.P. Maintenance Membership](/maintenance-membership/) covers twice-yearly inspections so small issues get caught before they turn into a breakdown during South Florida's hottest months.
