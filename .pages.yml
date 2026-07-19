@@ -107,8 +107,8 @@ content:
           - { name: eyebrow, label: "Eyebrow Text", type: string }
           - { name: headline, label: "Headline", type: string }
           - { name: subheadline, label: "Subheadline", type: text }
-          - { name: image, label: "Hero Image", type: image, description: "The large photo on the homepage. Recommended: at least 1600×2000px, portrait-friendly (a technician at work, a nice property, etc). This is the first thing visitors see — keep it high quality." }
-          - { name: imageAlt, label: "Hero Image Alt Text", type: string, description: "Describe what's in the photo for screen readers and search engines, e.g. \"Technician repairing an outdoor AC unit\"." }
+          - { name: image, label: "Hero Background Image", type: image, description: "The full-width cover photo behind the homepage headline. Recommended: at least 1600×900px, landscape (16:9 or wider) — a wide shot works best since a dark overlay and text sit on top. This is the first thing visitors see — keep it high quality." }
+          - { name: imageAlt, label: "Hero Image Alt Text", type: string, description: "Describe what's in the photo for screen readers and search engines, e.g. \"Jireh Cooler office reception with the company logo on the accent wall\"." }
           - name: primaryCta
             label: "Primary Button"
             type: object

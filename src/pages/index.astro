@@ -32,8 +32,22 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   preloadImage={home.hero.image}
 >
   <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-grid">
+  <section class="hero-photo">
+    <div class="hero-bg">
+      <ResponsiveImage
+        src={home.hero.image}
+        alt={home.hero.imageAlt}
+        ratio="16 / 9"
+        mobileRatio="4 / 5"
+        focal="22% 40%"
+        variant="background"
+        rounded={false}
+        priority
+        sizes="100vw"
+      />
+      <div class="hero-scrim" aria-hidden="true"></div>
+    </div>
+    <div class="container hero-inner">
       <div class="hero-copy" data-reveal>
         <p class="eyebrow">{home.hero.eyebrow}</p>
         <h1>{home.hero.headline}</h1>
@@ -50,18 +64,6 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
           <li><Icon name="clock" class="icon-sm" /> {site.emergencyAvailability} Emergency Service</li>
           <li><Icon name="calendar" class="icon-sm" /> Serving South Florida Since {site.foundedYear}</li>
         </ul>
-      </div>
-      <div class="hero-media" data-reveal>
-        <ResponsiveImage
-          src={home.hero.image}
-          alt={home.hero.imageAlt}
-          ratio="5 / 4"
-          mobileRatio="4 / 3"
-          focal="center 42%"
-          variant="hero"
-          priority
-          sizes="(min-width: 720px) 45vw, 100vw"
-        />
       </div>
     </div>
   </section>
@@ -311,26 +313,78 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
 </BaseLayout>
 
 <style>
-  .hero {
-    background: var(--gradient-ice);
-    padding-block: var(--space-2xl) var(--space-2xl);
+  .hero-photo {
+    position: relative;
     overflow: hidden;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-xl);
+    min-height: 560px;
+    display: flex;
     align-items: center;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-bg :global(.rimg) {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    /* Mobile/tablet default: uniformly strong scrim, since the stacked,
+       nearly full-width copy column doesn't leave room to dodge the logo
+       wall visible in the photo's left portion. */
+    background: rgba(4, 14, 32, 0.78);
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-block: var(--space-2xl);
+    display: flex;
+    justify-content: flex-start;
+  }
+  .hero-copy {
+    max-width: 640px;
+    text-align: left;
+  }
+  @media (min-width: 1280px) {
+    /* Only once the container reaches its own max-width is there enough
+       spare room on the left for the copy column to fully clear the
+       office's logo wall — swap to a left/right gradient so the logo
+       stays visible instead of being flatly darkened. */
+    .hero-scrim {
+      background: linear-gradient(90deg, rgba(4, 20, 45, 0.28) 0%, rgba(4, 16, 36, 0.62) 45%, rgba(4, 12, 28, 0.92) 100%);
+    }
+    .hero-inner {
+      justify-content: flex-end;
+    }
+  }
+  .hero-copy .eyebrow {
+    color: var(--color-cyan);
+  }
+  .hero-copy h1 {
+    color: var(--color-white);
   }
   .hero-sub {
     font-size: var(--fs-md);
     max-width: 52ch;
+    color: rgba(255, 255, 255, 0.86);
   }
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
     margin-block: var(--space-md);
+  }
+  .hero-photo .btn-outline {
+    background: rgba(4, 54, 136, 0.35);
+    border-color: rgba(255, 255, 255, 0.55);
+    color: var(--color-white);
+  }
+  .hero-photo .btn-outline:hover {
+    background: rgba(4, 54, 136, 0.55);
+    border-color: var(--color-white);
   }
   .icon-sm {
     width: 18px;
@@ -349,7 +403,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     padding: 0;
     font-size: var(--fs-xs);
     font-weight: 600;
-    color: var(--color-royal);
+    color: var(--color-white);
   }
   .hero-facts li {
     display: flex;
@@ -530,8 +584,8 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   }
 
   @media (min-width: 720px) {
-    .hero-grid {
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    .hero-photo {
+      min-height: 680px;
     }
     .pathway-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -560,6 +614,9 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   @media (min-width: 960px) {
     .services-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .hero-photo {
+      min-height: 760px;
     }
   }
 </style>

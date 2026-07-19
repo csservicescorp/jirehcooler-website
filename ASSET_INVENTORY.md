@@ -28,7 +28,8 @@ These take priority over stock photography wherever they cover a slot.
 | Original file | Production copy | Used on |
 |---|---|---|
 | `jireh-cooler-logo.png` | `public/images/brand/jireh-cooler-logo.{png,webp,avif}` | Header, mobile header, footer (via `src/components/Logo.astro`) |
-| `jireh-cooler-vans-residential.png` | `public/images/homepage/jireh-vans-residential.*` | Homepage hero |
+| `jireh-cooler-vans-residential.png` | `public/images/homepage/jireh-vans-residential.*` | No longer placed on a page (see office hero note below) — real Jireh Cooler photo kept in the repo, ready to reuse |
+| `office.png` | `public/images/homepage/jireh-cooler-office-hero.*` | Homepage hero background (full-width cover photo behind the headline) |
 | `jireh-cooler-owners-about.png` | `public/images/about/jireh-owners-portrait.*` | About page — primary image |
 | `jireh-cooler-planning-blueprint.png` | `public/images/about/jireh-planning-blueprint.*` | About page — secondary "Every Job Starts With a Plan" section |
 | `jireh-cooler-technician-ac-unit.png` | `public/images/services/jireh-technician-ac-unit.*` | Preventive Maintenance page |
@@ -76,6 +77,21 @@ there, untouched) and processed with `scripts/optimize-jireh-photos-batch2.mjs`:
 The residential and commercial pathway source photos share identical
 1448×1086 source dimensions and the same `ratio="16 / 10"` card treatment,
 so the two homepage cards render at equal height and proportion.
+
+**Homepage hero redesign — `office.png`:** a photo of the Jireh Cooler
+office reception (with the company logo visible on the accent wall)
+replaced the homepage's previous side-by-side hero layout with a
+full-width photo cover section, in the style of a premium service-company
+homepage. `scripts/optimize-office-hero.mjs` processes the original into
+`public/images/homepage/jireh-cooler-office-hero.*`. The hero now renders
+the photo as an absolutely-positioned full-bleed background
+(`ResponsiveImage` `variant="background"`, `focal="22% 40%"` to keep the
+logo wall in frame across breakpoints) with a dark navy scrim gradient
+behind the headline, subheadline, CTAs, and trust facts, all in white text
+for contrast. This displaced the previous hero photo,
+`jireh-vans-residential.png` (service vans at a residential job) — that
+file is left in the repo, unused but ready to be placed elsewhere, since
+it's real Jireh Cooler photography rather than stock.
 
 ## Favicon (polar bear mark)
 

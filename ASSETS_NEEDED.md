@@ -19,7 +19,7 @@ lists its recommended dimensions.
 | Location | Photo |
 |---|---|
 | Header, mobile header, footer | Official logo (transparency restored — see `ASSET_INVENTORY.md`) |
-| Homepage hero | Jireh Cooler vans parked at a residential job |
+| Homepage hero (full-width photo background) | Jireh Cooler office reception, logo visible on accent wall |
 | Homepage trust/credibility section | Jireh Cooler company fleet |
 | Gallery — "Our Fleet" | Jireh Cooler company fleet (same photo) |
 | About page — primary image | Portrait of owners Moyses and Evelise Oliveira |
