@@ -10,7 +10,7 @@ interface Props {
   schema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, path = Astro.url.pathname, image = '/images/og/default-og.jpg', noindex = false, schema } = Astro.props;
+const { title, description, path = Astro.url.pathname, image = site.ogImage, noindex = false, schema } = Astro.props;
 
 const siteUrl = 'https://jirehcooler.com';
 const canonical = new URL(path, siteUrl).toString();

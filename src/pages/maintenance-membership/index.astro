@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
 import maintenance from '@data/maintenance.json';
@@ -23,7 +23,7 @@ const m = maintenance.membership;
   <section>
     <div class="container membership-grid">
       <div data-reveal>
-        <ImagePlaceholder icon="check-circle" ratio="4 / 3" variant="ice" label="V.I.P. Membership" />
+        <ResponsiveImage src={m.image} alt={m.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="check-circle" />
       </div>
       <div class="membership-copy" data-reveal>
         <h2>What's Included</h2>
@@ -61,12 +61,12 @@ const m = maintenance.membership;
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
-    color: var(--color-navy);
+    color: var(--color-royal);
   }
   .icon-sm {
     width: 18px;
     height: 18px;
-    color: var(--color-blue);
+    color: var(--color-royal);
     flex-shrink: 0;
   }
   .note {

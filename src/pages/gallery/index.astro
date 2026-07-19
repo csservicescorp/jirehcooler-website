@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import CtaSection from '@components/CtaSection.astro';
 
 const items = await getCollection('gallery', ({ data }) => data.published);
@@ -18,13 +18,13 @@ const iconByCategory: Record<string, string> = {
 
 <BaseLayout
   title="Project Gallery | Jireh Cooler"
-  description="A look at residential and commercial air conditioning work completed by Jireh Cooler across Broward and Palm Beach County."
+  description="A look at residential and commercial air conditioning work across Broward and Palm Beach County."
   path="/gallery/"
 >
   <PageHero
     eyebrow="Gallery"
     title="Our Work Across South Florida"
-    description="Photography from real installations, repairs, and maintenance visits is being added to this gallery. Placeholders below mark where finished project photos will appear."
+    description="A look at the kind of residential and commercial HVAC work our team handles every day."
     breadcrumbs={[
       { label: 'Home', href: '/' },
       { label: 'Gallery', href: '/gallery/' },
@@ -35,8 +35,15 @@ const iconByCategory: Record<string, string> = {
     <div class="container">
       <div class="gallery-grid">
         {items.map((item, i) => (
-          <figure class="gallery-item" data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
-            <ImagePlaceholder icon={iconByCategory[item.data.category] ?? 'building'} ratio="4 / 3" variant={i % 2 === 0 ? 'ice' : 'blue'} />
+          <figure class:list={['gallery-item', { tall: i % 5 === 0 }]} data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
+            <ResponsiveImage
+              src={item.data.image}
+              alt={item.data.alt}
+              ratio={i % 5 === 0 ? '3 / 4' : '4 / 3'}
+              variant="gallery"
+              fallbackIcon={iconByCategory[item.data.category] ?? 'building'}
+              sizes="(min-width: 960px) 33vw, (min-width: 720px) 50vw, 100vw"
+            />
             <figcaption>{item.data.title}</figcaption>
           </figure>
         ))}
@@ -55,17 +62,25 @@ const iconByCategory: Record<string, string> = {
   }
   .gallery-item {
     margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+  .gallery-item :global(img:hover) {
+    transform: scale(1.05);
   }
   .gallery-item figcaption {
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: var(--fs-sm);
-    color: var(--color-navy);
+    color: var(--color-royal);
   }
   @media (min-width: 720px) {
     .gallery-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .gallery-item.tall {
+      grid-row: span 2;
     }
   }
 </style>

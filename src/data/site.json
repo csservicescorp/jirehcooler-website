@@ -40,5 +40,6 @@
   "callCta": {
     "label": "Call Now",
     "href": "tel:+19544266010"
-  }
+  },
+  "ogImage": "/images/og/default-og.jpg"
 }

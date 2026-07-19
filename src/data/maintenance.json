@@ -10,7 +10,9 @@
       "Priority scheduling for members"
     ],
     "note": "Specific membership pricing and additional benefits are confirmed at signup. Ask our team for current details.",
-    "cta": { "label": "Ask About Membership", "href": "/request-an-estimate/" }
+    "cta": { "label": "Ask About Membership", "href": "/request-an-estimate/" },
+    "image": "/images/homepage/membership-technician-inspection.jpg",
+    "imageAlt": "Technician performing hands-on maintenance work on an outdoor air conditioning unit"
   },
   "preventive": {
     "seoTitle": "Preventive AC Maintenance | Jireh Cooler",
@@ -35,6 +37,8 @@
         "description": "Many manufacturer warranties require documented, regular maintenance."
       }
     ],
-    "cta": { "label": "Schedule Maintenance", "href": "/request-an-estimate/" }
+    "cta": { "label": "Schedule Maintenance", "href": "/request-an-estimate/" },
+    "image": "/images/services/ac-repair-manifold-gauge.jpg",
+    "imageAlt": "HVAC technician using a manifold gauge to inspect an outdoor air conditioning unit"
   }
 }

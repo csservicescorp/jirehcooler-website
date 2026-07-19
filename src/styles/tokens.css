@@ -1,9 +1,9 @@
 :root {
-  /* Color system */
-  --color-navy: #082b4c;
-  --color-navy-deep: #061f38;
-  --color-blue: #1268b3;
-  --color-blue-light: #2f8fe5;
+  /* Color system — royal/cobalt blue identity, matches Jireh Cooler's social branding */
+  --color-royal: #043688; /* primary brand color — dominant across buttons, active states, icons */
+  --color-royal-deep: #0a2d66; /* hover / limited-contrast use only, not a section background */
+  --color-blue: #1a71b5; /* modern blue — secondary interactive accent */
+  --color-cyan: #32b6ec; /* bright cyan — small accents only, never dominant */
   --color-ice: #eaf5fc;
   --color-bg-soft: #f7fafc;
   --color-white: #ffffff;
@@ -16,8 +16,9 @@
   --color-danger: #b3261e;
 
   /* Gradients */
-  --gradient-navy: linear-gradient(160deg, var(--color-navy) 0%, var(--color-navy-deep) 100%);
-  --gradient-blue: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-light) 100%);
+  --gradient-royal: linear-gradient(160deg, var(--color-royal) 0%, var(--color-royal-deep) 100%);
+  --gradient-blue: linear-gradient(135deg, var(--color-royal) 0%, var(--color-blue) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-blue) 0%, var(--color-cyan) 100%); /* small accents only */
   --gradient-ice: linear-gradient(180deg, var(--color-ice) 0%, var(--color-white) 100%);
 
   /* Typography */
@@ -62,10 +63,10 @@
   --radius-pill: 999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(8, 43, 76, 0.08);
-  --shadow-md: 0 8px 24px rgba(8, 43, 76, 0.1);
-  --shadow-lg: 0 20px 48px rgba(8, 43, 76, 0.14);
-  --shadow-navy: 0 24px 60px rgba(6, 31, 56, 0.35);
+  --shadow-sm: 0 1px 3px rgba(4, 54, 136, 0.1);
+  --shadow-md: 0 8px 24px rgba(4, 54, 136, 0.12);
+  --shadow-lg: 0 20px 48px rgba(4, 54, 136, 0.16);
+  --shadow-royal: 0 24px 60px rgba(10, 45, 102, 0.32);
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

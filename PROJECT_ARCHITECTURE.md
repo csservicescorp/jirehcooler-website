@@ -105,9 +105,49 @@ color palette, type scale, spacing scale, radii, shadows, and motion
 durations/easing. Components consume these variables rather than hardcoding
 values, so a brand refresh (e.g. adjusting the blue) is a one-file change.
 
+**Color system:** Royal/cobalt blue identity (`#043688` primary, `#0A2D66`
+reserved for hover/limited-contrast use, `#1A71B5` as a secondary accent,
+`#32B6EC` cyan used only as a small accent — never a section background).
+`.section-royal` is the utility class for royal-blue sections; it's used
+strategically (trust section, membership section, final CTA) rather than
+throughout, keeping most of the site white/soft-background per the brand
+direction.
+
 Typography: **Sora** for headings, **Inter** for body text, both self-hosted
 as variable fonts (`public/fonts/`) and loaded with `font-display: swap` plus
 `<link rel="preload">` in `BaseLayout.astro`.
+
+## Image pipeline
+
+Photos are pre-optimized at build-authoring time (not at Astro's build
+step) because CMS-uploaded images live under `public/images/` as plain
+files, which Astro's `astro:assets` pipeline does not process automatically.
+
+- `scripts/optimize-images.mjs` — run manually whenever a new photo is added
+  outside the CMS. Takes a source image, resizes it to one or two widths,
+  and writes JPG + WebP + AVIF variants into `public/images/<category>/`,
+  then updates `src/data/image-manifest.json` with each image's real pixel
+  dimensions (used to set explicit `width`/`height` and prevent layout
+  shift).
+- `src/components/ResponsiveImage.astro` — the single component every page
+  uses to render a photo. Given a public path, it looks the path up in
+  `image-manifest.json`:
+  - **Found** → renders a `<picture>` with AVIF/WebP/JPG sources, a
+    `srcset` across both generated widths, explicit `width`/`height`, and
+    `loading="lazy"` (or eager + `fetchpriority="high"` when `priority` is
+    passed, used once for the homepage hero image).
+  - **Path given but not in the manifest** (e.g. a photo the client just
+    uploaded through Pages CMS and no one has run the optimize script
+    against yet) → renders a plain `<img>` pointing at that file directly,
+    still wrapped in an `aspect-ratio` container so layout doesn't shift.
+  - **No path at all** → renders an elegant gradient-and-icon placeholder,
+    never a broken image.
+- `BaseLayout.astro` accepts a `preloadImage` prop (used on the homepage)
+  that preloads the hero photo's WebP source as the page's LCP resource.
+
+This design lets a non-technical client replace any photo through Pages CMS
+without breaking layout, aspect ratio, or performance — see
+`CLIENT_EDITING_GUIDE.md`.
 
 ## Performance & accessibility choices
 
@@ -119,7 +159,6 @@ as variable fonts (`public/fonts/`) and loaded with `font-display: swap` plus
 - Skip-to-content link, visible focus states, semantic landmarks
   (`<header>`, `<nav>`, `<main>`, `<footer>`), and accessible form labeling
   throughout.
-- Images are rendered through a placeholder system today (see
-  `ASSETS_NEEDED.md`); once real photos are added, use Astro's built-in
-  `<Image>`/`<Picture>` components (already a dependency via `sharp`) for
-  responsive, lazy-loaded, correctly-sized output.
+- All photos are served as pre-generated AVIF/WebP/JPG with real
+  `width`/`height` attributes (see "Image pipeline" above) — no layout
+  shift, and every browser gets the smallest format it supports.

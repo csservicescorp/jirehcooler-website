@@ -5,6 +5,7 @@ import Footer from '@components/Footer.astro';
 import MobileConversionBar from '@components/MobileConversionBar.astro';
 import Seo from '@components/Seo.astro';
 import site from '@data/site.json';
+import manifest from '@data/image-manifest.json';
 
 interface Props {
   title: string;
@@ -14,9 +15,15 @@ interface Props {
   noindex?: boolean;
   schema?: Record<string, unknown> | Record<string, unknown>[];
   hideMobileBar?: boolean;
+  /** Public path (e.g. /images/homepage/hero-x.jpg) of the page's LCP image, preloaded as WebP. */
+  preloadImage?: string;
 }
 
-const { title, description, path, image, noindex, schema, hideMobileBar = false } = Astro.props;
+const { title, description, path, image, noindex, schema, hideMobileBar = false, preloadImage } = Astro.props;
+
+type ManifestEntry = { width: number; height: number; smWidth: number; smHeight: number };
+const preloadEntry: ManifestEntry | undefined = preloadImage ? (manifest as Record<string, ManifestEntry>)[preloadImage] : undefined;
+const preloadBase = preloadImage?.replace(/\.jpg$/i, '');
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -34,10 +41,20 @@ const combinedSchema = schema ? [orgSchema, ...(Array.isArray(schema) ? schema :
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#082b4c" />
+    <meta name="theme-color" content="#043688" />
     <Seo title={title} description={description} path={path} image={image} noindex={noindex} schema={combinedSchema} />
     <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Sora-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadEntry && preloadBase && (
+      <link
+        rel="preload"
+        as="image"
+        href={`${preloadBase}.webp`}
+        imagesrcset={`${preloadBase}-sm.webp ${preloadEntry.smWidth}w, ${preloadBase}.webp ${preloadEntry.width}w`}
+        imagesizes="(min-width: 720px) 45vw, 100vw"
+        fetchpriority="high"
+      />
+    )}
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>

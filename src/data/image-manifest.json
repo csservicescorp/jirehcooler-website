@@ -1,0 +1,122 @@
+{
+  "/images/homepage/hero-ac-technician-repair.jpg": {
+    "width": 1920,
+    "height": 2880,
+    "smWidth": 800,
+    "smHeight": 1200
+  },
+  "/images/homepage/residential-modern-home-exterior.jpg": {
+    "width": 1400,
+    "height": 766,
+    "smWidth": 700,
+    "smHeight": 383
+  },
+  "/images/homepage/commercial-rooftop-hvac-skyline.jpg": {
+    "width": 1400,
+    "height": 2100,
+    "smWidth": 700,
+    "smHeight": 1050
+  },
+  "/images/homepage/emergency-technician-response.jpg": {
+    "width": 1400,
+    "height": 2100,
+    "smWidth": 700,
+    "smHeight": 1050
+  },
+  "/images/homepage/membership-technician-inspection.jpg": {
+    "width": 1400,
+    "height": 1114,
+    "smWidth": 700,
+    "smHeight": 557
+  },
+  "/images/homepage/financing-suburban-homes.jpg": {
+    "width": 1400,
+    "height": 2488,
+    "smWidth": 700,
+    "smHeight": 1244
+  },
+  "/images/backgrounds/cta-background-rooftop-units.jpg": {
+    "width": 1920,
+    "height": 1280,
+    "smWidth": 800,
+    "smHeight": 533
+  },
+  "/images/services/ac-repair-manifold-gauge.jpg": {
+    "width": 1400,
+    "height": 2002,
+    "smWidth": 700,
+    "smHeight": 1001
+  },
+  "/images/services/ac-installation-technician.jpg": {
+    "width": 1400,
+    "height": 2100,
+    "smWidth": 700,
+    "smHeight": 1050
+  },
+  "/images/services/indoor-air-quality-bright-interior.jpg": {
+    "width": 1400,
+    "height": 934,
+    "smWidth": 700,
+    "smHeight": 467
+  },
+  "/images/services/duct-cleaning-industrial-ducts.jpg": {
+    "width": 1400,
+    "height": 2100,
+    "smWidth": 700,
+    "smHeight": 1050
+  },
+  "/images/services/uv-light-ventilation-system.jpg": {
+    "width": 1400,
+    "height": 935,
+    "smWidth": 700,
+    "smHeight": 467
+  },
+  "/images/services/pool-heater-miami-villa-sunset.jpg": {
+    "width": 1400,
+    "height": 933,
+    "smWidth": 700,
+    "smHeight": 467
+  },
+  "/images/services/water-heater-installation.jpg": {
+    "width": 1400,
+    "height": 1050,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/services/dryer-vent-laundry-closet.jpg": {
+    "width": 1400,
+    "height": 2100,
+    "smWidth": 700,
+    "smHeight": 1050
+  },
+  "/images/services/smart-thermostat-wall-adjust.jpg": {
+    "width": 1400,
+    "height": 788,
+    "smWidth": 700,
+    "smHeight": 394
+  },
+  "/images/about/technician-rooftop-work.jpg": {
+    "width": 1400,
+    "height": 1157,
+    "smWidth": 700,
+    "smHeight": 579
+  },
+  "/images/gallery/commercial-technicians-rooftop.jpg": {
+    "width": 1000,
+    "height": 773,
+    "smWidth": 600,
+    "smHeight": 464
+  },
+  "/images/gallery/technician-inspecting-outdoor-unit.jpg": {
+    "width": 1000,
+    "height": 667,
+    "smWidth": 600,
+    "smHeight": 400
+  },
+  "/images/gallery/technician-outdoor-maintenance.jpg": {
+    "width": 1000,
+    "height": 1520,
+    "smWidth": 600,
+    "smHeight": 912
+  }
+}

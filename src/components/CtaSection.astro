@@ -1,5 +1,6 @@
 ---
 import site from '@data/site.json';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Cta {
   label: string;
@@ -11,6 +12,8 @@ interface Props {
   primaryCta?: Cta;
   secondaryCta?: Cta;
   variant?: 'navy' | 'ice';
+  backgroundImage?: string;
+  backgroundImageAlt?: string;
 }
 const {
   heading,
@@ -18,10 +21,21 @@ const {
   primaryCta = { label: 'Call Now', href: `tel:${site.phoneRaw}` },
   secondaryCta = { label: 'Request an Estimate', href: '/request-an-estimate/' },
   variant = 'navy',
+  backgroundImage,
+  backgroundImageAlt = '',
 } = Astro.props;
 ---
 
-<section class:list={['final-cta', variant === 'navy' ? 'section-navy' : 'section-ice']} data-reveal>
+<section
+  class:list={['final-cta', variant === 'navy' ? 'section-royal' : 'section-ice', { 'has-bg': !!backgroundImage }]}
+  data-reveal
+>
+  {backgroundImage && (
+    <div class="cta-bg">
+      <ResponsiveImage src={backgroundImage} alt={backgroundImageAlt} ratio="16 / 9" variant="background" rounded={false} />
+      <div class="cta-scrim" aria-hidden="true"></div>
+    </div>
+  )}
   <div class="container cta-inner">
     <div class="cta-copy">
       <h2>{heading}</h2>
@@ -38,12 +52,32 @@ const {
 
 <style>
   .final-cta {
+    position: relative;
     border-radius: var(--radius-lg);
-    margin-inline: var(--space-md);
     max-width: calc(var(--content-max) - 2 * var(--space-md));
     margin-inline: auto;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .cta-bg :global(.rimg) {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .cta-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(4, 54, 136, 0.94) 0%, rgba(10, 45, 102, 0.86) 55%, rgba(10, 45, 102, 0.7) 100%);
+  }
+  .has-bg .cta-copy p {
+    color: rgba(255, 255, 255, 0.82);
   }
   .cta-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);

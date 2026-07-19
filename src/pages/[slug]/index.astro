@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
 import ServiceCard from '@components/ServiceCard.astro';
@@ -41,13 +41,32 @@ const path = `/${service.data.urlSlug}/`;
     ]}
   />
 
+  <section class="service-intro">
+    <div class="container intro-grid">
+      <div class="intro-image" data-reveal>
+        <ResponsiveImage
+          src={service.data.image}
+          alt={service.data.imageAlt}
+          ratio="16 / 11"
+          variant="editorial"
+          fallbackIcon={service.data.icon}
+          sizes="(min-width: 960px) 55vw, 100vw"
+        />
+      </div>
+      <div class="intro-copy" data-reveal>
+        <span class="intro-icon"><Icon name={service.data.icon} /></span>
+        <p class="intro-lead">{service.data.shortDescription}</p>
+        <a href="/request-an-estimate/" class="btn btn-primary btn-lg intro-cta">{service.data.ctaLabel}</a>
+      </div>
+    </div>
+  </section>
+
   <section class="service-body">
     <div class="container service-grid">
       <article class="service-content" data-reveal>
         <Content />
       </article>
       <aside class="service-sidebar" data-reveal>
-        <ImagePlaceholder icon={service.data.icon} ratio="4 / 3" variant="ice" />
         <div class="sidebar-card">
           <h3>What's Included</h3>
           <ul class="check-list">
@@ -85,6 +104,42 @@ const path = `/${service.data.urlSlug}/`;
 </BaseLayout>
 
 <style>
+  .service-intro {
+    padding-bottom: 0;
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+  }
+  .intro-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    background: var(--color-ice);
+    color: var(--color-royal);
+    margin-bottom: var(--space-sm);
+  }
+  .intro-lead {
+    font-size: var(--fs-lg);
+    color: var(--color-charcoal);
+    font-weight: 500;
+    max-width: 42ch;
+  }
+  .intro-cta {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+  @media (min-width: 860px) {
+    .intro-grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    }
+  }
+
   .service-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -128,7 +183,7 @@ const path = `/${service.data.urlSlug}/`;
     color: var(--color-charcoal);
   }
   .check-list :global(svg) {
-    color: var(--color-blue);
+    color: var(--color-royal);
     flex-shrink: 0;
     margin-top: 0.15rem;
   }

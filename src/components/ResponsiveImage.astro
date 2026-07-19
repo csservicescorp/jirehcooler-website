@@ -1,0 +1,162 @@
+---
+import Icon from './Icon.astro';
+import manifest from '@data/image-manifest.json';
+
+interface Props {
+  src?: string; // public path, e.g. /images/services/ac-repair-manifold-gauge.jpg
+  alt?: string;
+  ratio?: string; // CSS aspect-ratio, e.g. "4 / 3", "16 / 9", "3 / 4"
+  variant?: 'hero' | 'card' | 'editorial' | 'background' | 'gallery';
+  priority?: boolean; // eager-load + high fetch priority (hero image only)
+  focal?: string; // CSS object-position, e.g. "center", "top", "20% 40%"
+  rounded?: boolean;
+  sizes?: string;
+  fallbackIcon?: string;
+  fallbackLabel?: string;
+}
+
+const {
+  src,
+  alt = '',
+  ratio = '4 / 3',
+  variant = 'card',
+  priority = false,
+  focal = 'center',
+  rounded = true,
+  sizes = '(min-width: 960px) 50vw, 100vw',
+  fallbackIcon = 'building',
+  fallbackLabel,
+} = Astro.props;
+
+type ManifestEntry = { width: number; height: number; smWidth: number; smHeight: number };
+const entry: ManifestEntry | undefined = src ? (manifest as Record<string, ManifestEntry>)[src] : undefined;
+
+const base = src?.replace(/\.jpg$/i, '');
+const loading = priority ? 'eager' : 'lazy';
+const decoding = priority ? 'sync' : 'async';
+const fetchpriority = priority ? 'high' : 'auto';
+---
+
+{
+  src && entry && base ? (
+    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`}>
+      <picture>
+        <source
+          type="image/avif"
+          srcset={`${base}-sm.avif ${entry.smWidth}w, ${base}.avif ${entry.width}w`}
+          sizes={sizes}
+        />
+        <source
+          type="image/webp"
+          srcset={`${base}-sm.webp ${entry.smWidth}w, ${base}.webp ${entry.width}w`}
+          sizes={sizes}
+        />
+        <img
+          src={`${base}.jpg`}
+          srcset={`${base}-sm.jpg ${entry.smWidth}w, ${base}.jpg ${entry.width}w`}
+          sizes={sizes}
+          width={entry.width}
+          height={entry.height}
+          alt={alt}
+          loading={loading}
+          decoding={decoding}
+          fetchpriority={fetchpriority}
+          style={`object-position:${focal}`}
+        />
+      </picture>
+    </div>
+  ) : src ? (
+    // CMS-uploaded image without a pre-generated manifest entry: render it directly.
+    // Still prevents layout shift via the aspect-ratio wrapper; loses AVIF/WebP/srcset
+    // until the next `node scripts/optimize-images.mjs` run.
+    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`}>
+      <img src={src} alt={alt} loading={loading} decoding={decoding} style={`object-position:${focal}`} />
+    </div>
+  ) : (
+    // No image selected yet — elegant placeholder, never a broken image.
+    <div class:list={['rimg', 'placeholder', `variant-${variant}`, { rounded }]} style={`aspect-ratio:${ratio}`} role="img" aria-label={fallbackLabel ?? 'Photo coming soon'}>
+      <svg class="grid-pattern" aria-hidden="true">
+        <defs>
+          <pattern id={`grid-${fallbackIcon}`} width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M28 0H0V28" fill="none" stroke="currentColor" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#grid-${fallbackIcon})`} />
+      </svg>
+      <span class="ph-icon"><Icon name={fallbackIcon} stroke-width={1.2} /></span>
+      {fallbackLabel && <span class="ph-label">{fallbackLabel}</span>}
+    </div>
+  )
+}
+
+<style>
+  .rimg {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-ice);
+  }
+  .rimg.rounded {
+    border-radius: var(--radius-lg);
+  }
+  .rimg picture,
+  .rimg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .rimg img {
+    object-fit: cover;
+  }
+
+  .variant-hero.rounded {
+    border-radius: var(--radius-lg);
+  }
+  .variant-background {
+    border-radius: 0;
+  }
+  .variant-gallery img {
+    transition: transform var(--duration-slow) var(--ease-out);
+  }
+
+  /* Placeholder fallback */
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(150deg, var(--color-ice) 0%, #dceefa 100%);
+    color: var(--color-royal);
+  }
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+    color: currentColor;
+  }
+  .ph-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+  }
+  .ph-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .ph-label {
+    position: relative;
+    font-family: var(--font-heading);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+</style>

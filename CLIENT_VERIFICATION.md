@@ -70,9 +70,15 @@ as-is:
    the Facebook page. Once Google Business Profile or other verified reviews
    are available, add them via the CMS (see `CMS_GUIDE.md`).
 
-7. **Gallery photography** — no real project photos were available to reuse.
-   The Gallery page currently uses styled placeholders. See
-   `ASSETS_NEEDED.md`.
+7. **Gallery and site-wide photography** — no real Jireh Cooler project
+   photos were available to reuse, so the site uses appropriately-licensed
+   Pexels stock photography throughout (technicians at work, HVAC
+   equipment, South Florida homes) as realistic, professional placeholders.
+   None of it is labeled or implied to be Jireh Cooler's own staff or
+   completed jobs — alt text describes the photos generically. See
+   `ASSET_INVENTORY.md` for full sourcing/licensing records and
+   `ASSETS_NEEDED.md` for where real company photography should eventually
+   replace each stock photo.
 
 8. **WhatsApp number** — the old site mentioned WhatsApp availability but did
    not display a specific number in the crawled content. `whatsapp.enabled`

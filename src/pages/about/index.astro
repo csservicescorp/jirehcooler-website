@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TrustPoints from '@components/TrustPoints.astro';
 import CtaSection from '@components/CtaSection.astro';
 import about from '@data/about.json';
@@ -21,7 +21,7 @@ import site from '@data/site.json';
   <section>
     <div class="container about-grid">
       <div data-reveal>
-        <ImagePlaceholder icon="users" ratio="4 / 3" variant="ice" label={about.imageAlt} />
+        <ResponsiveImage src={about.image} alt={about.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="users" />
       </div>
       <div data-reveal>
         <p class="intro">{about.intro}</p>

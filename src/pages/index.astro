@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Icon from '@components/Icon.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TrustPoints from '@components/TrustPoints.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import ProcessSteps from '@components/ProcessSteps.astro';
@@ -25,6 +25,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
   title="Jireh Cooler | South Florida Air Conditioning Experts"
   description="Family-operated, state-certified AC repair, installation, and maintenance in Broward and Palm Beach County since 1994. 24/7 emergency service."
   schema={localBusinessSchema()}
+  preloadImage={home.hero.image}
 >
   <!-- HERO -->
   <section class="hero">
@@ -47,7 +48,14 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
         </ul>
       </div>
       <div class="hero-media" data-reveal>
-        <ImagePlaceholder icon="thermostat" label="Service Photography" ratio="4 / 5" variant="blue" />
+        <ResponsiveImage
+          src={home.hero.image}
+          alt={home.hero.imageAlt}
+          ratio="4 / 5"
+          variant="hero"
+          priority
+          sizes="(min-width: 720px) 45vw, 100vw"
+        />
       </div>
     </div>
   </section>
@@ -60,7 +68,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
       </div>
       <div class="pathway-grid">
         <a href={home.pathways.residential.href} class="pathway-card" data-reveal>
-          <ImagePlaceholder icon="home" ratio="16 / 10" variant="ice" />
+          <ResponsiveImage src={home.pathways.residential.image} alt={home.pathways.residential.imageAlt} ratio="16 / 10" variant="card" />
           <div class="pathway-body">
             <h3>{home.pathways.residential.label}</h3>
             <p>{home.pathways.residential.description}</p>
@@ -68,7 +76,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
           </div>
         </a>
         <a href={home.pathways.commercial.href} class="pathway-card" data-reveal style="transition-delay:80ms">
-          <ImagePlaceholder icon="building" ratio="16 / 10" variant="navy" />
+          <ResponsiveImage src={home.pathways.commercial.image} alt={home.pathways.commercial.imageAlt} ratio="16 / 10" variant="card" />
           <div class="pathway-body">
             <h3>{home.pathways.commercial.label}</h3>
             <p>{home.pathways.commercial.description}</p>
@@ -80,7 +88,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
   </section>
 
   <!-- TRUST -->
-  <section class="section-navy trust-section">
+  <section class="section-royal trust-section">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Why South Florida Trusts Us</p>
@@ -117,23 +125,22 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     </div>
   </section>
 
-  <!-- EMERGENCY -->
+  <!-- EMERGENCY (full-bleed editorial photo, not another flat color block) -->
   <section class="emergency-section">
-    <div class="container emergency-grid">
-      <div class="emergency-copy" data-reveal>
-        <p class="eyebrow">Emergency Service</p>
-        <h2>{home.emergency.heading}</h2>
-        <p>{home.emergency.description}</p>
-        <div class="hero-actions">
-          <a href={home.emergency.cta.href} class="btn btn-primary btn-lg">
-            <Icon name="bolt" class="icon-sm" />
-            {home.emergency.cta.label}
-          </a>
-          <a href={home.emergency.href} class="btn btn-outline btn-lg">Learn More</a>
-        </div>
-      </div>
-      <div class="emergency-media" data-reveal>
-        <ImagePlaceholder icon="bolt" ratio="4 / 3" variant="ice" label="24/7 Response" />
+    <div class="emergency-bg">
+      <ResponsiveImage src={home.emergency.image} alt={home.emergency.imageAlt} ratio="16 / 9" variant="background" rounded={false} sizes="100vw" />
+      <div class="emergency-scrim" aria-hidden="true"></div>
+    </div>
+    <div class="container emergency-inner" data-reveal>
+      <p class="eyebrow">Emergency Service</p>
+      <h2>{home.emergency.heading}</h2>
+      <p>{home.emergency.description}</p>
+      <div class="hero-actions">
+        <a href={home.emergency.cta.href} class="btn btn-primary btn-lg">
+          <Icon name="bolt" class="icon-sm" />
+          {home.emergency.cta.label}
+        </a>
+        <a href={home.emergency.href} class="btn btn-outline btn-lg">Learn More</a>
       </div>
     </div>
   </section>
@@ -161,10 +168,10 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
   </section>
 
   <!-- MEMBERSHIP -->
-  <section class="section-navy membership-section">
+  <section class="section-royal membership-section">
     <div class="container membership-grid">
       <div data-reveal>
-        <ImagePlaceholder icon="check-circle" ratio="4 / 3" variant="blue" label="V.I.P. Membership" />
+        <ResponsiveImage src={home.membership.image} alt={home.membership.imageAlt} ratio="4 / 3" variant="editorial" />
       </div>
       <div data-reveal>
         <p class="eyebrow">Preventive Maintenance</p>
@@ -190,7 +197,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
         <a href={home.financing.cta.href} class="btn btn-primary btn-lg">{home.financing.cta.label}</a>
       </div>
       <div data-reveal>
-        <ImagePlaceholder icon="document" ratio="4 / 3" variant="ice" label="Financing" />
+        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" variant="editorial" />
       </div>
     </div>
   </section>
@@ -199,7 +206,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
   <section class="section-ice air-quality-section">
     <div class="container air-grid">
       <div data-reveal>
-        <ImagePlaceholder icon="wind" ratio="4 / 3" variant="blue" label="Indoor Air Quality" />
+        <ResponsiveImage src={home.airQuality.image} alt={home.airQuality.imageAlt} ratio="4 / 3" variant="editorial" />
       </div>
       <div data-reveal>
         <p class="eyebrow">Indoor Air Quality</p>
@@ -258,7 +265,14 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     </div>
   </section>
 
-  <CtaSection heading={home.finalCta.heading} description={home.finalCta.description} primaryCta={home.finalCta.primaryCta} secondaryCta={home.finalCta.secondaryCta} />
+  <CtaSection
+    heading={home.finalCta.heading}
+    description={home.finalCta.description}
+    primaryCta={home.finalCta.primaryCta}
+    secondaryCta={home.finalCta.secondaryCta}
+    backgroundImage={home.finalCta.backgroundImage}
+    backgroundImageAlt={home.finalCta.backgroundImageAlt}
+  />
 </BaseLayout>
 
 <style>
@@ -300,7 +314,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     padding: 0;
     font-size: var(--fs-xs);
     font-weight: 600;
-    color: var(--color-navy);
+    color: var(--color-royal);
   }
   .hero-facts li {
     display: flex;
@@ -325,6 +339,12 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
   }
+  .pathway-card:hover :global(img) {
+    transform: scale(1.04);
+  }
+  .pathway-card :global(.rimg) {
+    border-radius: 0;
+  }
   .pathway-body {
     padding: var(--space-lg);
   }
@@ -334,7 +354,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     gap: 0.35rem;
     font-family: var(--font-heading);
     font-weight: 600;
-    color: var(--color-blue);
+    color: var(--color-royal);
   }
 
   .services-grid {
@@ -349,23 +369,46 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
   }
 
   .emergency-section {
-    background: var(--color-navy-deep);
+    position: relative;
+    padding-block: var(--space-3xl);
+    color: var(--color-white);
+    overflow: hidden;
+  }
+  .emergency-bg {
+    position: absolute;
+    inset: 0;
+  }
+  .emergency-bg :global(.rimg) {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+  .emergency-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(4, 54, 136, 0.92) 0%, rgba(10, 45, 102, 0.82) 45%, rgba(10, 45, 102, 0.55) 100%);
+  }
+  .emergency-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+  }
+  .emergency-inner .eyebrow {
+    color: var(--color-cyan);
+  }
+  .emergency-inner h2 {
     color: var(--color-white);
   }
-  .emergency-section .eyebrow {
-    color: var(--color-blue-light);
+  .emergency-inner p {
+    color: rgba(255, 255, 255, 0.82);
   }
-  .emergency-section h2 {
+  .emergency-inner .btn-outline {
+    background: rgba(4, 54, 136, 0.35);
+    border-color: rgba(255, 255, 255, 0.55);
     color: var(--color-white);
   }
-  .emergency-section p {
-    color: rgba(255, 255, 255, 0.75);
-  }
-  .emergency-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-xl);
-    align-items: center;
+  .emergency-inner .btn-outline:hover {
+    background: rgba(4, 54, 136, 0.55);
+    border-color: var(--color-white);
   }
 
   .membership-grid,
@@ -413,7 +456,7 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     align-items: center;
     gap: 0.4rem;
     font-weight: 600;
-    color: var(--color-navy);
+    color: var(--color-royal);
     font-size: var(--fs-sm);
   }
 
@@ -426,9 +469,6 @@ const areas = (await getCollection('serviceAreas', ({ data }) => data.published)
     }
     .services-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .emergency-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
     .membership-grid,
     .financing-grid,

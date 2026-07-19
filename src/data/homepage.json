@@ -3,8 +3,8 @@
     "eyebrow": "Serving Broward & Palm Beach County Since 1994",
     "headline": "South Florida's Trusted Air Conditioning Experts",
     "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
-    "image": "/images/hero/hero-technician.jpg",
-    "imageAlt": "Jireh Cooler technician servicing a residential air conditioning unit in South Florida",
+    "image": "/images/homepage/hero-ac-technician-repair.jpg",
+    "imageAlt": "HVAC technician using pressure gauges to service an outdoor air conditioning unit",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
     "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
   },
@@ -14,13 +14,15 @@
       "label": "Residential HVAC",
       "description": "Reliable comfort for your home, from same-day repairs to full system replacements.",
       "href": "/residential-hvac/",
-      "image": "/images/pathways/residential.jpg"
+      "image": "/images/homepage/residential-modern-home-exterior.jpg",
+      "imageAlt": "Modern South Florida residential home exterior"
     },
     "commercial": {
       "label": "Commercial HVAC",
       "description": "Dependable climate control for offices, restaurants, and retail spaces that can't afford downtime.",
       "href": "/commercial-hvac/",
-      "image": "/images/pathways/commercial.jpg"
+      "image": "/images/homepage/commercial-rooftop-hvac-skyline.jpg",
+      "imageAlt": "Commercial rooftop air conditioning units under a clear blue sky"
     }
   },
   "trust": {
@@ -61,7 +63,9 @@
     "heading": "AC Down? We're Already On Our Way.",
     "description": "South Florida heat doesn't wait for business hours, and neither do we. Our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year.",
     "cta": { "label": "Call for Emergency Service", "href": "tel:+19544266010" },
-    "href": "/emergency-ac-service/"
+    "href": "/emergency-ac-service/",
+    "image": "/images/homepage/emergency-technician-response.jpg",
+    "imageAlt": "HVAC technician using pressure gauges during an urgent air conditioning repair"
   },
   "whyChooseUs": {
     "heading": "Why South Florida Chooses Jireh Cooler",
@@ -117,23 +121,30 @@
       "Two scheduled visits per year",
       "Priority scheduling for members"
     ],
-    "cta": { "label": "Learn About Membership", "href": "/maintenance-membership/" }
+    "cta": { "label": "Learn About Membership", "href": "/maintenance-membership/" },
+    "image": "/images/homepage/membership-technician-inspection.jpg",
+    "imageAlt": "Technician performing hands-on maintenance work on an outdoor air conditioning unit"
   },
   "financing": {
     "heading": "Flexible Financing Options",
     "description": "Financing is available for qualified homeowners so a system replacement doesn't have to be an all-at-once expense.",
-    "cta": { "label": "Explore Financing", "href": "/financing/" }
+    "cta": { "label": "Explore Financing", "href": "/financing/" },
+    "image": "/images/homepage/financing-suburban-homes.jpg",
+    "imageAlt": "Sunset view of a South Florida suburban neighborhood with palm trees"
   },
   "airQuality": {
     "heading": "Breathe Easier Indoors",
     "description": "UV light systems, duct cleaning, and filtration upgrades that improve the air quality inside your home or business.",
     "cta": { "label": "See Indoor Air Quality Options", "href": "/indoor-air-quality/" },
-    "image": "/images/sections/air-quality.jpg"
+    "image": "/images/services/indoor-air-quality-bright-interior.jpg",
+    "imageAlt": "Bright, clean modern living space representing improved indoor air quality"
   },
   "finalCta": {
     "heading": "Ready for Reliable Comfort?",
     "description": "Talk to a real technician, not a call center. Reach out today for a straightforward estimate or emergency service.",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
-    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" }
+    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" },
+    "backgroundImage": "/images/backgrounds/cta-background-rooftop-units.jpg",
+    "backgroundImageAlt": "Rooftop commercial HVAC units against a clear sky"
   }
 }

@@ -45,6 +45,24 @@ The editor is organized into these sections, matching `.pages.yml`:
 - **FAQs** — add/edit/reorder frequently asked questions by category.
 - **Service Areas** — add/remove cities and their county.
 - **Contact** — the subset of Website Settings relevant to the Contact page.
+- **SEO** — the default social-sharing (Open Graph) image used when a page
+  without its own custom image is shared on Facebook/Instagram/text.
+
+## Uploading and replacing photos
+
+Every image field in Pages CMS (labeled "Photo" or "Image") lets the client
+upload a new file, or pick an existing one already in the media library, and
+edit its alt text — all from the same field, no code involved. Photos are
+stored under `public/images/`, organized by section (homepage, services,
+about, gallery, backgrounds).
+
+New uploads display immediately using the original file the client
+uploaded. For the fully optimized experience (automatic AVIF/WebP versions
+and zero layout shift), a developer should periodically run
+`node scripts/optimize-images.mjs` after new photos are added and commit
+the result — see `PROJECT_ARCHITECTURE.md` → "Image pipeline" for details.
+This is a maintenance step, not something required for the site to keep
+working; uploaded photos render correctly either way.
 
 ## What the client cannot edit (by design)
 

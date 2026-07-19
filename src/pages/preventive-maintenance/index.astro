@@ -2,7 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import TrustPoints from '@components/TrustPoints.astro';
-import ImagePlaceholder from '@components/ImagePlaceholder.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
 import CtaSection from '@components/CtaSection.astro';
 import maintenance from '@data/maintenance.json';
 
@@ -23,7 +23,7 @@ const p = maintenance.preventive;
   <section>
     <div class="container maint-grid">
       <div data-reveal>
-        <ImagePlaceholder icon="thermostat" ratio="4 / 3" variant="ice" label="Preventive Maintenance" />
+        <ResponsiveImage src={p.image} alt={p.imageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="thermostat" />
       </div>
       <div data-reveal>
         <h2>The Benefits of Staying Ahead</h2>

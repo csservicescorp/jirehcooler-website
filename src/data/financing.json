@@ -18,5 +18,7 @@
     }
   ],
   "disclaimer": "Financing terms, promotional periods, and approval are subject to credit qualification and are determined by our financing partner, not Jireh Cooler directly. Contact us for current rates and terms.",
-  "cta": { "label": "Ask About Financing", "href": "/request-an-estimate/" }
+  "cta": { "label": "Ask About Financing", "href": "/request-an-estimate/" },
+  "image": "/images/homepage/financing-suburban-homes.jpg",
+  "imageAlt": "Sunset view of a South Florida suburban neighborhood with palm trees"
 }
