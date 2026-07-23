@@ -85,7 +85,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
       </div>
       <div class="pathway-grid">
         <a href={home.pathways.residential.href} class="pathway-card" data-reveal>
-          <ResponsiveImage src={home.pathways.residential.image} alt={home.pathways.residential.imageAlt} ratio="16 / 10" variant="card" />
+          <ResponsiveImage src={home.pathways.residential.image} alt={home.pathways.residential.imageAlt} ratio="16 / 10" variant="card" focal="center" />
           <div class="pathway-body">
             <h3>{home.pathways.residential.label}</h3>
             <p>{home.pathways.residential.description}</p>
