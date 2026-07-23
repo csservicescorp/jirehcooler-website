@@ -232,5 +232,11 @@
     "height": 810,
     "smWidth": 600,
     "smHeight": 450
+  },
+  "/images/about/jireh-businessrate-award.jpg": {
+    "width": 1024,
+    "height": 1535,
+    "smWidth": 640,
+    "smHeight": 959
   }
 }

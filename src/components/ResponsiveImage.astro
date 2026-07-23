@@ -10,6 +10,7 @@ interface Props {
   variant?: 'hero' | 'card' | 'editorial' | 'background' | 'gallery';
   priority?: boolean; // eager-load + high fetch priority (hero image only)
   focal?: string; // CSS object-position, e.g. "center", "top", "20% 40%"
+  fit?: 'cover' | 'contain'; // object-fit; use 'contain' to show a document/plaque/graphic uncropped
   rounded?: boolean;
   sizes?: string;
   fallbackIcon?: string;
@@ -24,6 +25,7 @@ const {
   variant = 'card',
   priority = false,
   focal = 'center',
+  fit = 'cover',
   rounded = true,
   sizes = '(min-width: 960px) 50vw, 100vw',
   fallbackIcon = 'building',
@@ -42,7 +44,7 @@ const ratioVars = `--ratio:${ratio};--ratio-mobile:${mobileRatio ?? ratio};`;
 
 {
   src && entry && base ? (
-    <div class:list={['rimg', `variant-${variant}`, { rounded }]} style={ratioVars}>
+    <div class:list={['rimg', `variant-${variant}`, { rounded, 'fit-contain': fit === 'contain' }]} style={ratioVars}>
       <picture>
         <source
           type="image/avif"
@@ -116,6 +118,9 @@ const ratioVars = `--ratio:${ratio};--ratio-mobile:${mobileRatio ?? ratio};`;
   }
   .rimg img {
     object-fit: cover;
+  }
+  .rimg.fit-contain img {
+    object-fit: contain;
   }
 
   .variant-hero.rounded {

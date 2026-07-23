@@ -43,15 +43,23 @@ import site from '@data/site.json';
     </div>
   </section>
 
-  <section class="planning-section">
+  <section class="planning-section recognition-section section-soft">
     <div class="container planning-grid">
-      <div class="planning-copy" data-reveal>
-        <p class="eyebrow">Behind Every Installation</p>
-        <h2>{about.secondaryHeading}</h2>
-        <p>{about.secondaryText}</p>
+      <div class="recognition-image" data-reveal>
+        <ResponsiveImage
+          src={about.recognitionImage}
+          alt={about.recognitionImageAlt}
+          ratio="1024 / 1535"
+          mobileRatio="1024 / 1535"
+          variant="editorial"
+          fit="contain"
+          fallbackIcon="star"
+        />
       </div>
-      <div data-reveal>
-        <ResponsiveImage src={about.secondaryImage} alt={about.secondaryImageAlt} ratio="1 / 1" mobileRatio="4 / 3" variant="editorial" fallbackIcon="document" />
+      <div class="planning-copy" data-reveal>
+        <p class="eyebrow">{about.recognitionEyebrow}</p>
+        <h2>{about.recognitionHeading}</h2>
+        <p>{about.recognitionText}</p>
       </div>
     </div>
   </section>
@@ -107,6 +115,15 @@ import site from '@data/site.json';
   .planning-copy p:not(.eyebrow) {
     font-size: var(--fs-md);
     max-width: 46ch;
+  }
+
+  .recognition-image {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+  .recognition-image :global(.rimg) {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
   }
 
   @media (min-width: 860px) {
