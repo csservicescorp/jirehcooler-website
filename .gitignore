@@ -19,6 +19,11 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Incoming client assets staged for processing (raw zips, extracted
+# scratch copies) — originals get copied into public/images/jireh-originals/
+# once processed, so nothing here needs to be tracked.
+_incoming/
+
 # Logs
 npm-debug.log*
 *.log

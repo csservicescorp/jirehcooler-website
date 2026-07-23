@@ -7,6 +7,7 @@ import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import ReviewCard from '@components/ReviewCard.astro';
+import ServiceGallery from '@components/ServiceGallery.astro';
 import site from '@data/site.json';
 import { serviceSchema } from '@/lib/schema';
 
@@ -100,6 +101,18 @@ const relatedReview = relatedReviewerName
       </aside>
     </div>
   </section>
+
+  {service.data.gallery && service.data.gallery.length > 0 && (
+    <section class="service-gallery-section">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">Real Projects</p>
+          <h2>{service.data.title} in Action</h2>
+        </div>
+        <ServiceGallery items={service.data.gallery} />
+      </div>
+    </section>
+  )}
 
   {relatedReview && (
     <section class="related-review-section">

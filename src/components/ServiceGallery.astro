@@ -1,0 +1,44 @@
+---
+import ResponsiveImage from './ResponsiveImage.astro';
+
+interface Props {
+  items: { image: string; alt: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="service-gallery">
+  {items.map((item, i) => (
+    <figure class="service-gallery-item" data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
+      <ResponsiveImage
+        src={item.image}
+        alt={item.alt}
+        ratio="4 / 3"
+        variant="gallery"
+        sizes="(min-width: 960px) 33vw, (min-width: 720px) 50vw, 100vw"
+      />
+    </figure>
+  ))}
+</div>
+
+<style>
+  .service-gallery {
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .service-gallery-item {
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+  }
+  .service-gallery-item :global(img:hover) {
+    transform: scale(1.05);
+  }
+  @media (min-width: 640px) {
+    .service-gallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

@@ -31,5 +31,22 @@
   "secondaryHeading": "Every Job Starts With a Plan",
   "secondaryText": "Before a technician ever picks up a tool, the details get worked out on paper: system layout, equipment sizing, and what the job actually requires. That upfront planning is what keeps installations on schedule and free of surprises.",
   "secondaryImage": "/images/about/jireh-planning-blueprint.jpg",
-  "secondaryImageAlt": "Jireh Cooler owner reviewing a system layout blueprint"
+  "secondaryImageAlt": "Jireh Cooler owner reviewing a system layout blueprint",
+  "leadershipEyebrow": "Meet the Owner",
+  "leadershipHeading": "Led by Moyses Oliveira, Not a Call Center",
+  "leadershipText": [
+    "Moyses Oliveira founded Jireh Cooler in 1994 and has run every year of it hands-on, a South Technical Education Center-trained technician who built the company from the ground up alongside his wife Evelise.",
+    "Three decades later, that same hands-on approach still shapes how the company operates: technicians trained to Moyses' standard, jobs scoped with his direct input, and a customer's ability to reach an owner who has actually done the work himself.",
+    "That continuity, the same ownership and leadership since day one, is what customers across Broward and Palm Beach County point to when they explain why they trust Jireh Cooler with their home or business."
+  ],
+  "leadershipImage": "/images/about/jireh-founder-leadership.jpg",
+  "leadershipImageAlt": "Moyses Oliveira, owner of Jireh Cooler, on-site at a South Florida construction project",
+  "teamEyebrow": "Behind the Scenes",
+  "teamHeading": "A Team That Meets, Not Just Dispatches",
+  "teamText": [
+    "Jireh Cooler's technicians meet regularly to stay aligned, not just to catch up. These sessions cover new equipment and manufacturer specifications, technical standards for how a job should be done, and how a call should be handled from the first phone call to the final walkthrough.",
+    "That consistency is deliberate. A customer in Boca Raton should get the same standard of work and communication as a customer in Fort Lauderdale, and regular team alignment is how that stays true as the company grows."
+  ],
+  "teamImage": "/images/about/jireh-team-meeting.jpg",
+  "teamImageAlt": "Jireh Cooler technicians and staff in a team training and alignment meeting"
 }

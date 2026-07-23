@@ -1,45 +1,9 @@
 {
-  "/images/homepage/emergency-technician-response.jpg": {
-    "width": 1400,
-    "height": 2100,
-    "smWidth": 700,
-    "smHeight": 1050
-  },
-  "/images/homepage/membership-technician-inspection.jpg": {
-    "width": 1400,
-    "height": 1114,
-    "smWidth": 700,
-    "smHeight": 557
-  },
   "/images/homepage/financing-suburban-homes.jpg": {
     "width": 1400,
     "height": 2488,
     "smWidth": 700,
     "smHeight": 1244
-  },
-  "/images/backgrounds/cta-background-rooftop-units.jpg": {
-    "width": 1920,
-    "height": 1280,
-    "smWidth": 800,
-    "smHeight": 533
-  },
-  "/images/services/ac-installation-technician.jpg": {
-    "width": 1400,
-    "height": 2100,
-    "smWidth": 700,
-    "smHeight": 1050
-  },
-  "/images/services/indoor-air-quality-bright-interior.jpg": {
-    "width": 1400,
-    "height": 934,
-    "smWidth": 700,
-    "smHeight": 467
-  },
-  "/images/services/duct-cleaning-industrial-ducts.jpg": {
-    "width": 1400,
-    "height": 2100,
-    "smWidth": 700,
-    "smHeight": 1050
   },
   "/images/services/uv-light-ventilation-system.jpg": {
     "width": 1400,
@@ -101,23 +65,11 @@
     "smWidth": 450,
     "smHeight": 191
   },
-  "/images/homepage/jireh-residential-ac-service.jpg": {
-    "width": 1448,
-    "height": 1086,
-    "smWidth": 800,
-    "smHeight": 600
-  },
   "/images/homepage/jireh-commercial-thermostat-service.jpg": {
     "width": 1448,
     "height": 1086,
     "smWidth": 800,
     "smHeight": 600
-  },
-  "/images/services/jireh-ac-repair-technician.jpg": {
-    "width": 1327,
-    "height": 1186,
-    "smWidth": 700,
-    "smHeight": 626
   },
   "/images/services/jireh-attic-hvac-service.jpg": {
     "width": 941,
@@ -136,5 +88,149 @@
     "height": 1086,
     "smWidth": 800,
     "smHeight": 600
+  },
+  "/images/services/jireh-ac-installation-multi-system.jpg": {
+    "width": 1400,
+    "height": 1050,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/homepage/jireh-emergency-diagnosis.jpg": {
+    "width": 1080,
+    "height": 810,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/homepage/jireh-maintenance-visit.jpg": {
+    "width": 1400,
+    "height": 1050,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/services/jireh-commercial-rooftop-team.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "smWidth": 800,
+    "smHeight": 600
+  },
+  "/images/services/jireh-ductwork-installation.jpg": {
+    "width": 1400,
+    "height": 788,
+    "smWidth": 700,
+    "smHeight": 394
+  },
+  "/images/backgrounds/jireh-rooftop-crane-lift.jpg": {
+    "width": 1440,
+    "height": 810,
+    "smWidth": 800,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-luxury-new-construction.jpg": {
+    "width": 1200,
+    "height": 872,
+    "smWidth": 600,
+    "smHeight": 436
+  },
+  "/images/gallery/jireh-estate-service-call.jpg": {
+    "width": 1200,
+    "height": 900,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-air-handler-inspection.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "smWidth": 600,
+    "smHeight": 800
+  },
+  "/images/gallery/jireh-commercial-ductwork-system.jpg": {
+    "width": 1177,
+    "height": 883,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-construction-partnership.jpg": {
+    "width": 1200,
+    "height": 899,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-dealership-install.jpg": {
+    "width": 1200,
+    "height": 900,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-restaurant-delivery.jpg": {
+    "width": 1200,
+    "height": 900,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-crane-delivery.jpg": {
+    "width": 1200,
+    "height": 675,
+    "smWidth": 600,
+    "smHeight": 338
+  },
+  "/images/gallery/jireh-equipment-delivery-team.jpg": {
+    "width": 1200,
+    "height": 675,
+    "smWidth": 600,
+    "smHeight": 338
+  },
+  "/images/gallery/jireh-construction-site-visit.jpg": {
+    "width": 1200,
+    "height": 842,
+    "smWidth": 600,
+    "smHeight": 421
+  },
+  "/images/gallery/jireh-package-units-ready.jpg": {
+    "width": 1080,
+    "height": 810,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/gallery/jireh-rooftop-package-service.jpg": {
+    "width": 1080,
+    "height": 810,
+    "smWidth": 600,
+    "smHeight": 450
+  },
+  "/images/homepage/jireh-residential-service-van.jpg": {
+    "width": 1078,
+    "height": 811,
+    "smWidth": 700,
+    "smHeight": 527
+  },
+  "/images/services/jireh-repair-diagnostic.jpg": {
+    "width": 1400,
+    "height": 1050,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/about/jireh-team-meeting.jpg": {
+    "width": 1200,
+    "height": 675,
+    "smWidth": 700,
+    "smHeight": 394
+  },
+  "/images/about/jireh-founder-leadership.jpg": {
+    "width": 1200,
+    "height": 800,
+    "smWidth": 700,
+    "smHeight": 467
+  },
+  "/images/services/jireh-commercial-fleet-ready.jpg": {
+    "width": 1200,
+    "height": 675,
+    "smWidth": 600,
+    "smHeight": 338
+  },
+  "/images/services/jireh-residential-equipment-delivery.jpg": {
+    "width": 1080,
+    "height": 810,
+    "smWidth": 600,
+    "smHeight": 450
   }
 }

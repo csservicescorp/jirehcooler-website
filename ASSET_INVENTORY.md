@@ -74,6 +74,49 @@ The residential and commercial pathway source photos share identical
 1448×1086 source dimensions and the same `ratio="16 / 10"` card treatment,
 so the two homepage cards render at equal height and proportion.
 
+A third batch of 28 official, client-approved, pre-renamed photos was added
+later in `public/images/jireh-originals/batch3-new-photos/` (originals
+preserved there, untouched) and processed with
+`scripts/optimize-jireh-photos-batch3.mjs`. Every photo was visually
+reviewed before use; all show genuine Jireh Cooler vans, uniforms, or
+jobsite signage (own logo, own phone numbers) — no third-party branding.
+18 of the 28 were placed on the site; the remaining 10 (mostly
+near-duplicate framings of the same two construction jobsites, plus one
+team-training photo with no HVAC work visible) are kept in the originals
+folder, unused, ready to reuse later, matching the precedent set by
+`jireh-vans-residential.png`.
+
+| Original file | Production copy | Used on |
+|---|---|---|
+| `jireh-cooler-residential-multi-system-ac-service-01.jpg` | `public/images/services/jireh-ac-installation-multi-system.*` | AC Installation & Replacement page; also Gallery |
+| `jireh-cooler-frozen-evaporator-coil-diagnosis-01.jpg` | `public/images/homepage/jireh-emergency-diagnosis.*` | Homepage emergency section background; also Gallery |
+| `jireh-cooler-residential-ac-repair-technician-01.jpg` | `public/images/homepage/jireh-maintenance-visit.*` | Homepage membership section + V.I.P. Maintenance Membership page |
+| `jireh-cooler-commercial-rooftop-hvac-repair-team-01.png` | `public/images/services/jireh-commercial-rooftop-team.*` | Commercial HVAC page (previously reused the thermostat photo) |
+| `jireh-cooler-commercial-ductwork-installation-01.jpg` | `public/images/services/jireh-ductwork-installation.*` | Duct Cleaning page |
+| `jireh-cooler-commercial-rooftop-unit-crane-lift-01.jpg` | `public/images/backgrounds/jireh-rooftop-crane-lift.*` | Homepage final CTA background |
+| `jireh-cooler-luxury-residential-new-construction-hvac-01.jpg` | `public/images/gallery/jireh-luxury-new-construction.*` | Gallery |
+| `jireh-cooler-residential-service-team-home-01.png` | `public/images/gallery/jireh-estate-service-call.*` | Gallery |
+| `jireh-cooler-indoor-hvac-system-inspection-01.png` | `public/images/gallery/jireh-air-handler-inspection.*` | Gallery |
+| `jireh-cooler-commercial-ductwork-system-02.jpg` | `public/images/gallery/jireh-commercial-ductwork-system.*` | Gallery |
+| `jireh-cooler-commercial-project-partnership-01.jpg` | `public/images/gallery/jireh-construction-partnership.*` | Gallery |
+| `jireh-cooler-commercial-hvac-installation-auto-dealership-01.png` | `public/images/gallery/jireh-dealership-install.*` | Gallery |
+| `jireh-cooler-commercial-hvac-delivery-restaurant-01.png` | `public/images/gallery/jireh-restaurant-delivery.*` | Gallery |
+| `jireh-cooler-commercial-hvac-equipment-crane-delivery-01.jpg` | `public/images/gallery/jireh-crane-delivery.*` | Gallery |
+| `jireh-cooler-hvac-equipment-delivery-team-01.jpg` | `public/images/gallery/jireh-equipment-delivery-team.*` | Gallery |
+| `jireh-cooler-commercial-construction-project-team-01.jpg` | `public/images/gallery/jireh-construction-site-visit.*` | Gallery |
+| `jireh-cooler-commercial-package-units-installation-ready-01.jpg` | `public/images/gallery/jireh-package-units-ready.*` | Gallery |
+| `jireh-cooler-commercial-rooftop-package-unit-service-01.jpg` | `public/images/gallery/jireh-rooftop-package-service.*` | Gallery |
+
+This batch **replaced five remaining stock photos** (all deleted, all
+formats): `homepage/emergency-technician-response.*` (Pexels 6471911),
+`homepage/membership-technician-inspection.*` (Pexels 5463581),
+`backgrounds/cta-background-rooftop-units.*` (Pexels 2539462),
+`services/ac-installation-technician.*` (Pexels 5463582), and
+`services/duct-cleaning-industrial-ducts.*` (source untracked). The
+duct-cleaning replacement photo shows ductwork *installation*, not active
+cleaning — the alt text describes it honestly as installed ductwork rather
+than overclaiming "cleaning" in progress.
+
 **Homepage hero redesign — `office.png`:** a photo of the Jireh Cooler
 office reception (with the company logo visible on the accent wall)
 replaced the homepage's previous side-by-side hero layout with a
@@ -124,22 +167,22 @@ Pexels source.
 
 | File (`public/images/...`) | Pexels photo ID | Photographer | Pexels URL |
 |---|---|---|---|
-| `homepage/emergency-technician-response.jpg` | 6471911 | José Andrés Pacheco Cortes | pexels.com/photo/6471911 |
-| `homepage/membership-technician-inspection.jpg` | 5463581 | José Andrés Pacheco Cortes | pexels.com/photo/5463581 |
 | `homepage/financing-suburban-homes.jpg` | 30433180 | Onbab | pexels.com/photo/30433180 |
-| `backgrounds/cta-background-rooftop-units.jpg` | 2539462 | Sergei A | pexels.com/photo/2539462 |
-| `services/ac-installation-technician.jpg` | 5463582 | José Andrés Pacheco Cortes | pexels.com/photo/5463582 |
 | `services/indoor-air-quality-bright-interior.jpg` | 8146213 | Artbovich | pexels.com/photo/8146213 |
-| `services/duct-cleaning-industrial-ducts.jpg` | 8297856 | Mikhail Nilov | pexels.com/photo/8297856 |
 | `services/uv-light-ventilation-system.jpg` | 36129008 | jan-van-der-wolf | pexels.com/photo/36129008 |
 | `services/pool-heater-miami-villa-sunset.jpg` | 7313084 | Onbab | pexels.com/photo/7313084 |
 | `services/water-heater-installation.jpg` | 34938439 | (Pexels contributor 2157750954) | pexels.com/photo/34938439 |
 | `services/dryer-vent-laundry-closet.jpg` | 9515294 | introspectivedsgn | pexels.com/photo/9515294 |
 
+Note: `homepage/financing-suburban-homes.jpg` remains in the repository but
+is no longer referenced anywhere — the homepage financing section and
+Financing page both now use the real `jireh-financing-consultation` photo.
+
 ### Stock photos removed during the photography authenticity audit
 
-Seven stock photos were deleted from the repository (not just unused —
-removed outright) after a review of the Gallery page:
+Twelve stock photos have been deleted from the repository outright (not
+just unused) as real Jireh Cooler photography became available to replace
+them:
 
 | File (`public/images/...`) | Reason removed |
 |---|---|
@@ -150,6 +193,11 @@ removed outright) after a review of the Gallery page:
 | `homepage/residential-modern-home-exterior.jpg` | Same — no longer used anywhere after its Gallery entry was removed |
 | `services/ac-repair-manifold-gauge.jpg` | No longer used anywhere (superseded by the real AC Repair page photo; its Gallery use was removed) |
 | `services/smart-thermostat-wall-adjust.jpg` | No longer used anywhere (superseded by the real Smart Thermostats page photo; its Gallery use was removed) |
+| `homepage/emergency-technician-response.jpg` | Superseded by the real frozen-evaporator-coil diagnosis photo (batch 3) on the homepage emergency section |
+| `homepage/membership-technician-inspection.jpg` | Superseded by the real maintenance-visit photo (batch 3), used on both the homepage membership section and the V.I.P. Maintenance Membership page |
+| `backgrounds/cta-background-rooftop-units.jpg` | Superseded by the real rooftop crane-lift photo (batch 3) on the homepage final CTA background |
+| `services/ac-installation-technician.jpg` | Superseded by the real multi-system AC installation photo (batch 3) on the AC Installation & Replacement page |
+| `services/duct-cleaning-industrial-ducts.jpg` | Superseded by a real ductwork-installation photo (batch 3) on the Duct Cleaning page |
 
 See `CLIENT_VERIFICATION.md` item 7 for the full account of this cleanup.
 Stock photography that's still genuinely in use (table above) remains

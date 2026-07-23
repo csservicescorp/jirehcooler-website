@@ -30,6 +30,19 @@ import site from '@data/site.json';
     </div>
   </section>
 
+  <section class="planning-section leadership-section">
+    <div class="container planning-grid">
+      <div class="planning-copy" data-reveal>
+        <p class="eyebrow">{about.leadershipEyebrow}</p>
+        <h2>{about.leadershipHeading}</h2>
+        {about.leadershipText.map((p: string) => <p>{p}</p>)}
+      </div>
+      <div data-reveal>
+        <ResponsiveImage src={about.leadershipImage} alt={about.leadershipImageAlt} ratio="4 / 5" mobileRatio="4 / 3" variant="editorial" fallbackIcon="users" />
+      </div>
+    </div>
+  </section>
+
   <section class="planning-section">
     <div class="container planning-grid">
       <div class="planning-copy" data-reveal>
@@ -39,6 +52,19 @@ import site from '@data/site.json';
       </div>
       <div data-reveal>
         <ResponsiveImage src={about.secondaryImage} alt={about.secondaryImageAlt} ratio="1 / 1" mobileRatio="4 / 3" variant="editorial" fallbackIcon="document" />
+      </div>
+    </div>
+  </section>
+
+  <section class="planning-section team-section">
+    <div class="container planning-grid">
+      <div class="planning-copy" data-reveal>
+        <p class="eyebrow">{about.teamEyebrow}</p>
+        <h2>{about.teamHeading}</h2>
+        {about.teamText.map((p: string) => <p>{p}</p>)}
+      </div>
+      <div data-reveal>
+        <ResponsiveImage src={about.teamImage} alt={about.teamImageAlt} ratio="4 / 3" variant="editorial" fallbackIcon="users" />
       </div>
     </div>
   </section>

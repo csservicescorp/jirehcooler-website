@@ -12,6 +12,10 @@ const services = defineCollection({
     icon: z.string(),
     image: z.string(),
     imageAlt: z.string(),
+    gallery: z
+      .array(z.object({ image: z.string(), alt: z.string() }))
+      .max(6)
+      .optional(),
     benefits: z.array(z.string()),
     ctaLabel: z.string().default('Request an Estimate'),
     seoTitle: z.string(),
