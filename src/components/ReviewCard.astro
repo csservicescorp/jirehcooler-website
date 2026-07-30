@@ -1,7 +1,5 @@
 ---
-import Icon from './Icon.astro';
 import StarRating from './StarRating.astro';
-import site from '@data/site.json';
 
 interface Props {
   reviewerName: string;
@@ -13,7 +11,7 @@ interface Props {
   featured?: boolean;
 }
 
-const { reviewerName, rating, reviewText, reviewDate, sourceLabel, sourceUrl, featured = false } = Astro.props;
+const { reviewerName, rating, reviewText, reviewDate, sourceLabel, featured = false } = Astro.props;
 
 const LONG_REVIEW_THRESHOLD = 320;
 const isLong = reviewText.length > LONG_REVIEW_THRESHOLD;
@@ -34,8 +32,6 @@ if (reviewDate) {
     formattedDate = reviewDate;
   }
 }
-
-const linkHref = sourceUrl || site.googleProfileUrl;
 ---
 
 <article class:list={['review-card', { featured }]}>
@@ -62,17 +58,7 @@ const linkHref = sourceUrl || site.googleProfileUrl;
     <p class="review-text">{reviewText}</p>
   )}
 
-  <a
-    href={linkHref}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="review-source"
-    data-track="google_reviews_click"
-    data-track-params={JSON.stringify({ location: 'review_card' })}
-  >
-    {sourceLabel}
-    <Icon name="external" class="source-icon" />
-  </a>
+  <span class="review-source">{sourceLabel}</span>
 </article>
 
 <style>
@@ -187,22 +173,12 @@ const linkHref = sourceUrl || site.googleProfileUrl;
     display: none;
   }
   .review-source {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
+    display: block;
     margin-top: 1rem;
     padding-top: 0.8rem;
     border-top: 1px solid var(--color-border);
     font-size: var(--fs-xs);
     font-weight: 600;
-    color: var(--color-royal);
-    text-decoration: none;
-  }
-  .review-source:hover {
-    text-decoration: underline;
-  }
-  .source-icon {
-    width: 13px;
-    height: 13px;
+    color: var(--color-muted);
   }
 </style>

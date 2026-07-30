@@ -4,11 +4,10 @@ import Icon from '@components/Icon.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TrustPoints from '@components/TrustPoints.astro';
 import ServiceCard from '@components/ServiceCard.astro';
-import ProcessSteps from '@components/ProcessSteps.astro';
 import FaqAccordion from '@components/FaqAccordion.astro';
 import ReviewCard from '@components/ReviewCard.astro';
 import CtaSection from '@components/CtaSection.astro';
-import site from '@data/site.json';
+import site from '@/lib/site';
 import home from '@data/homepage.json';
 import { getCollection } from 'astro:content';
 import { localBusinessSchema } from '@/lib/schema';
@@ -18,7 +17,7 @@ const featured = home.services.featuredSlugs
   .map((slug) => allServices.find((s) => s.data.urlSlug === slug))
   .filter(Boolean);
 
-const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order).slice(0, 6);
+const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
 const areas = (await getCollection('serviceAreas', ({ data }) => data.published)).slice(0, 8);
 const featuredReviews = (await getCollection('testimonials', ({ data }) => data.published && data.featured))
   .sort((a, b) => a.data.displayOrder - b.data.displayOrder)
@@ -48,7 +47,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
       <div class="hero-scrim" aria-hidden="true"></div>
     </div>
     <div class="container hero-inner">
-      <div class="hero-copy" data-reveal>
+      <div class="hero-copy">
         <p class="eyebrow eyebrow-desktop">{home.hero.eyebrow}</p>
         <p class="eyebrow eyebrow-mobile">{home.hero.mobileEyebrow}</p>
         <h1>{home.hero.headline}</h1>
@@ -180,8 +179,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
         </p>
       )}
       <div class="reviews-actions">
-        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-track="google_reviews_click" data-track-params={JSON.stringify({ location: "homepage" })}>Read More Reviews</a>
-        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-track="leave_review_click" data-track-params={JSON.stringify({ location: "homepage" })}>Leave Us a Review</a>
+        <a href={site.googleProfileUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-track="google_reviews_click" data-track-params={JSON.stringify({ location: "homepage" })}>Read Our Reviews on Google</a>
       </div>
     </div>
   </section>
@@ -189,7 +187,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   <!-- EMERGENCY (full-bleed editorial photo, not another flat color block) -->
   <section class="emergency-section">
     <div class="emergency-bg">
-      <ResponsiveImage src={home.emergency.image} alt={home.emergency.imageAlt} ratio="16 / 9" variant="background" rounded={false} sizes="100vw" />
+      <ResponsiveImage src={home.emergency.image} alt={home.emergency.imageAlt} ratio="16 / 9" focal="50% 18%" variant="background" rounded={false} sizes="100vw" />
       <div class="emergency-scrim" aria-hidden="true"></div>
     </div>
     <div class="container emergency-inner" data-reveal>
@@ -206,63 +204,33 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     </div>
   </section>
 
-  <!-- PROCESS -->
-  <section class="process-section">
+  <!-- CLIENT TESTIMONIAL (compact video teaser — full video lives on /about/#client-testimonial) -->
+  <section class="section-royal story-section">
+    <div class="container story-inner" data-reveal>
+      <span class="story-play" aria-hidden="true"><Icon name="play" class="icon-play" /></span>
+      <p class="eyebrow">{home.clientTestimonial.eyebrow}</p>
+      <h2>{home.clientTestimonial.heading}</h2>
+      <p>{home.clientTestimonial.description}</p>
+      <a href={home.clientTestimonial.cta.href} class="btn btn-white btn-lg" data-track="watch_testimonial_click" data-track-params={JSON.stringify({ location: "homepage" })}>{home.clientTestimonial.cta.label}</a>
+    </div>
+  </section>
+
+  <!-- MORE WAYS WE HELP (compact cards — maintenance, financing, indoor air quality) -->
+  <section class="section-ice more-help-section">
     <div class="container">
       <div class="section-head center">
-        <p class="eyebrow">{home.process.eyebrow}</p>
-        <h2>{home.process.heading}</h2>
+        <h2>{home.moreWaysWeHelp.heading}</h2>
+        <p>{home.moreWaysWeHelp.subheading}</p>
       </div>
-      <ProcessSteps steps={home.process.steps} />
-    </div>
-  </section>
-
-  <!-- MEMBERSHIP -->
-  <section class="section-royal membership-section">
-    <div class="container membership-grid">
-      <div data-reveal>
-        <ResponsiveImage src={home.membership.image} alt={home.membership.imageAlt} ratio="4 / 3" variant="editorial" />
-      </div>
-      <div data-reveal>
-        <p class="eyebrow">Preventive Maintenance</p>
-        <h2>{home.membership.heading}</h2>
-        <p>{home.membership.description}</p>
-        <ul class="check-list">
-          {home.membership.highlights.map((h) => (
-            <li><Icon name="check" class="icon-sm" /> {h}</li>
-          ))}
-        </ul>
-        <a href={home.membership.cta.href} class="btn btn-white btn-lg" data-track="maintenance_click" data-track-params={JSON.stringify({ location: "homepage" })}>{home.membership.cta.label}</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINANCING -->
-  <section class="financing-section">
-    <div class="container financing-grid">
-      <div data-reveal>
-        <p class="eyebrow">Financing</p>
-        <h2>{home.financing.heading}</h2>
-        <p>{home.financing.description}</p>
-        <a href={home.financing.cta.href} class="btn btn-primary btn-lg" data-track="financing_click" data-track-params={JSON.stringify({ location: "homepage" })}>{home.financing.cta.label}</a>
-      </div>
-      <div data-reveal>
-        <ResponsiveImage src={home.financing.image} alt={home.financing.imageAlt} ratio="4 / 3" focal="center 38%" variant="editorial" />
-      </div>
-    </div>
-  </section>
-
-  <!-- AIR QUALITY -->
-  <section class="section-ice air-quality-section">
-    <div class="container air-grid">
-      <div data-reveal>
-        <ResponsiveImage src={home.airQuality.image} alt={home.airQuality.imageAlt} ratio="4 / 3" variant="editorial" />
-      </div>
-      <div data-reveal>
-        <p class="eyebrow">Indoor Air Quality</p>
-        <h2>{home.airQuality.heading}</h2>
-        <p>{home.airQuality.description}</p>
-        <a href={home.airQuality.cta.href} class="btn btn-primary btn-lg">{home.airQuality.cta.label}</a>
+      <div class="more-help-grid">
+        {home.moreWaysWeHelp.cards.map((card) => (
+          <div class="more-help-card" data-reveal>
+            <span class="more-help-icon"><Icon name={card.icon} class="icon-md" /></span>
+            <h3>{card.heading}</h3>
+            <p>{card.description}</p>
+            <a href={card.cta.href} class="more-help-link">{card.cta.label} <Icon name="arrow-right" class="icon-xs" /></a>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -308,6 +276,7 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     secondaryCta={home.finalCta.secondaryCta}
     backgroundImage={home.finalCta.backgroundImage}
     backgroundImageAlt={home.finalCta.backgroundImageAlt}
+    layout="split"
   />
 </BaseLayout>
 
@@ -580,10 +549,35 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     height: 100%;
     aspect-ratio: auto;
   }
+  /* Moyses' head sits near the top of the source photo; the section is much
+     wider than it is tall, so object-fit: cover crops vertically. These
+     overrides are tuned per breakpoint (not a single blind value) so his
+     head and face stay fully in frame while the HVAC equipment on the left
+     stays visible, across phone/tablet/1366px laptop/large desktop. */
+  .emergency-bg :global(.rimg img) {
+    object-position: 50% 22%;
+  }
+  @media (min-width: 640px) {
+    .emergency-bg :global(.rimg img) {
+      object-position: 50% 20%;
+    }
+  }
+  @media (min-width: 1024px) {
+    .emergency-bg :global(.rimg img) {
+      object-position: 50% 18%;
+    }
+  }
+  @media (min-width: 1440px) {
+    .emergency-bg :global(.rimg img) {
+      object-position: 50% 16%;
+    }
+  }
   .emergency-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(100deg, rgba(4, 54, 136, 0.92) 0%, rgba(10, 45, 102, 0.82) 45%, rgba(10, 45, 102, 0.55) 100%);
+    /* Brand royal blue (--color-royal: #043688) at low opacity — a light
+       brand tint over the photo, not a dark scrim. */
+    background: rgba(4, 54, 136, 0.2);
   }
   .emergency-inner {
     position: relative;
@@ -592,12 +586,15 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
   }
   .emergency-inner .eyebrow {
     color: var(--color-cyan);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   }
   .emergency-inner h2 {
     color: var(--color-white);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   }
   .emergency-inner p {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
   .emergency-inner .btn-outline {
     background: rgba(4, 54, 136, 0.35);
@@ -609,26 +606,81 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     border-color: var(--color-white);
   }
 
-  .membership-grid,
-  .financing-grid,
-  .air-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-xl);
-    align-items: center;
-  }
-  .check-list {
-    list-style: none;
-    margin: var(--space-sm) 0 var(--space-md);
-    padding: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.6rem;
-  }
-  .check-list li {
+  .story-inner {
+    max-width: 620px;
+    margin-inline: auto;
+    text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+  }
+  .story-play {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--color-cyan);
+    margin-bottom: var(--space-sm);
+  }
+  .icon-play {
+    width: 28px;
+    height: 28px;
+  }
+  .story-inner .eyebrow {
+    color: var(--color-cyan);
+  }
+  .story-inner h2 {
+    color: var(--color-white);
+  }
+  .story-inner p {
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 48ch;
+  }
+  .story-inner .btn {
+    margin-top: var(--space-sm);
+  }
+
+  .more-help-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-md);
+  }
+  .more-help-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .more-help-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--color-ice);
+    color: var(--color-royal);
+    margin-bottom: var(--space-sm);
+  }
+  .icon-md {
+    width: 22px;
+    height: 22px;
+  }
+  .more-help-card p {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+  }
+  .more-help-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    color: var(--color-royal);
+    margin-top: 0.4rem;
   }
 
   .reviews-teaser {
@@ -696,19 +748,11 @@ const featuredReviews = (await getCollection('testimonials', ({ data }) => data.
     .trust-grid-layout {
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     }
-    .membership-grid,
-    .financing-grid,
-    .air-grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    }
-    .financing-grid > div:first-child {
-      order: 1;
-    }
-    .financing-grid > div:last-child {
-      order: 2;
-    }
     .areas-list {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .more-help-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   @media (min-width: 960px) {

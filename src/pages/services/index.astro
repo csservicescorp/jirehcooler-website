@@ -29,6 +29,18 @@ const services = (await getCollection('services', ({ data }) => data.published))
         {services.map((service) => (
           <ServiceCard title={service.data.title} description={service.data.shortDescription} href={`/${service.data.urlSlug}/`} icon={service.data.icon} />
         ))}
+        <ServiceCard
+          title="Preventive Maintenance"
+          description="A one-time or as-needed maintenance visit to catch small issues before they become breakdowns."
+          href="/preventive-maintenance/"
+          icon="check-circle"
+        />
+        <ServiceCard
+          title="V.I.P. Maintenance Membership"
+          description="A recurring plan with two scheduled preventive maintenance visits a year and priority scheduling."
+          href="/maintenance-membership/"
+          icon="shield"
+        />
       </div>
     </div>
   </section>

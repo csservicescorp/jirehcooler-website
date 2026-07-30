@@ -6,11 +6,6 @@ shortDescription: "Complete heating, cooling, and air quality services for South
 icon: "home"
 image: "/images/services/jireh-residential-new-construction.jpg"
 imageAlt: "Jireh Cooler residential HVAC project at a South Florida new-construction home"
-gallery:
-  - image: "/images/gallery/jireh-equipment-delivery-team.jpg"
-    alt: "Jireh Cooler team delivering HVAC equipment to a residential home"
-  - image: "/images/gallery/jireh-estate-service-call.jpg"
-    alt: "Jireh Cooler service van at a South Florida residential service call"
 benefits:
   - "Repair, installation, and maintenance under one company"
   - "Technicians familiar with South Florida homes and older ductwork"

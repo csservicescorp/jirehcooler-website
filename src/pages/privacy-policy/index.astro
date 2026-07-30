@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
-import site from '@data/site.json';
+import site from '@/lib/site';
 
 const updated = 'July 18, 2026';
 ---
@@ -71,9 +71,6 @@ const updated = 'July 18, 2026';
         Questions about this policy can be directed to {site.email} or {site.phone}.
       </p>
 
-      <p class="verification-note">
-        This policy is a general template pending legal review. See CLIENT_VERIFICATION.md for details.
-      </p>
     </div>
   </section>
 </BaseLayout>
@@ -85,12 +82,5 @@ const updated = 'July 18, 2026';
   .legal-content p,
   .legal-content li {
     color: var(--color-muted);
-  }
-  .verification-note {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-border);
-    font-size: var(--fs-xs);
-    font-style: italic;
   }
 </style>

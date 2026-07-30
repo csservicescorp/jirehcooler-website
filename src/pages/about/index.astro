@@ -5,7 +5,7 @@ import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TrustPoints from '@components/TrustPoints.astro';
 import CtaSection from '@components/CtaSection.astro';
 import about from '@data/about.json';
-import site from '@data/site.json';
+import site from '@/lib/site';
 ---
 
 <BaseLayout title={about.seoTitle} description={about.metaDescription} path="/about/">
@@ -39,6 +39,25 @@ import site from '@data/site.json';
       </div>
       <div data-reveal>
         <ResponsiveImage src={about.leadershipImage} alt={about.leadershipImageAlt} ratio="4 / 5" mobileRatio="4 / 3" variant="editorial" fallbackIcon="users" />
+      </div>
+    </div>
+  </section>
+
+  <section id="client-testimonial" class="section-soft story-section">
+    <div class="container container-narrow">
+      <div class="section-head center">
+        <p class="eyebrow">Client Testimonial</p>
+        <h2>See Why Clients Trust Jireh Cooler</h2>
+        <p>Hear from Krista Nasse, a South Florida client and Realtor, about her experience with Jireh Cooler.</p>
+      </div>
+      <div class="video-frame" data-reveal>
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/EhxsmVH3PdM"
+          title="Jireh Cooler Client Testimonial — Krista Nasse"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </section>
@@ -115,6 +134,23 @@ import site from '@data/site.json';
   .planning-copy p:not(.eyebrow) {
     font-size: var(--fs-md);
     max-width: 46ch;
+  }
+
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+  }
+  .video-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 
   .recognition-image {

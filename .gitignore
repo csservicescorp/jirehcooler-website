@@ -27,3 +27,8 @@ _incoming/
 # Logs
 npm-debug.log*
 *.log
+
+.vercel
+
+# Local Netlify folder
+.netlify

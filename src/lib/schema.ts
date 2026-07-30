@@ -1,4 +1,4 @@
-import site from '@data/site.json';
+import site from '@/lib/site';
 
 const siteUrl = 'https://jirehcooler.com';
 

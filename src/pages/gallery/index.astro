@@ -5,7 +5,7 @@ import PageHero from '@components/PageHero.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import CtaSection from '@components/CtaSection.astro';
 
-const items = await getCollection('gallery', ({ data }) => data.published);
+const allItems = await getCollection('gallery', ({ data }) => data.published);
 
 const iconByCategory: Record<string, string> = {
   installation: 'install',
@@ -14,6 +14,19 @@ const iconByCategory: Record<string, string> = {
   maintenance: 'thermostat',
   residential: 'home',
 };
+
+// Four honest project categories, each pulling only the real photos that
+// belong to it — no photo appears in more than one category or on any other
+// route on the site.
+const sections: { heading: string; category: 'residential' | 'commercial' | 'installation' | 'repair' }[] = [
+  { heading: 'Residential Projects', category: 'residential' },
+  { heading: 'Commercial Projects', category: 'commercial' },
+  { heading: 'Installation & Replacement', category: 'installation' },
+  { heading: 'Repair & Diagnostics', category: 'repair' },
+];
+const grouped = sections
+  .map((section) => ({ ...section, items: allItems.filter((item) => item.data.category === section.category) }))
+  .filter((section) => section.items.length > 0);
 ---
 
 <BaseLayout
@@ -31,30 +44,41 @@ const iconByCategory: Record<string, string> = {
     ]}
   />
 
-  <section>
-    <div class="container">
-      <div class="gallery-grid">
-        {items.map((item, i) => (
-          <figure class:list={['gallery-item', { tall: i % 5 === 0 }]} data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
-            <ResponsiveImage
-              src={item.data.image}
-              alt={item.data.alt}
-              ratio={i % 5 === 0 ? '3 / 4' : '4 / 3'}
-              variant="gallery"
-              fallbackIcon={iconByCategory[item.data.category] ?? 'building'}
-              sizes="(min-width: 960px) 33vw, (min-width: 720px) 50vw, 100vw"
-            />
-            <figcaption>{item.data.title}</figcaption>
-          </figure>
-        ))}
+  {grouped.map((section) => (
+    <section class="gallery-section">
+      <div class="container">
+        <div class="section-head">
+          <h2>{section.heading}</h2>
+        </div>
+        <div class="gallery-grid">
+          {section.items.map((item, i) => (
+            <figure class:list={['gallery-item', { tall: i % 5 === 0 }]} data-reveal style={`transition-delay:${(i % 6) * 50}ms`}>
+              <ResponsiveImage
+                src={item.data.image}
+                alt={item.data.alt}
+                ratio={i % 5 === 0 ? '3 / 4' : '4 / 3'}
+                variant="gallery"
+                fallbackIcon={iconByCategory[item.data.category] ?? 'building'}
+                sizes="(min-width: 960px) 33vw, (min-width: 720px) 50vw, 100vw"
+              />
+              <figcaption>{item.data.title}</figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <CtaSection heading="Have a Project in Mind?" description="Request an estimate and let's talk about what your space needs." />
 </BaseLayout>
 
 <style>
+  .gallery-section {
+    padding-block: var(--space-lg);
+  }
+  .gallery-section .section-head {
+    margin-bottom: var(--space-md);
+  }
   .gallery-grid {
     display: grid;
     gap: var(--space-md);

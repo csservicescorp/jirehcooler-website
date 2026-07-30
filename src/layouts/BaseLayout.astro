@@ -4,7 +4,7 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import MobileConversionBar from '@components/MobileConversionBar.astro';
 import Seo from '@components/Seo.astro';
-import site from '@data/site.json';
+import site from '@/lib/site';
 import manifest from '@data/image-manifest.json';
 
 interface Props {
@@ -20,6 +20,16 @@ interface Props {
 }
 
 const { title, description, path, image, noindex, schema, hideMobileBar = false, preloadImage } = Astro.props;
+
+// Explicit, build-time-safe indexing switch. Astro/Vite always makes
+// PUBLIC_-prefixed vars available via import.meta.env, regardless of whether
+// the build runs inside Netlify's own CI (where CONTEXT is set automatically)
+// or locally before a manual `netlify deploy` (where it is not). Only an
+// exact "production" value opts into indexing — every other value, including
+// the variable being unset entirely, defaults to noindex so a draft can
+// never accidentally end up indexable.
+const isProduction = import.meta.env.PUBLIC_SITE_ENV === 'production';
+const effectiveNoindex = noindex || !isProduction;
 
 type ManifestEntry = { width: number; height: number; smWidth: number; smHeight: number };
 const preloadEntry: ManifestEntry | undefined = preloadImage ? (manifest as Record<string, ManifestEntry>)[preloadImage] : undefined;
@@ -47,15 +57,16 @@ const combinedSchema = schema ? [orgSchema, ...(Array.isArray(schema) ? schema :
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#043688" />
-    <Seo title={title} description={description} path={path} image={image} noindex={noindex} schema={combinedSchema} />
+    <Seo title={title} description={description} path={path} image={image} noindex={effectiveNoindex} schema={combinedSchema} />
     <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Sora-Variable.woff2" as="font" type="font/woff2" crossorigin />
     {preloadEntry && preloadBase && (
       <link
         rel="preload"
         as="image"
-        href={`${preloadBase}.webp`}
-        imagesrcset={`${preloadBase}-sm.webp ${preloadEntry.smWidth}w, ${preloadBase}.webp ${preloadEntry.width}w`}
+        type="image/avif"
+        href={`${preloadBase}.avif`}
+        imagesrcset={`${preloadBase}-sm.avif ${preloadEntry.smWidth}w, ${preloadBase}.avif ${preloadEntry.width}w`}
         imagesizes="(min-width: 720px) 45vw, 100vw"
         fetchpriority="high"
       />

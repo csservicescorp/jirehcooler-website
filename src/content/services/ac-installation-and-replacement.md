@@ -6,11 +6,6 @@ shortDescription: "Full system replacements and new installations sized correctl
 icon: "install"
 image: "/images/services/jireh-ac-installation-multi-system.jpg"
 imageAlt: "Jireh Cooler technician servicing a newly installed multi-system residential AC setup"
-gallery:
-  - image: "/images/gallery/jireh-package-units-ready.jpg"
-    alt: "Commercial package HVAC units staged and ready for a Jireh Cooler installation"
-  - image: "/images/services/jireh-residential-equipment-delivery.jpg"
-    alt: "New AC equipment delivered by Jireh Cooler to a residential job site"
 benefits:
   - "Proper load calculations, not one-size-fits-all sizing"
   - "Major brands available: Carrier, Bryant, Rheem, Goodman, Lennox"

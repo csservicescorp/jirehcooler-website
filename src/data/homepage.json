@@ -16,23 +16,23 @@
       "label": "Residential HVAC",
       "description": "Reliable comfort for your home, from same-day repairs to full system replacements.",
       "href": "/residential-hvac/",
-      "image": "/images/services/jireh-residential-new-construction.jpg",
-      "imageAlt": "Jireh Cooler residential HVAC project at a South Florida new-construction home"
+      "image": "/images/homepage/jireh-luxury-residential-new-construction.jpg",
+      "imageAlt": "Jireh Cooler truck at a luxury residential new-construction project in South Florida"
     },
     "commercial": {
       "label": "Commercial HVAC",
       "description": "Dependable climate control for offices, restaurants, and retail spaces that can't afford downtime.",
       "href": "/commercial-hvac/",
-      "image": "/images/services/jireh-commercial-rooftop-team.jpg",
-      "imageAlt": "Jireh Cooler technicians servicing a commercial rooftop HVAC unit"
+      "image": "/images/services/jireh-commercial-service-final.jpg",
+      "imageAlt": "Two Jireh Cooler technicians in blue shirts servicing a commercial rooftop HVAC unit"
     }
   },
   "trust": {
     "eyebrow": "Why South Florida Trusts Us",
     "heading": "Why South Florida Trusts Jireh Cooler",
     "subheading": "Jireh Cooler has been a family-operated fixture in Broward and Palm Beach County since 1994.",
-    "image": "/images/homepage/jireh-company-fleet.jpg",
-    "imageAlt": "Jireh Cooler branded service vans and truck parked outside the company facility",
+    "image": "/images/homepage/jireh-founder-new-construction-project.jpg",
+    "imageAlt": "Moyses Oliveira, owner of Jireh Cooler, at a South Florida new-construction project",
     "points": [
       {
         "label": "Family-Operated Since 1994",
@@ -69,67 +69,45 @@
     "description": "South Florida heat doesn't wait for business hours, and neither do we. Our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year.",
     "cta": { "label": "Call for Emergency Service", "href": "tel:+19544266010" },
     "href": "/emergency-ac-service/",
-    "image": "/images/homepage/jireh-emergency-diagnosis.jpg",
-    "imageAlt": "Frozen evaporator coil diagnosed by a Jireh Cooler technician during an urgent AC repair call"
+    "image": "/images/homepage/jireh-founder-commercial-hvac-service.jpg",
+    "imageAlt": "Jireh Cooler technician servicing HVAC equipment, ready for emergency response"
   },
-  "process": {
-    "eyebrow": "How It Works",
-    "heading": "How Jireh Cooler Works",
-    "steps": [
+  "clientTestimonial": {
+    "eyebrow": "Client Testimonial",
+    "heading": "What Clients Say About Jireh Cooler",
+    "description": "A South Florida client and Realtor shares her experience working with Jireh Cooler.",
+    "cta": { "label": "Watch the Testimonial", "href": "/about/#client-testimonial" }
+  },
+  "moreWaysWeHelp": {
+    "heading": "More Ways We Help",
+    "subheading": "Keep your system running, make a replacement affordable, and breathe easier indoors.",
+    "cards": [
       {
-        "step": "1",
-        "label": "You Call or Request an Estimate",
-        "description": "Reach our team by phone or through our online request form, 24 hours a day."
+        "icon": "check-circle",
+        "heading": "V.I.P. Maintenance Membership",
+        "description": "Two scheduled preventive maintenance visits a year and priority scheduling for members.",
+        "cta": { "label": "Join the V.I.P. Plan", "href": "/maintenance-membership/" }
       },
       {
-        "step": "2",
-        "label": "We Diagnose the Problem",
-        "description": "A certified technician evaluates your system and explains what's going on in plain language."
+        "icon": "document",
+        "heading": "Flexible Financing",
+        "description": "Financing is available for qualified homeowners so a replacement isn't an all-at-once expense.",
+        "cta": { "label": "Ask About Financing", "href": "/financing/" }
       },
       {
-        "step": "3",
-        "label": "You Get a Clear Estimate",
-        "description": "We provide written pricing before any work begins. No surprises on the invoice."
-      },
-      {
-        "step": "4",
-        "label": "We Get It Done Right",
-        "description": "Our technicians complete the repair, installation, or maintenance to code and to spec."
+        "icon": "wind",
+        "heading": "Indoor Air Quality",
+        "description": "UV light systems, duct cleaning, and filtration upgrades for cleaner indoor air.",
+        "cta": { "label": "See Air Quality Options", "href": "/indoor-air-quality/" }
       }
     ]
-  },
-  "membership": {
-    "heading": "V.I.P. Maintenance Membership",
-    "description": "Our maintenance membership covers a comprehensive multi-point inspection twice a year, helping catch small issues before they become expensive breakdowns.",
-    "highlights": [
-      "18-point system inspection",
-      "Two scheduled visits per year",
-      "Priority scheduling for members"
-    ],
-    "cta": { "label": "Join the V.I.P. Maintenance Plan", "href": "/maintenance-membership/" },
-    "image": "/images/homepage/jireh-maintenance-visit.jpg",
-    "imageAlt": "Jireh Cooler technician performing hands-on maintenance work on a residential outdoor air conditioning unit"
-  },
-  "financing": {
-    "heading": "Flexible Financing Options",
-    "description": "Financing is available for qualified homeowners so a system replacement doesn't have to be an all-at-once expense.",
-    "cta": { "label": "Ask About Financing", "href": "/financing/" },
-    "image": "/images/financing/jireh-financing-consultation.jpg",
-    "imageAlt": "Jireh Cooler HVAC professional explaining financing options to a homeowner"
-  },
-  "airQuality": {
-    "heading": "Breathe Easier Indoors",
-    "description": "UV light systems, duct cleaning, and filtration upgrades that improve the air quality inside your home or business.",
-    "cta": { "label": "See Indoor Air Quality Options", "href": "/indoor-air-quality/" },
-    "image": "/images/gallery/jireh-air-handler-inspection.jpg",
-    "imageAlt": "Jireh Cooler technicians inspecting an indoor air handler unit"
   },
   "finalCta": {
     "heading": "Ready for Reliable Comfort?",
     "description": "Talk to a real technician, not a call center. Reach out today for a straightforward estimate or emergency service.",
     "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
     "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/" },
-    "backgroundImage": "/images/backgrounds/jireh-rooftop-crane-lift.jpg",
-    "backgroundImageAlt": "Crane lifting a commercial HVAC unit onto a rooftop at a Jireh Cooler jobsite"
+    "backgroundImage": "/images/homepage/jireh-founder-luxury-residential-project.jpg",
+    "backgroundImageAlt": "Jireh Cooler founder with a company van at a South Florida residential project"
   }
 }

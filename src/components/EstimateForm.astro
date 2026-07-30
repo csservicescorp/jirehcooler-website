@@ -4,6 +4,7 @@ interface Props {
   compact?: boolean;
 }
 const { formType = 'estimate', compact = false } = Astro.props;
+const formName = formType === 'estimate' ? 'estimate' : 'contact';
 
 const serviceOptions = [
   { value: 'ac-repair', label: 'AC Repair' },
@@ -25,14 +26,22 @@ const serviceOptions = [
 ];
 ---
 
-<form class="estimate-form" data-estimate-form novalidate>
-  <input type="hidden" name="formType" value={formType} />
+<form
+  class="estimate-form"
+  data-estimate-form
+  novalidate
+  name={formName}
+  method="POST"
+  action="/thank-you/"
+  data-netlify="true"
+  netlify-honeypot="companyWebsite"
+>
+  <input type="hidden" name="form-name" value={formName} />
   <!-- Honeypot field: hidden from real users, bots often fill every field -->
   <div class="hp-field" aria-hidden="true">
     <label for="company-website">Company Website</label>
     <input type="text" id="company-website" name="companyWebsite" tabindex="-1" autocomplete="off" />
   </div>
-  <input type="hidden" name="formStartedAt" data-form-start-time value="" />
   <input type="hidden" name="utmSource" data-utm="utm_source" value="" />
   <input type="hidden" name="utmMedium" data-utm="utm_medium" value="" />
   <input type="hidden" name="utmCampaign" data-utm="utm_campaign" value="" />
@@ -42,36 +51,36 @@ const serviceOptions = [
   <div class="form-row">
     <div class="field">
       <label for="name">Full Name <span aria-hidden="true">*</span></label>
-      <input type="text" id="name" name="name" required autocomplete="name" data-required />
-      <p class="field-error" data-error-for="name" hidden></p>
+      <input type="text" id="name" name="name" required autocomplete="name" data-required aria-describedby="error-name" />
+      <p class="field-error" id="error-name" data-error-for="name" role="alert" hidden></p>
     </div>
     <div class="field">
       <label for="phone">Phone <span aria-hidden="true">*</span></label>
-      <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" data-required />
-      <p class="field-error" data-error-for="phone" hidden></p>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" data-required aria-describedby="error-phone" />
+      <p class="field-error" id="error-phone" data-error-for="phone" role="alert" hidden></p>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
       <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
-      <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" data-required />
-      <p class="field-error" data-error-for="zip" hidden></p>
+      <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" data-required aria-describedby="error-zip" />
+      <p class="field-error" id="error-zip" data-error-for="zip" role="alert" hidden></p>
     </div>
     {formType === 'estimate' ? (
       <div class="field">
         <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
-        <select id="serviceNeeded" name="serviceNeeded" required data-required data-service-select>
+        <select id="serviceNeeded" name="serviceNeeded" required data-required data-service-select aria-describedby="error-serviceNeeded">
           <option value="">Select a service</option>
           {serviceOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
         </select>
-        <p class="field-error" data-error-for="serviceNeeded" hidden></p>
+        <p class="field-error" id="error-serviceNeeded" data-error-for="serviceNeeded" role="alert" hidden></p>
       </div>
     ) : (
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" autocomplete="email" />
-        <p class="field-error" data-error-for="email" hidden></p>
+        <input type="email" id="email" name="email" autocomplete="email" aria-describedby="error-email" />
+        <p class="field-error" id="error-email" data-error-for="email" role="alert" hidden></p>
       </div>
     )}
   </div>
@@ -79,7 +88,7 @@ const serviceOptions = [
   {formType === 'estimate' && (
     <fieldset class="field urgency-field">
       <legend>How Urgent Is This? <span aria-hidden="true">*</span></legend>
-      <div class="urgency-options" role="radiogroup" aria-required="true" data-urgency-group>
+      <div class="urgency-options" role="radiogroup" aria-required="true" data-urgency-group aria-describedby="error-urgency">
         <label class="urgency-option">
           <input type="radio" name="urgency" value="emergency" required data-required />
           <span>Emergency</span>
@@ -93,14 +102,14 @@ const serviceOptions = [
           <span>Planning Ahead</span>
         </label>
       </div>
-      <p class="field-error" data-error-for="urgency" hidden></p>
+      <p class="field-error" id="error-urgency" data-error-for="urgency" role="alert" hidden></p>
     </fieldset>
   )}
 
   <div class="field">
     <label for="message">{formType === 'estimate' ? 'Short Description' : 'Message'} <span aria-hidden="true">*</span></label>
-    <textarea id="message" name="message" rows={compact ? 3 : 4} required data-required placeholder={formType === 'estimate' ? "e.g. AC is blowing warm air, unit won't turn on..." : ''}></textarea>
-    <p class="field-error" data-error-for="message" hidden></p>
+    <textarea id="message" name="message" rows={compact ? 3 : 4} required data-required placeholder={formType === 'estimate' ? "e.g. AC is blowing warm air, unit won't turn on..." : ''} aria-describedby="error-message"></textarea>
+    <p class="field-error" id="error-message" data-error-for="message" role="alert" hidden></p>
   </div>
 
   {formType === 'estimate' && (
@@ -109,8 +118,8 @@ const serviceOptions = [
       <div class="form-row">
         <div class="field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" />
-          <p class="field-error" data-error-for="email" hidden></p>
+          <input type="email" id="email" name="email" autocomplete="email" aria-describedby="error-email" />
+          <p class="field-error" id="error-email" data-error-for="email" role="alert" hidden></p>
         </div>
         <div class="field">
           <label for="propertyType">Property Type</label>
@@ -135,20 +144,19 @@ const serviceOptions = [
 
   <div class="field consent-field">
     <label class="checkbox-label">
-      <input type="checkbox" id="consent" name="consent" required data-required />
+      <input type="checkbox" id="consent" name="consent" required data-required aria-describedby="error-consent" />
       <span>I agree to be contacted by Jireh Cooler about my request. <span aria-hidden="true">*</span></span>
     </label>
-    <p class="field-error" data-error-for="consent" hidden></p>
+    <p class="field-error" id="error-consent" data-error-for="consent" role="alert" hidden></p>
   </div>
 
   <button type="submit" class="btn btn-primary btn-lg btn-block" data-submit-btn>
     <span data-btn-label>{formType === 'estimate' ? 'Request My Estimate' : 'Send Message'}</span>
   </button>
 
-  <p class="form-status" role="status" aria-live="polite" data-form-status hidden></p>
   <noscript>
     <p class="noscript-note">
-      This form requires JavaScript to submit online. Please call us directly to reach our team.
+      If this form doesn't submit, please call us directly to reach our team.
     </p>
   </noscript>
 </form>
@@ -289,24 +297,6 @@ const serviceOptions = [
     height: 1px;
     overflow: hidden;
   }
-  .form-status {
-    padding: 0.85rem 1rem;
-    border-radius: var(--radius-sm);
-    font-size: var(--fs-sm);
-    font-weight: 600;
-  }
-  .form-status.success {
-    background: #e7f5ee;
-    color: var(--color-success);
-  }
-  .form-status.error {
-    background: #fbeceb;
-    color: var(--color-danger);
-  }
-  .form-status.loading {
-    background: var(--color-ice);
-    color: var(--color-royal);
-  }
   .noscript-note {
     font-size: var(--fs-sm);
     color: var(--color-danger);
@@ -339,9 +329,6 @@ const serviceOptions = [
   }
 
   forms.forEach((form) => {
-    const startField = form.querySelector<HTMLInputElement>('[data-form-start-time]');
-    if (startField) startField.value = String(Date.now());
-
     // Preselect the service dropdown from ?service=<slug> on the estimate form.
     const serviceSelect = form.querySelector<HTMLSelectElement>('[data-service-select]');
     if (serviceSelect) {
@@ -352,11 +339,20 @@ const serviceOptions = [
       }
     }
 
-    // Carry campaign parameters through as hidden fields, if present.
+    // Carry campaign parameters through as hidden fields, but only when the
+    // URL actually has a value — this is a native form submission now, so
+    // whatever hidden inputs remain in the DOM at submit time get sent as-is.
+    // A field left in with an empty value would still reach Netlify empty;
+    // removing the element entirely is the only way to keep it out.
     const searchParams = new URLSearchParams(window.location.search);
     form.querySelectorAll<HTMLInputElement>('[data-utm]').forEach((input) => {
       const key = input.dataset.utm;
-      if (key) input.value = searchParams.get(key) ?? '';
+      const value = key ? searchParams.get(key) : null;
+      if (value) {
+        input.value = value;
+      } else {
+        input.remove();
+      }
     });
 
     let started = false;
@@ -379,6 +375,7 @@ const serviceOptions = [
       form.querySelectorAll<HTMLElement>('.field.has-error, .urgency-field.has-error').forEach((el) => {
         el.classList.remove('has-error');
       });
+      form.querySelectorAll<HTMLElement>('[aria-invalid="true"]').forEach((el) => el.setAttribute('aria-invalid', 'false'));
     }
 
     function showError(name: string, message: string) {
@@ -388,6 +385,7 @@ const serviceOptions = [
       errorEl.hidden = false;
       const container = errorEl.closest('.field') ?? errorEl.closest('.urgency-field');
       container?.classList.add('has-error');
+      container?.querySelectorAll<HTMLElement>(`[name="${name}"]`).forEach((el) => el.setAttribute('aria-invalid', 'true'));
     }
 
     function validate(): boolean {
@@ -436,47 +434,21 @@ const serviceOptions = [
       return valid;
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const status = form.querySelector<HTMLElement>('[data-form-status]');
-      const button = form.querySelector<HTMLButtonElement>('[data-submit-btn]');
-      const label = form.querySelector<HTMLElement>('[data-btn-label]');
-      if (!status || !button || !label) return;
-
-      if (button.disabled) return; // already submitting, prevent duplicate submission
-      if (!validate()) return;
-
-      const originalLabel = label.textContent;
-      button.disabled = true;
-      label.textContent = 'Sending…';
-      status.hidden = false;
-      status.className = 'form-status loading';
-      status.textContent = 'Sending your request…';
-
-      try {
-        const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
-
-        const response = await fetch('/api/estimate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) throw new Error('Request failed');
-
-        trackEvent('estimate_form_submit', { form_type: String(payload.formType ?? 'estimate') });
-        status.className = 'form-status success';
-        status.textContent = 'Success — redirecting…';
-        form.reset();
-        window.location.href = '/thank-you/';
-      } catch (err) {
-        status.className = 'form-status error';
-        status.textContent = "Something went wrong sending your request. Please call us directly so we don't miss you.";
-        button.disabled = false;
-        label.textContent = originalLabel;
+    form.addEventListener('submit', (e) => {
+      // Validation only ever blocks submission on error. When the form is
+      // valid, no preventDefault is called at all — the browser performs a
+      // normal native POST to Netlify (action="/thank-you/"), which is what
+      // lets Netlify Forms' own static detection, honeypot check, and
+      // notification pick up every real field exactly as submitted.
+      if (!validate()) {
+        e.preventDefault();
+        return;
       }
+
+      const button = form.querySelector<HTMLButtonElement>('[data-submit-btn]');
+      if (button) button.disabled = true; // guards against a duplicate click while the page navigates away
+
+      trackEvent('estimate_form_submit', { form_type: form.getAttribute('name') ?? 'estimate' });
     });
   });
 </script>

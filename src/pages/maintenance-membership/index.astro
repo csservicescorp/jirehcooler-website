@@ -42,15 +42,6 @@ const faqs = (await getCollection('faqs', ({ data }) => data.category === 'maint
             <li><Icon name="check" class="icon-sm" /> {item}</li>
           ))}
         </ul>
-        {m.checklist.length > 0 ? (
-          <ul class="check-list checklist-detail">
-            {m.checklist.map((item: string) => (
-              <li><Icon name="check" class="icon-sm" /> {item}</li>
-            ))}
-          </ul>
-        ) : (
-          <p class="checklist-note">{m.checklistNote}</p>
-        )}
         <p class="note">{m.note}</p>
         <a href={m.cta.href} class="btn btn-primary btn-lg" data-track="maintenance_click" data-track-params={JSON.stringify({ location: 'maintenance_page' })}>{m.cta.label}</a>
       </div>
@@ -100,17 +91,6 @@ const faqs = (await getCollection('faqs', ({ data }) => data.category === 'maint
     gap: 0.5rem;
     font-weight: 600;
     color: var(--color-royal);
-  }
-  .checklist-detail li {
-    font-weight: 500;
-    color: var(--color-charcoal);
-  }
-  .checklist-note {
-    font-size: var(--fs-sm);
-    color: var(--color-muted);
-    background: var(--color-ice);
-    border-radius: var(--radius-sm);
-    padding: var(--space-sm) var(--space-md);
   }
   .icon-sm {
     width: 18px;

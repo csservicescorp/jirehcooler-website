@@ -4,7 +4,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import PageHero from '@components/PageHero.astro';
 import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
-import site from '@data/site.json';
+import site from '@/lib/site';
 
 const areas = await getCollection('serviceAreas', ({ data }) => data.published);
 const cityPages = await getCollection('cityPages', ({ data }) => data.published);

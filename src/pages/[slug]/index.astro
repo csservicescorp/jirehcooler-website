@@ -7,8 +7,8 @@ import Icon from '@components/Icon.astro';
 import CtaSection from '@components/CtaSection.astro';
 import ServiceCard from '@components/ServiceCard.astro';
 import ReviewCard from '@components/ReviewCard.astro';
-import ServiceGallery from '@components/ServiceGallery.astro';
-import site from '@data/site.json';
+import FaqAccordion from '@components/FaqAccordion.astro';
+import site from '@/lib/site';
 import { serviceSchema } from '@/lib/schema';
 
 export async function getStaticPaths() {
@@ -42,6 +42,18 @@ const relatedReviewerName = RELATED_REVIEWER[service.data.urlSlug];
 const relatedReview = relatedReviewerName
   ? (await getCollection('testimonials', ({ data }) => data.published && data.reviewerName === relatedReviewerName))[0]
   : undefined;
+
+// Services with a clean, honest match to an existing FAQ category get a
+// compact FAQ section in place of the old per-service photo gallery.
+const FAQ_CATEGORY: Record<string, string> = {
+  'ac-repair': 'repair',
+  'ac-installation-and-replacement': 'installation',
+  'emergency-ac-service': 'emergency',
+};
+const faqCategory = FAQ_CATEGORY[service.data.urlSlug];
+const relatedFaqs = faqCategory
+  ? (await getCollection('faqs', ({ data }) => data.category === faqCategory)).sort((a, b) => a.data.order - b.data.order)
+  : [];
 ---
 
 <BaseLayout
@@ -102,14 +114,14 @@ const relatedReview = relatedReviewerName
     </div>
   </section>
 
-  {service.data.gallery && service.data.gallery.length > 0 && (
-    <section class="service-gallery-section">
-      <div class="container">
+  {relatedFaqs.length > 0 && (
+    <section class="section-soft service-faq-section">
+      <div class="container container-narrow">
         <div class="section-head center">
-          <p class="eyebrow">Real Projects</p>
-          <h2>{service.data.title} in Action</h2>
+          <p class="eyebrow">Common Questions</p>
+          <h2>{service.data.title} FAQ</h2>
         </div>
-        <ServiceGallery items={service.data.gallery} />
+        <FaqAccordion faqs={relatedFaqs.map((f) => f.data)} withSchema={false} />
       </div>
     </section>
   )}

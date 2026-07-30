@@ -1,5 +1,5 @@
 ---
-import site from '@data/site.json';
+import site from '@/lib/site';
 import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Cta {
@@ -14,6 +14,12 @@ interface Props {
   variant?: 'navy' | 'ice';
   backgroundImage?: string;
   backgroundImageAlt?: string;
+  backgroundFocal?: string;
+  backgroundMobileFocal?: string;
+  /** 'split' renders a two-column premium layout (copy left, uncropped photo
+   * right) instead of the default full-bleed background-photo treatment.
+   * Opt-in only — every other caller of CtaSection is unaffected. */
+  layout?: 'default' | 'split';
 }
 const {
   heading,
@@ -23,32 +29,70 @@ const {
   variant = 'navy',
   backgroundImage,
   backgroundImageAlt = '',
+  backgroundFocal = 'center',
+  backgroundMobileFocal,
+  layout = 'default',
 } = Astro.props;
+const isSplit = layout === 'split' && !!backgroundImage;
 ---
 
-<section
-  class:list={['final-cta', variant === 'navy' ? 'section-royal' : 'section-ice', { 'has-bg': !!backgroundImage }]}
-  data-reveal
->
-  {backgroundImage && (
-    <div class="cta-bg">
-      <ResponsiveImage src={backgroundImage} alt={backgroundImageAlt} ratio="16 / 9" variant="background" rounded={false} />
-      <div class="cta-scrim" aria-hidden="true"></div>
+{isSplit ? (
+  <section class="final-cta split-cta section-royal" data-reveal>
+    <div class="split-inner">
+      <div class="split-copy">
+        <h2>{heading}</h2>
+        {description && <p>{description}</p>}
+        <div class="cta-actions">
+          <a href={primaryCta.href} class="btn btn-lg btn-white">{primaryCta.label}</a>
+          <a href={secondaryCta.href} class="btn btn-lg btn-outline">{secondaryCta.label}</a>
+        </div>
+      </div>
+      <div class="split-media">
+        <ResponsiveImage
+          src={backgroundImage}
+          alt={backgroundImageAlt}
+          ratio="4 / 5"
+          mobileRatio="4 / 5"
+          variant="editorial"
+          fit="contain"
+          rounded={false}
+        />
+      </div>
     </div>
-  )}
-  <div class="container cta-inner">
-    <div class="cta-copy">
-      <h2>{heading}</h2>
-      {description && <p>{description}</p>}
+  </section>
+) : (
+  <section
+    class:list={['final-cta', variant === 'navy' ? 'section-royal' : 'section-ice', { 'has-bg': !!backgroundImage }]}
+    data-reveal
+  >
+    {backgroundImage && (
+      <div class="cta-bg">
+        <ResponsiveImage
+          src={backgroundImage}
+          alt={backgroundImageAlt}
+          ratio="16 / 9"
+          variant="background"
+          rounded={false}
+          focal={backgroundFocal}
+          mobileFocal={backgroundMobileFocal}
+        />
+        <div class="cta-scrim" aria-hidden="true"></div>
+      </div>
+    )}
+    <div class="container cta-inner">
+      <div class="cta-copy">
+        <h2>{heading}</h2>
+        {description && <p>{description}</p>}
+      </div>
+      <div class="cta-actions">
+        <a href={primaryCta.href} class:list={['btn', 'btn-lg', variant === 'navy' ? 'btn-white' : 'btn-primary']}>
+          {primaryCta.label}
+        </a>
+        <a href={secondaryCta.href} class="btn btn-lg btn-outline">{secondaryCta.label}</a>
+      </div>
     </div>
-    <div class="cta-actions">
-      <a href={primaryCta.href} class:list={['btn', 'btn-lg', variant === 'navy' ? 'btn-white' : 'btn-primary']}>
-        {primaryCta.label}
-      </a>
-      <a href={secondaryCta.href} class="btn btn-lg btn-outline">{secondaryCta.label}</a>
-    </div>
-  </div>
-</section>
+  </section>
+)}
 
 <style>
   .final-cta {
@@ -70,10 +114,19 @@ const {
   .cta-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(115deg, rgba(4, 54, 136, 0.94) 0%, rgba(10, 45, 102, 0.86) 55%, rgba(10, 45, 102, 0.7) 100%);
+    background: linear-gradient(100deg, rgba(4, 20, 45, 0.62) 0%, rgba(4, 20, 45, 0.4) 45%, rgba(4, 20, 45, 0.22) 100%);
+  }
+  @media (max-width: 719px) {
+    .cta-scrim {
+      background: rgba(4, 20, 45, 0.58);
+    }
+  }
+  .has-bg .cta-copy h2 {
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   }
   .has-bg .cta-copy p {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
   }
   .cta-inner {
     position: relative;
@@ -100,6 +153,66 @@ const {
     .cta-inner {
       flex-direction: row;
       align-items: center;
+    }
+  }
+
+  /* Split layout (homepage final CTA only): the source photo is a vertical
+     portrait, so instead of forcing object-fit: cover on a wide banner (which
+     hid almost the whole photo), it gets its own contained panel at full,
+     honest proportions — no crop, no overlay on the face. */
+  .split-cta {
+    padding: 0;
+  }
+  .split-inner {
+    display: flex;
+    flex-direction: column;
+  }
+  .split-copy {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+  .split-copy h2 {
+    color: var(--color-white);
+    max-width: 22ch;
+  }
+  .split-copy p {
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 48ch;
+  }
+  .split-media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+  }
+  .split-media :global(.rimg) {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+
+  @media (min-width: 860px) {
+    .split-inner {
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 360px;
+    }
+    .split-copy {
+      width: 55%;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+    .split-media {
+      width: 45%;
+      aspect-ratio: auto;
+    }
+  }
+  @media (min-width: 1280px) {
+    .split-inner {
+      min-height: 430px;
     }
   }
 </style>

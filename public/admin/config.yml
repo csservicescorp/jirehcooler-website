@@ -1,0 +1,547 @@
+# Decap CMS configuration for jirehcooler-website.
+#
+# Backend requires Netlify Identity + Git Gateway enabled on the Netlify site
+# (Site settings > Identity, and Site settings > Identity > Services > Git
+# Gateway). This is a dashboard-only step — nothing in this repo can turn it
+# on. Until it's enabled, this panel will load but authentication will fail.
+#
+# publish_mode is intentionally omitted — Decap defaults to "simple" (every
+# save commits directly), no draft/review step in between.
+#
+# What's editable, in plain terms:
+# - One phone number for the whole site (the tel: link version is generated
+#   automatically — there's nothing else to keep in sync).
+# - Email, address, hours, license, and social links.
+# - Every service page's title, description, photo, benefits, and body text.
+# - Homepage and About page text AND photos.
+# - Financing and Maintenance page text and photos.
+# - Gallery photos, customer reviews, FAQs, service areas, and the existing
+#   city pages' intro text and FAQs.
+#
+# What's locked out everywhere (present in the files, preserved on save, but
+# never shown as an editable field): every internal link/href, every page's
+# URL slug/route, category/icon codes used by the templates, SEO titles and
+# meta descriptions, published/featured/order flags (toggling these off would
+# effectively delete a page from navigation, which is the same as deleting
+# it), and anything to do with the estimate/contact forms. No collection here
+# can create or delete an existing service, city, financing, or maintenance
+# page — only edit the text and photos inside it.
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/gallery"
+public_folder: "/images/gallery"
+
+collections:
+  - name: "pages"
+    label: "Site Pages"
+    description: "The Home, About, Contact, Financing, and Maintenance pages. Click a page below to edit its text and photos."
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "src/data/homepage.json"
+        fields:
+          - label: "Hero (top banner)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow (desktop)", name: "eyebrow", widget: "string" }
+              - { label: "Eyebrow (mobile)", name: "mobileEyebrow", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subheadline (desktop)", name: "subheadline", widget: "text" }
+              - { label: "Subheadline (mobile)", name: "mobileSubheadline", widget: "text" }
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                media_folder: "public/images/homepage"
+                public_folder: "/images/homepage"
+                hint: "Recommended: landscape, at least 1600px wide, under 2MB."
+              - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+              - label: "Primary Button"
+                name: "primaryCta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Secondary Button"
+                name: "secondaryCta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+          - label: "Residential / Commercial Cards"
+            name: "pathways"
+            widget: "object"
+            fields:
+              - { label: "Section Heading", name: "heading", widget: "string" }
+              - label: "Residential Card"
+                name: "residential"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+                  - label: "Photo"
+                    name: "image"
+                    widget: "image"
+                    media_folder: "public/images/homepage"
+                    public_folder: "/images/homepage"
+                  - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+              - label: "Commercial Card"
+                name: "commercial"
+                widget: "object"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+                  - label: "Photo"
+                    name: "image"
+                    widget: "image"
+                    media_folder: "public/images/homepage"
+                    public_folder: "/images/homepage"
+                  - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+          - label: "Why South Florida Trusts Us"
+            name: "trust"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "text" }
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                media_folder: "public/images/homepage"
+                public_folder: "/images/homepage"
+              - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+              - label: "Trust Points"
+                name: "points"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Complete AC Services Section"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "text" }
+              - { label: "Featured Service List (technical — do not edit)", name: "featuredSlugs", widget: "hidden" }
+          - label: "Emergency Section"
+            name: "emergency"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Button"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - { label: "Learn More Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                media_folder: "public/images/homepage"
+                public_folder: "/images/homepage"
+              - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+          - label: "Client Testimonial Teaser"
+            name: "clientTestimonial"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Button"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+          - label: "More Ways We Help (3 small cards)"
+            name: "moreWaysWeHelp"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Subheading", name: "subheading", widget: "text" }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                fields:
+                  - { label: "Icon (technical — do not edit)", name: "icon", widget: "hidden" }
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "label", widget: "string" }
+                      - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+          - label: "Final Call-to-Action"
+            name: "finalCta"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Primary Button"
+                name: "primaryCta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Secondary Button"
+                name: "secondaryCta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Background Photo"
+                name: "backgroundImage"
+                widget: "image"
+                media_folder: "public/images/homepage"
+                public_folder: "/images/homepage"
+              - { label: "Photo Description (for accessibility)", name: "backgroundImageAlt", widget: "string" }
+
+      - name: "about"
+        label: "About Page"
+        file: "src/data/about.json"
+        fields:
+          - { label: "SEO Title (technical — do not edit)", name: "seoTitle", widget: "hidden" }
+          - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro Paragraph", name: "intro", widget: "text" }
+          - { label: "Story Paragraphs", name: "story", widget: "list" }
+          - label: "Values"
+            name: "values"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Owners Photo"
+            name: "image"
+            widget: "image"
+            media_folder: "public/images/about"
+            public_folder: "/images/about"
+          - { label: "Photo Description (for accessibility)", name: "imageAlt", widget: "string" }
+          - { label: "Recognition Eyebrow", name: "recognitionEyebrow", widget: "string" }
+          - { label: "Recognition Heading", name: "recognitionHeading", widget: "string" }
+          - { label: "Recognition Text", name: "recognitionText", widget: "text" }
+          - label: "Recognition Photo (award photo)"
+            name: "recognitionImage"
+            widget: "image"
+            media_folder: "public/images/about"
+            public_folder: "/images/about"
+          - { label: "Photo Description (for accessibility)", name: "recognitionImageAlt", widget: "string" }
+          - { label: "Leadership Eyebrow", name: "leadershipEyebrow", widget: "string" }
+          - { label: "Leadership Heading", name: "leadershipHeading", widget: "string" }
+          - { label: "Leadership Paragraphs", name: "leadershipText", widget: "list" }
+          - label: "Leadership Photo"
+            name: "leadershipImage"
+            widget: "image"
+            media_folder: "public/images/about"
+            public_folder: "/images/about"
+          - { label: "Photo Description (for accessibility)", name: "leadershipImageAlt", widget: "string" }
+          - { label: "Team Eyebrow", name: "teamEyebrow", widget: "string" }
+          - { label: "Team Heading", name: "teamHeading", widget: "string" }
+          - { label: "Team Paragraphs", name: "teamText", widget: "list" }
+          - label: "Team Photo"
+            name: "teamImage"
+            widget: "image"
+            media_folder: "public/images/about"
+            public_folder: "/images/about"
+          - { label: "Photo Description (for accessibility)", name: "teamImageAlt", widget: "string" }
+
+      - name: "contact"
+        label: "Contact Info, Hours & Company Details"
+        file: "src/data/site.json"
+        fields:
+          - { label: "Business Name (technical — do not edit)", name: "businessName", widget: "hidden" }
+          - { label: "Legal Name (technical — do not edit)", name: "legalName", widget: "hidden" }
+          - { label: "Tagline (technical — do not edit)", name: "tagline", widget: "hidden" }
+          - { label: "Short Tagline (technical — do not edit)", name: "shortTagline", widget: "hidden" }
+          - { label: "Founded Year (technical — do not edit)", name: "foundedYear", widget: "hidden" }
+          - label: "Phone Number"
+            name: "phone"
+            widget: "string"
+            hint: "The ONE phone number for the whole site. Changing it updates the header, footer, contact page, every call button, and the site's search-engine listing automatically — there is no second number to update."
+          - { label: "Email", name: "email", widget: "string" }
+          - label: "Address"
+            name: "address"
+            widget: "object"
+            fields:
+              - { label: "Street", name: "street", widget: "string" }
+              - { label: "City", name: "city", widget: "string" }
+              - { label: "State", name: "state", widget: "string" }
+              - { label: "ZIP", name: "zip", widget: "string" }
+              - { label: "Full Address (shown on Contact page and map)", name: "full", widget: "string" }
+          - label: "License"
+            name: "license"
+            widget: "object"
+            fields:
+              - { label: "License Label", name: "label", widget: "string" }
+              - { label: "License Number", name: "number", widget: "string" }
+          - label: "Hours"
+            name: "hours"
+            widget: "object"
+            fields:
+              - { label: "Office Hours", name: "office", widget: "string" }
+              - { label: "Emergency Hours", name: "emergency", widget: "string" }
+          - { label: "Emergency Availability Badge (technical — do not edit)", name: "emergencyAvailability", widget: "hidden" }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+          - { label: "Google Reviews Link (technical — do not edit)", name: "googleProfileUrl", widget: "hidden" }
+          - label: "WhatsApp (technical — do not edit)"
+            name: "whatsapp"
+            widget: "object"
+            fields:
+              - { label: "Enabled", name: "enabled", widget: "hidden" }
+              - { label: "Number", name: "number", widget: "hidden" }
+          - { label: "Service Area Summary (technical — do not edit)", name: "serviceAreaSummary", widget: "hidden" }
+          - label: "Header Button (technical — do not edit)"
+            name: "headerCta"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "hidden" }
+              - { label: "Link", name: "href", widget: "hidden" }
+          - label: "Call Button (technical — do not edit)"
+            name: "callCta"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "hidden" }
+              - { label: "Link", name: "href", widget: "hidden" }
+          - { label: "Social Share Image (technical — do not edit)", name: "ogImage", widget: "hidden" }
+          - label: "Logo (technical — do not edit)"
+            name: "logo"
+            widget: "object"
+            fields:
+              - { label: "Image", name: "image", widget: "hidden" }
+              - { label: "Alt", name: "alt", widget: "hidden" }
+
+      - name: "financing"
+        label: "Financing Page"
+        file: "src/data/financing.json"
+        fields:
+          - { label: "SEO Title (technical — do not edit)", name: "seoTitle", widget: "hidden" }
+          - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Intro Paragraph", name: "intro", widget: "text" }
+          - label: "Highlights"
+            name: "highlights"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "How Financing Works"
+            name: "howItWorks"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Step Number (technical — do not edit)", name: "step", widget: "hidden" }
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - { label: "Disclaimer", name: "disclaimer", widget: "text" }
+          - label: "Button"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "label", widget: "string" }
+              - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+          - label: "Photo"
+            name: "image"
+            widget: "image"
+            required: false
+            media_folder: "public/images/financing"
+            public_folder: "/images/financing"
+          - { label: "Photo Description (for accessibility, fill in if you add a photo)", name: "imageAlt", widget: "string", required: false }
+
+      - name: "maintenance"
+        label: "Maintenance Pages (Membership & Preventive)"
+        file: "src/data/maintenance.json"
+        fields:
+          - label: "V.I.P. Maintenance Membership"
+            name: "membership"
+            widget: "object"
+            fields:
+              - { label: "SEO Title (technical — do not edit)", name: "seoTitle", widget: "hidden" }
+              - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Paragraph", name: "intro", widget: "text" }
+              - { label: "Why It Matters", name: "whyItMatters", widget: "text" }
+              - { label: "What's Included (one line each)", name: "included", widget: "list" }
+              - { label: "Who It's For", name: "whoItsFor", widget: "text" }
+              - { label: "Note", name: "note", widget: "text" }
+              - label: "Button"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                required: false
+                media_folder: "public/images/maintenance"
+                public_folder: "/images/maintenance"
+              - { label: "Photo Description (for accessibility, fill in if you add a photo)", name: "imageAlt", widget: "string", required: false }
+          - label: "Preventive Maintenance"
+            name: "preventive"
+            widget: "object"
+            fields:
+              - { label: "SEO Title (technical — do not edit)", name: "seoTitle", widget: "hidden" }
+              - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Paragraph", name: "intro", widget: "text" }
+              - label: "Benefits"
+                name: "benefits"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+              - label: "Button"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "label", widget: "string" }
+                  - { label: "Link (technical — do not edit)", name: "href", widget: "hidden" }
+              - label: "Photo"
+                name: "image"
+                widget: "image"
+                required: false
+                media_folder: "public/images/maintenance"
+                public_folder: "/images/maintenance"
+              - { label: "Photo Description (for accessibility, fill in if you add a photo)", name: "imageAlt", widget: "string", required: false }
+
+  - name: "services"
+    label: "Services"
+    description: "Every service page (AC Repair, Commercial HVAC, etc). You can edit the title, description, photo, benefits, and full page text for each — you cannot add a new service, delete one, or change its web address here. FAQs for services are managed separately, in the FAQs section below (grouped by topic, not per-service)."
+    folder: "src/content/services"
+    create: false
+    delete: false
+    identifier_field: title
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Web Address (technical — do not edit)", name: "urlSlug", widget: "hidden" }
+      - { label: "Category (technical — do not edit)", name: "category", widget: "hidden" }
+      - { label: "Short Description (shown on cards and menus)", name: "shortDescription", widget: "text" }
+      - { label: "Icon (technical — do not edit)", name: "icon", widget: "hidden" }
+      - label: "Photo"
+        name: "image"
+        widget: "image"
+        required: false
+        media_folder: "public/images/services"
+        public_folder: "/images/services"
+        hint: "Recommended: landscape, at least 1400px wide, under 2MB."
+      - { label: "Photo Description (for accessibility, fill in if you add a photo)", name: "imageAlt", widget: "string", required: false }
+      - { label: "Benefits / What's Included (one line each)", name: "benefits", widget: "list" }
+      - { label: "Button Text", name: "ctaLabel", widget: "string" }
+      - { label: "SEO Title (technical — do not edit)", name: "seoTitle", widget: "hidden" }
+      - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+      - { label: "Published (technical — do not edit)", name: "published", widget: "hidden" }
+      - { label: "Featured (technical — do not edit)", name: "featured", widget: "hidden" }
+      - { label: "Display Order (technical — do not edit)", name: "order", widget: "hidden" }
+      - { label: "Page Content", name: "body", widget: "markdown" }
+
+  - name: "gallery"
+    label: "Gallery Photos"
+    description: "Photos shown on the /gallery/ page, organized into four categories."
+    folder: "src/content/gallery"
+    create: true
+    delete: true
+    identifier_field: title
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Photo"
+        name: "image"
+        widget: "image"
+        media_folder: "public/images/gallery"
+        public_folder: "/images/gallery"
+        hint: "Recommended: at least 1200px wide, under 2MB."
+      - { label: "Alt Text (describe honestly what's in the photo)", name: "alt", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Residential Projects", value: "residential" }
+          - { label: "Commercial Projects", value: "commercial" }
+          - { label: "Installation & Replacement", value: "installation" }
+          - { label: "Repair & Diagnostics", value: "repair" }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "testimonials"
+    label: "Customer Reviews"
+    folder: "src/content/testimonials"
+    create: true
+    delete: true
+    identifier_field: reviewerName
+    fields:
+      - { label: "Reviewer Name", name: "reviewerName", widget: "string" }
+      - { label: "Rating (1-5)", name: "rating", widget: "number", min: 1, max: 5, value_type: "int" }
+      - { label: "Review Text", name: "reviewText", widget: "text" }
+      - { label: "Review Date", name: "reviewDate", widget: "string", required: false, hint: "Use YYYY-MM-DD, or a stable 'Month YYYY' — never a relative label like '3 weeks ago'." }
+      - { label: "Source Label", name: "sourceLabel", widget: "string", default: "Originally posted on Google" }
+      - { label: "Source URL", name: "sourceUrl", widget: "string", required: false }
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Featured reviews appear in the highlighted section on /reviews/ and on the homepage." }
+      - { label: "Display Order", name: "displayOrder", widget: "number", value_type: "int", default: 99 }
+
+  - name: "faqs"
+    label: "FAQs"
+    folder: "src/content/faqs"
+    create: true
+    delete: true
+    identifier_field: question
+    fields:
+      - { label: "Question", name: "question", widget: "string" }
+      - { label: "Answer", name: "answer", widget: "text" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["general", "repair", "installation", "maintenance", "financing", "emergency"]
+        hint: "Repair/Installation/Emergency FAQs also appear on the matching service page automatically."
+      - { label: "Order", name: "order", widget: "number", value_type: "int", default: 99, hint: "Lower numbers show first." }
+
+  - name: "serviceAreas"
+    label: "Service Areas"
+    folder: "src/content/serviceAreas"
+    create: true
+    delete: true
+    identifier_field: city
+    fields:
+      - { label: "City", name: "city", widget: "string" }
+      - label: "County"
+        name: "county"
+        widget: "select"
+        options: ["Broward", "Palm Beach"]
+      - { label: "Published", name: "published", widget: "boolean", default: true }
+
+  - name: "cityPages"
+    label: "City Pages"
+    description: "The existing dedicated pages for specific cities. You can edit the intro text and FAQs — you cannot add a new city page, delete one, or change its web address here."
+    folder: "src/content/cityPages"
+    create: false
+    delete: false
+    identifier_field: city
+    fields:
+      - { label: "City (technical — do not edit)", name: "city", widget: "hidden" }
+      - { label: "Web Address (technical — do not edit)", name: "slug", widget: "hidden" }
+      - { label: "County (technical — do not edit)", name: "county", widget: "hidden" }
+      - { label: "SEO Description (technical — do not edit)", name: "metaDescription", widget: "hidden" }
+      - { label: "Intro Paragraphs", name: "intro", widget: "list" }
+      - label: "FAQs"
+        name: "faqs"
+        widget: "list"
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
+      - { label: "Published (technical — do not edit)", name: "published", widget: "hidden" }

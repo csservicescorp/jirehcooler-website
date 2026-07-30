@@ -10,8 +10,8 @@ const services = defineCollection({
     category: z.enum(['residential', 'commercial', 'both']),
     shortDescription: z.string(),
     icon: z.string(),
-    image: z.string(),
-    imageAlt: z.string(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     gallery: z
       .array(z.object({ image: z.string(), alt: z.string() }))
       .max(6)
