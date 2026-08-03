@@ -28,7 +28,7 @@
     ]
   },
   "disclaimer": "Financing terms, promotional periods, and approval are subject to credit qualification and are determined by our financing partner, not Jireh Cooler directly. Contact us for current rates and terms.",
-  "cta": { "label": "Ask About Financing", "href": "/request-an-estimate/" },
+  "cta": { "label": "Ask About Financing", "href": "/request-an-estimate/?service=financing#estimate-request" },
   "image": "/images/financing/jireh-financing-consultation.jpg",
   "imageAlt": "Jireh Cooler HVAC professional explaining financing options to a homeowner"
 }

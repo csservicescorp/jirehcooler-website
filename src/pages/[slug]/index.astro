@@ -26,7 +26,7 @@ const related = allServices.filter((s) => s.data.urlSlug !== service.data.urlSlu
 const path = `/${service.data.urlSlug}/`;
 // Emergency service's CTA is a direct phone call, not the estimate form.
 const isEmergency = service.data.urlSlug === 'emergency-ac-service';
-const ctaHref = isEmergency ? `tel:${site.phoneRaw}` : `/request-an-estimate/?service=${service.data.urlSlug}`;
+const ctaHref = isEmergency ? `tel:${site.phoneRaw}` : `/request-an-estimate/?service=${service.data.urlSlug}#estimate-request`;
 
 // Thematically-matched real review shown on the five highest-priority
 // service pages, pulled from the same authentic testimonials collection

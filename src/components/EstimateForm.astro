@@ -4,7 +4,7 @@ interface Props {
   compact?: boolean;
 }
 const { formType = 'estimate', compact = false } = Astro.props;
-const formName = formType === 'estimate' ? 'estimate' : 'contact';
+const formName = formType === 'estimate' ? 'estimate-request' : 'contact';
 
 const serviceOptions = [
   { value: 'ac-repair', label: 'AC Repair' },
@@ -42,11 +42,8 @@ const serviceOptions = [
     <label for="company-website">Company Website</label>
     <input type="text" id="company-website" name="companyWebsite" tabindex="-1" autocomplete="off" />
   </div>
-  <input type="hidden" name="utmSource" data-utm="utm_source" value="" />
-  <input type="hidden" name="utmMedium" data-utm="utm_medium" value="" />
-  <input type="hidden" name="utmCampaign" data-utm="utm_campaign" value="" />
-  <input type="hidden" name="utmContent" data-utm="utm_content" value="" />
-  <input type="hidden" name="gclid" data-utm="gclid" value="" />
+  <!-- Populated client-side with the page the visitor clicked from; never a UTM/tracking value. -->
+  <input type="hidden" name="pageSource" data-page-source value="" />
 
   <div class="form-row">
     <div class="field">
@@ -55,7 +52,7 @@ const serviceOptions = [
       <p class="field-error" id="error-name" data-error-for="name" role="alert" hidden></p>
     </div>
     <div class="field">
-      <label for="phone">Phone <span aria-hidden="true">*</span></label>
+      <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
       <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" data-required aria-describedby="error-phone" />
       <p class="field-error" id="error-phone" data-error-for="phone" role="alert" hidden></p>
     </div>
@@ -63,27 +60,27 @@ const serviceOptions = [
 
   <div class="form-row">
     <div class="field">
+      <label for="email">Email Address <span aria-hidden="true">*</span></label>
+      <input type="email" id="email" name="email" required autocomplete="email" data-required aria-describedby="error-email" />
+      <p class="field-error" id="error-email" data-error-for="email" role="alert" hidden></p>
+    </div>
+    <div class="field">
       <label for="zip">ZIP Code <span aria-hidden="true">*</span></label>
       <input type="text" id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" required autocomplete="postal-code" data-required aria-describedby="error-zip" />
       <p class="field-error" id="error-zip" data-error-for="zip" role="alert" hidden></p>
     </div>
-    {formType === 'estimate' ? (
-      <div class="field">
-        <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
-        <select id="serviceNeeded" name="serviceNeeded" required data-required data-service-select aria-describedby="error-serviceNeeded">
-          <option value="">Select a service</option>
-          {serviceOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
-        </select>
-        <p class="field-error" id="error-serviceNeeded" data-error-for="serviceNeeded" role="alert" hidden></p>
-      </div>
-    ) : (
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" autocomplete="email" aria-describedby="error-email" />
-        <p class="field-error" id="error-email" data-error-for="email" role="alert" hidden></p>
-      </div>
-    )}
   </div>
+
+  {formType === 'estimate' && (
+    <div class="field">
+      <label for="serviceNeeded">Service Needed <span aria-hidden="true">*</span></label>
+      <select id="serviceNeeded" name="serviceNeeded" required data-required data-service-select aria-describedby="error-serviceNeeded">
+        <option value="">Select a service</option>
+        {serviceOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+      </select>
+      <p class="field-error" id="error-serviceNeeded" data-error-for="serviceNeeded" role="alert" hidden></p>
+    </div>
+  )}
 
   {formType === 'estimate' && (
     <fieldset class="field urgency-field">
@@ -107,45 +104,26 @@ const serviceOptions = [
   )}
 
   <div class="field">
-    <label for="message">{formType === 'estimate' ? 'Short Description' : 'Message'} <span aria-hidden="true">*</span></label>
-    <textarea id="message" name="message" rows={compact ? 3 : 4} required data-required placeholder={formType === 'estimate' ? "e.g. AC is blowing warm air, unit won't turn on..." : ''} aria-describedby="error-message"></textarea>
+    <label for="message">
+      {formType === 'estimate' ? 'Message or Project Details' : 'Message'}
+      {formType !== 'estimate' && <span aria-hidden="true">*</span>}
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      rows={compact ? 3 : 4}
+      required={formType !== 'estimate'}
+      data-required={formType !== 'estimate'}
+      placeholder={formType === 'estimate' ? "e.g. AC is blowing warm air, unit won't turn on..." : ''}
+      aria-describedby="error-message"
+    ></textarea>
     <p class="field-error" id="error-message" data-error-for="message" role="alert" hidden></p>
   </div>
-
-  {formType === 'estimate' && (
-    <details class="optional-fields">
-      <summary>Additional details (optional)</summary>
-      <div class="form-row">
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" aria-describedby="error-email" />
-          <p class="field-error" id="error-email" data-error-for="email" role="alert" hidden></p>
-        </div>
-        <div class="field">
-          <label for="propertyType">Property Type</label>
-          <select id="propertyType" name="propertyType">
-            <option value="">Select one</option>
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
-          </select>
-        </div>
-      </div>
-      <div class="field">
-        <label for="contactMethod">Preferred Contact Method</label>
-        <select id="contactMethod" name="contactMethod">
-          <option value="">No preference</option>
-          <option value="phone">Phone Call</option>
-          <option value="text">Text Message</option>
-          <option value="email">Email</option>
-        </select>
-      </div>
-    </details>
-  )}
 
   <div class="field consent-field">
     <label class="checkbox-label">
       <input type="checkbox" id="consent" name="consent" required data-required aria-describedby="error-consent" />
-      <span>I agree to be contacted by Jireh Cooler about my request. <span aria-hidden="true">*</span></span>
+      <span>I agree to be contacted by Jireh Cooler by phone or email about my request. <span aria-hidden="true">*</span></span>
     </label>
     <p class="field-error" id="error-consent" data-error-for="consent" role="alert" hidden></p>
   </div>
@@ -256,27 +234,6 @@ const serviceOptions = [
     background: var(--color-ice);
     color: var(--color-royal);
   }
-  .optional-fields {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: 0.75rem 1rem;
-  }
-  .optional-fields summary {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: var(--fs-sm);
-    color: var(--color-royal);
-  }
-  .optional-fields[open] summary {
-    margin-bottom: var(--space-sm);
-  }
-  .optional-fields .form-row,
-  .optional-fields .field {
-    margin-top: var(--space-sm);
-  }
-  .optional-fields .form-row:first-of-type {
-    margin-top: var(--space-sm);
-  }
   .checkbox-label {
     display: flex;
     align-items: flex-start;
@@ -339,21 +296,26 @@ const serviceOptions = [
       }
     }
 
-    // Carry campaign parameters through as hidden fields, but only when the
-    // URL actually has a value — this is a native form submission now, so
-    // whatever hidden inputs remain in the DOM at submit time get sent as-is.
-    // A field left in with an empty value would still reach Netlify empty;
-    // removing the element entirely is the only way to keep it out.
-    const searchParams = new URLSearchParams(window.location.search);
-    form.querySelectorAll<HTMLInputElement>('[data-utm]').forEach((input) => {
-      const key = input.dataset.utm;
-      const value = key ? searchParams.get(key) : null;
-      if (value) {
-        input.value = value;
-      } else {
-        input.remove();
+    // Record which page the visitor was on when they reached this form: the
+    // referring page for a dedicated form page (e.g. a CTA on the homepage
+    // linking to /request-an-estimate/), or the current page itself when the
+    // form is embedded inline (e.g. the Contact page's own form, where no
+    // navigation happens between the click and the form).
+    const pageSourceInput = form.querySelector<HTMLInputElement>('[data-page-source]');
+    if (pageSourceInput) {
+      let source = window.location.pathname;
+      try {
+        if (document.referrer) {
+          const referrer = new URL(document.referrer);
+          if (referrer.origin === window.location.origin && referrer.pathname !== window.location.pathname) {
+            source = referrer.pathname;
+          }
+        }
+      } catch {
+        /* malformed referrer, fall back to the current page path */
       }
-    });
+      pageSourceInput.value = source;
+    }
 
     let started = false;
     form.addEventListener(

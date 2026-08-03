@@ -54,7 +54,7 @@ const coreServices = [
         <a href={`tel:${site.phoneRaw}`} class="btn btn-primary btn-lg" data-track="phone_click" data-track-params={JSON.stringify({ location: 'city_page' })}>
           <Icon name="phone" class="icon-sm" /> Call {site.phone}
         </a>
-        <a href="/request-an-estimate/" class="btn btn-outline btn-lg" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: 'city_page' })}>
+        <a href="/request-an-estimate/#estimate-request" class="btn btn-outline btn-lg" data-track="schedule_service_click" data-track-params={JSON.stringify({ location: 'city_page' })}>
           Schedule Service
         </a>
       </div>
@@ -107,7 +107,7 @@ const coreServices = [
   <CtaSection
     heading={`Ready to Schedule Service in ${c.city}?`}
     description="Reach out today for a straightforward estimate, or call our emergency line if you need help right away."
-    secondaryCta={{ label: 'Request an Estimate', href: '/request-an-estimate/' }}
+    secondaryCta={{ label: 'Request an Estimate', href: '/request-an-estimate/#estimate-request' }}
   />
 </BaseLayout>
 
