@@ -1,14 +1,20 @@
 {
   "hero": {
-    "eyebrow": "Serving Broward & Palm Beach County Since 1994",
     "mobileEyebrow": "Serving South Florida Since 1994",
-    "headline": "South Florida's Trusted Air Conditioning Experts",
-    "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
-    "mobileSubheadline": "Family-owned HVAC service for repairs, installation, and maintenance.",
-    "image": "/images/homepage/jireh-cooler-office-hero.jpg",
+    "eyebrow": "Serving Broward & Palm Beach County Since 1994.",
+    "primaryCta": {
+      "label": "Call Now",
+      "href": "tel:+19544266010"
+    },
     "imageAlt": "Jireh Cooler office reception area with the company logo on the accent wall",
-    "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
-    "secondaryCta": { "label": "Schedule Service", "href": "/request-an-estimate/#estimate-request" }
+    "mobileSubheadline": "Family-owned HVAC service for repairs, installation, and maintenance.",
+    "subheadline": "Family-owned. State-certified. Available around the clock for repair, installation, and maintenance on homes and businesses across South Florida.",
+    "headline": "South Florida's Trusted Air Conditioning Experts",
+    "image": "/images/homepage/jireh-cooler-office-hero.jpg",
+    "secondaryCta": {
+      "label": "Schedule Service",
+      "href": "/request-an-estimate/#estimate-request"
+    }
   },
   "pathways": {
     "heading": "Built for Your Home. Ready for Your Business.",
@@ -67,7 +73,10 @@
   "emergency": {
     "heading": "AC Down? We're Already On Our Way.",
     "description": "South Florida heat doesn't wait for business hours, and neither do we. Our emergency line is staffed 24 hours a day, 7 days a week, 365 days a year.",
-    "cta": { "label": "Call for Emergency Service", "href": "tel:+19544266010" },
+    "cta": {
+      "label": "Call for Emergency Service",
+      "href": "tel:+19544266010"
+    },
     "href": "/emergency-ac-service/",
     "image": "/images/homepage/jireh-founder-commercial-hvac-service.jpg",
     "imageAlt": "Jireh Cooler technician servicing HVAC equipment, ready for emergency response"
@@ -76,7 +85,10 @@
     "eyebrow": "Client Testimonial",
     "heading": "What Clients Say About Jireh Cooler",
     "description": "A South Florida client and Realtor shares her experience working with Jireh Cooler.",
-    "cta": { "label": "Watch the Testimonial", "href": "/about/#client-testimonial" }
+    "cta": {
+      "label": "Watch the Testimonial",
+      "href": "/about/#client-testimonial"
+    }
   },
   "moreWaysWeHelp": {
     "heading": "More Ways We Help",
@@ -86,27 +98,42 @@
         "icon": "check-circle",
         "heading": "V.I.P. Maintenance Membership",
         "description": "Two scheduled preventive maintenance visits a year and priority scheduling for members.",
-        "cta": { "label": "Join the V.I.P. Plan", "href": "/maintenance-membership/" }
+        "cta": {
+          "label": "Join the V.I.P. Plan",
+          "href": "/maintenance-membership/"
+        }
       },
       {
         "icon": "document",
         "heading": "Flexible Financing",
         "description": "Financing is available for qualified homeowners so a replacement isn't an all-at-once expense.",
-        "cta": { "label": "Ask About Financing", "href": "/financing/" }
+        "cta": {
+          "label": "Ask About Financing",
+          "href": "/financing/"
+        }
       },
       {
         "icon": "wind",
         "heading": "Indoor Air Quality",
         "description": "UV light systems, duct cleaning, and filtration upgrades for cleaner indoor air.",
-        "cta": { "label": "See Air Quality Options", "href": "/indoor-air-quality/" }
+        "cta": {
+          "label": "See Air Quality Options",
+          "href": "/indoor-air-quality/"
+        }
       }
     ]
   },
   "finalCta": {
     "heading": "Ready for Reliable Comfort?",
     "description": "Talk to a real technician, not a call center. Reach out today for a straightforward estimate or emergency service.",
-    "primaryCta": { "label": "Call Now", "href": "tel:+19544266010" },
-    "secondaryCta": { "label": "Request an Estimate", "href": "/request-an-estimate/#estimate-request" },
+    "primaryCta": {
+      "label": "Call Now",
+      "href": "tel:+19544266010"
+    },
+    "secondaryCta": {
+      "label": "Request an Estimate",
+      "href": "/request-an-estimate/#estimate-request"
+    },
     "backgroundImage": "/images/homepage/jireh-founder-luxury-residential-project.jpg",
     "backgroundImageAlt": "Jireh Cooler founder with a company van at a South Florida residential project"
   }
