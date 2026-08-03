@@ -1,9 +1,10 @@
 # Decap CMS configuration for jirehcooler-website.
 #
-# Backend requires Netlify Identity + Git Gateway enabled on the Netlify site
-# (Site settings > Identity, and Site settings > Identity > Services > Git
-# Gateway). This is a dashboard-only step — nothing in this repo can turn it
-# on. Until it's enabled, this panel will load but authentication will fail.
+# Backend authenticates directly against GitHub (no Netlify Identity, no Git
+# Gateway). Editors sign in with a GitHub account that has write access to
+# csservicescorp/jirehcooler-website. This still requires a one-time,
+# dashboard-only setup — an OAuth app registered with GitHub and connected to
+# this Netlify site — nothing in this repo can turn that on.
 #
 # publish_mode is intentionally omitted — Decap defaults to "simple" (every
 # save commits directly), no draft/review step in between.
@@ -28,7 +29,8 @@
 # page — only edit the text and photos inside it.
 
 backend:
-  name: git-gateway
+  name: github
+  repo: csservicescorp/jirehcooler-website
   branch: main
 
 media_folder: "public/images/gallery"
