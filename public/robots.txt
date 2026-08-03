@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://jirehcooler.com/sitemap-index.xml
+Sitemap: https://www.jirehcooler.com/sitemap-index.xml

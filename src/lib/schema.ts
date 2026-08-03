@@ -1,6 +1,6 @@
 import site from '@/lib/site';
 
-const siteUrl = 'https://jirehcooler.com';
+const siteUrl = 'https://www.jirehcooler.com';
 
 export function localBusinessSchema() {
   return {

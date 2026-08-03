@@ -12,7 +12,7 @@ interface Props {
 
 const { title, description, path = Astro.url.pathname, image = site.ogImage, noindex = false, schema } = Astro.props;
 
-const siteUrl = 'https://jirehcooler.com';
+const siteUrl = 'https://www.jirehcooler.com';
 const canonical = new URL(path, siteUrl).toString();
 const ogImage = new URL(image, siteUrl).toString();
 const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
