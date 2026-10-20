@@ -244,5 +244,47 @@
     "height": 1050,
     "smWidth": 700,
     "smHeight": 525
+  },
+  "/images/gallery/jireh-medical-office-crane-lift-wide.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/gallery/jireh-medical-office-crane-lift-entrance.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "smWidth": 700,
+    "smHeight": 933
+  },
+  "/images/gallery/jireh-medical-office-crane-lift-roof.jpg": {
+    "width": 1448,
+    "height": 1086,
+    "smWidth": 700,
+    "smHeight": 525
+  },
+  "/images/gallery/jireh-medical-office-crane-lift-evening.jpg": {
+    "width": 1086,
+    "height": 1448,
+    "smWidth": 700,
+    "smHeight": 933
+  },
+  "/images/gallery/jireh-medical-office-technician-wiring.jpg": {
+    "width": 1600,
+    "height": 900,
+    "smWidth": 700,
+    "smHeight": 394
+  },
+  "/images/gallery/jireh-medical-office-rooftop-unit-curb.jpg": {
+    "width": 1600,
+    "height": 900,
+    "smWidth": 700,
+    "smHeight": 394
+  },
+  "/images/gallery/jireh-medical-office-rooftop-unit-disconnect.jpg": {
+    "width": 941,
+    "height": 1672,
+    "smWidth": 700,
+    "smHeight": 1244
   }
 }
